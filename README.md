@@ -1,68 +1,74 @@
-# Welcome to GitHub
+## Welcome to team NCPC Pages
 
-캡스톤 팀 생성을 축하합니다.
+### 프로젝트 목표
+글로벌 보안제품 인증 기관 [AV-TEST](https://www.av-test.org/)에 통계에 따르면, 해마다 총 악성코드의 개수가 늘어나고 있습니다.
+<img src="https://www.av-test.org/typo3temp/avtestreports/malware-all-years_sum_en.png" width="70%" height="70%">
 
-## 팀소개 및 페이지를 꾸며주세요.
+하지만, 악성코드 전문가의 수는 한정적이기 때문에 효율적으로 악성코드를 분석하기 위해서는 자동화된 분석 시스템이 필요합니다. 이에 본 프로젝트는 악성코드 분석 전문가의 효율적인 악성코드 분석을 돕기위한 서비스를 제공하기위해 시작 하였습니다.
 
-- readme.md 수정.
+### 프로젝트 소개 영상
+* 준비중 입니다.
 
-- index.md 예시보고 수정.
+### 프로젝트 구성원 소개
 
-- 수정후 팀페이지 확인하여 점검.
-
-**팀페이지 주소** -> https://kookmin-sw.github.io/ `{{자신의 리파지토리 아이디}}`
-
-**예시)** 1조  https://kookmin-sw.github.io/2018-cap-1
-
-## readme파일에 아래와 같은 내용들을 추가하세요.
-
-### 1. 프로잭트 소개
-
-프로젝트
-
-### 2. 소개 영상
-
-프로젝트 소개하는 영상을 추가하세요
-
-### 3. 팀 소개
-
-팀을 소개하세요.
-
-팀원정보 및 담당이나 사진 및 SNS를 이용하여 소개하세요.
-
-### 4. 사용법
-
-소스코드제출시 설치법이나 사용법을 작성하세요.
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
-
-
-## Markdown을 사용하여 내용꾸미기
-
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```Python
+member_1 = {
+  "name" : "한채연",
+  "position" : "팀 리더",
+  "role" : [
+    "동적 분석 시스템 최적화, 자동화",
+    "리포트로부터 유용한 피쳐들 추출",
+    "논문 분석 및 연구"
+  ]
+}
 ```
 
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+```Python
+member_2 = {
+  "name" : "김영재",
+  "position" : "개발자",
+  "role" : [
+    "정적 분석 자동화",
+    "정적 및 동적 피쳐 가공",
+    "딥러닝 모델 설계 및 구축",
+    "악성코드 크롤러 제작"
+  ]
+}
+```
+```Python
+member_3 = {
+  "name" : "명준우",
+  "position" : "개발자",
+  "role" : [
+    "VirusTotal 분석 리포트 수집",
+    "파일 간 유사도 추출",
+    "딥러닝 모델 설계 및 구축",
+    "악성코드 라벨링"
+  ]
+}
+```
+```Python
+member_4 = {
+  "name" : "이유정",
+  "position" : "디자이너",
+  "role" : [
+    "웹 프론트엔드 제작",
+    "포스터 등 디자인"
+  ]
+}
+```
+```Python
+member_5 = {
+  "name" : "허준녕",
+  "position" : "DB 및 시스템 관리자",
+  "role" : [
+    "프로젝트 인프라 관리",
+    "데이터베이스 설계 및 SQL 작성, 관리, 검색엔진 구축",
+    "ssdeep를 이용한 파일 유사도 분석",
+    "웹서버 구축 및 관리"
+  ]
+}
+```
 
-### Support or Contact
-
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
+### 사용법
+* 준비중입니다.
