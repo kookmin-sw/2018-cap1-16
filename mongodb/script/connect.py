@@ -1,13 +1,13 @@
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from pymongo.errors import OperationFailure
-import os, time, re, getpass
+import re, getpass
 class MyMongoClient:
-	def __init__(self,ip,port,db,collection):
+	def __init__(self,ip,port,db):
 		self.client = self.connect_db(ip,port)
 		self.check_connection()
 		self.db = self.get_db(db)
-		self.collection = self.get_collection(collection)
+		#self.collection = self.get_collection(collection)
 
 	def connect_db(self,ip,port):
 		client = MongoClient('mongodb://%s:%d' %(ip,port), serverSelectionTimeoutMS = 1500)
