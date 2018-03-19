@@ -1,6 +1,6 @@
-#Cuckoo Sandbox Settings Manual
+# Cuckoo Sandbox Settings Manual
 
-###1. 기본 패키지 / C 라이브러리 설치
+### 1. 기본 패키지 / C 라이브러리 설치
 ```bash
 $ sudo apt-get install -y python-pip python-dev libssl-dev libjpeg-dev zlib1g-dev tcpdump apparmor-utils libffi-dev swig python-setuptools
 $ sudo pip install pyopenssl
@@ -29,7 +29,7 @@ $ sudo apt-get update
 $ sudo apt-get install -y virtualbox
 ```
 * * *
-###2. 쿠쿠 코어 설치하기
+### 2. 쿠쿠 코어 설치하기
 ```bash
 # pip가 python3과 연동될 경우 pip2 명령어를 이용하여 설치하기
 $ sudo pip install cuckoo
@@ -40,7 +40,7 @@ $ sudo pip install cuckoo
 https://cuckoo.sh/docs/installation/host/requirements.html 에서 setuptools 최신 버전 설치
 
 * * *
-###3. 샌드박스 구성
+### 3. 샌드박스 구성
 * 가상머신 다운로드 및 가져오기
 ![Imgur](https://i.imgur.com/hKSPo32.png)
 https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
