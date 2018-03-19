@@ -35,6 +35,7 @@ $ sudo apt-get install -y virtualbox
 $ sudo pip install cuckoo
 ```
 ![Imgur](https://i.imgur.com/y4UxQzM.png)
+
 위와 같은 에러가 날 경우
 https://cuckoo.sh/docs/installation/host/requirements.html 에서 setuptools 최신 버전 설치
 
@@ -43,6 +44,7 @@ https://cuckoo.sh/docs/installation/host/requirements.html 에서 setuptools 최
 * 가상머신 다운로드 및 가져오기
 ![Imgur](https://i.imgur.com/hKSPo32.png)
 https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
+
 윈도우 7 32비트 운영체제 선택
 가상머신은 virtualbox로
 ```bash
@@ -78,17 +80,21 @@ $ vboxmanage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1
 ```
 
 ![Imgur](https://i.imgur.com/CmGzQHv.png)
+
 설정 -> 네트워크 -> 호스트 전용 어댑터 vboxnet0 선택
 
 ![Imgur](https://i.imgur.com/o6zMsai.png)
 ![Imgur](https://i.imgur.com/YBOsnc3.png)
+
 ipconfig, ping으로 네트워크 설정 잘 되었는지 확인
 
 * 방화벽/업데이트 비활성화
 ![Imgur](https://i.imgur.com/QOhiVsc.png)
+
 시작 > Control Panel > System and Security > windows Firewall > Customize settings
 Turn off windows Firewall 선택
 ![Imgur](https://i.imgur.com/btuevpo.png)
+
 시작 > Control Panel > System and Security > Windows Update > Change settings
 Window update 비활성화
 
@@ -97,6 +103,7 @@ Window update 비활성화
 $ Net user administrator /active:yes
 ```
 ![Imgur](https://i.imgur.com/Lb16M1J.png)
+
 관리자 계정을 활성화하고 로그인하는 이유? -> 악성코드가 동작하는데 방해가 없어야 하기 때문
 Log off 후 Administrator 계정으로 다시 로그인
 만약 패스워드가 걸려있다면? -> 바탕화면의 패스워드를 확인하기
@@ -108,11 +115,15 @@ UAC(User Account Control) :사용자 계정을 제어하는데 사용
 
 * agent.py 실행과 스냅샷 구성
 ![Imgur](https://i.imgur.com/RObszP8.png)
+
 장치 > 공유 폴더
 ![Imgur](https://i.imgur.com/q5k7bbb.png)
+
 폴더 경로 : /home/’<계정>’/.cuckoo/agent
 ![Imgur](https://i.imgur.com/2K6YSnk.png)
+
 시작 > Computer > Network > 공유 폴더 > agent.py 파일을 바탕화면에 복사하기
 바탕화면에서 agent.py 실행하기
 ![Imgur](https://i.imgur.com/Honpk1l.png)
+
 스냅샷 이름 : Snapshot1(추후 설정에 필요)
