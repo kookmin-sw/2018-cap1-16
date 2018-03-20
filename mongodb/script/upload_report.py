@@ -1,4 +1,4 @@
-from connect import MyMongoClient
+from connect import SeclabMongoClient
 import os,datetime,json
 
 DIRECTORY = '/home/jun/kisa_reports'
@@ -38,6 +38,6 @@ def upload_report(dir_url,collection):
 
 
 if __name__ == '__main__':
-	client = MyMongoClient('localhost',27017,'seclab')
-	collection = client.db['similarity_report']
+	client = SeclabMongoClient('localhost',27017,'seclab')
+	collection = client.db['analyzed_report']
 	upload_report(DIRECTORY,collection)

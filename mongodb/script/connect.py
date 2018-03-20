@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from pymongo.errors import OperationFailure
 import re, getpass
-class MyMongoClient:
+class SeclabMongoClient:
 	def __init__(self,ip,port,db):
 		self.client = self.connect_db(ip,port)
 		self.check_connection()
