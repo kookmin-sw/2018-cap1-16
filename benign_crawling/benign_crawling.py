@@ -2,7 +2,7 @@ import pefile, os, shutil, hashlib
 
 import multiprocessing as mp
 
-from settings import *
+from benign_crawling.settings import *
 
 def get_file_path( root ) :
     path_32bit_exe, path_64bit_exe = [], []
