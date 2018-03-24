@@ -6,7 +6,7 @@ class SeclabMongoClient:
 	def __init__(self,ip,port,db):
 		self.client = self.connect_db(ip,port)
 		self.check_connection()
-		self.db = self.get_db(db)
+		self.db = self.get_db(db,0)
 		#self.collection = self.get_collection(collection)
 
 	def connect_db(self,ip,port):
@@ -21,19 +21,20 @@ class SeclabMongoClient:
 			print("Server is not available")
 			exit()
 		
+	def get_db(self,db_name,auth):
+		db = self.client[db_name]
 
-	def get_db(self,db_name):
-		while(True):
-			user_id , user_pwd = self.get_authenticate()
-			db = self.client[db_name]
-			try:
-				db.authenticate(user_id,user_pwd)
-			except OperationFailure:
-				print("Failed to login")
-				continue
+		if auth == 1:
+			while(True):
+				user_id , user_pwd = self.get_authenticate()
+				try:
+					db.authenticate(user_id,user_pwd)
+				except OperationFailure:
+					print("Failed to login")
+					continue
 
-			print('Login successfully')
-			break
+				print('Login successfully')
+				break
 
 		return db
 
