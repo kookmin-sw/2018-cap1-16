@@ -86,8 +86,31 @@ def crawling_64bit_dll( path_64bit ) :
         except :
             pass
 
+def init() :
+    if not os.path.exists(DESTINATION_32_EXE_PATH) :
+        try :
+            os.makedirs(DESTINATION_32_EXE_PATH)
+        except :
+            exit(1)
+    if not os.path.exists(DESTINATION_64_EXE_PATH) :
+        try :
+            os.makedirs(DESTINATION_64_EXE_PATH)
+        except :
+            exit(1)
+    if not os.path.exists(DESTINATION_32_DLL_PATH) :
+        try :
+            os.makedirs(DESTINATION_32_DLL_PATH)
+        except :
+            exit(1)
+    if not os.path.exists(DESTINATION_64_DLL_PATH) :
+        try :
+            os.makedirs(DESTINATION_64_DLL_PATH)
+        except :
+            exit(1)
+
 def run( root ) :
     mp.freeze_support()
+    init()
     path_32bit_exe, path_64bit_exe, path_32bit_dll, path_64bit_dll = get_file_path( root )
     p = mp.Pool(os.cpu_count() // 2)
     print("Start copy 32bit EXE : {}".format(len(path_32bit_exe)))
