@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>{% block page_title %}Capstone Desing Web{% endblock %}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
+    <script type="text/javascript" src ="{% static 'js/jquery-3.3.1.min.js' %}">
+        (function(e, t, n) {
+            var r = e.querySelectorAll("html")[0];
+            r.className = r.className.replace(/(^|\s)no-js(\s|$)/, "$1js$2")
+        })(document, window, 0);
+
+    </script>
+</head>
+
+<body>
+    
+    
+        <div class="nav_box" style="height:100%;">
+            <div class="home">
+            
+            </div>
+            <div class="nav_list" style="vertical-align: middle">
+            {% block sidebar %} {% endblock %}
+            </div>
+        </div>
+        
+        <div class="con_box">
+            {% block content %} {% endblock %}
+        </div>
+
+
+</body>
+
+</html>

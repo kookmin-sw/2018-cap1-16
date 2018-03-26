@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load staticfiles %}
+{% if md5_form != 0 %}
+
+
+<h1> DB내 검색 결과 입니다. </h1>
+<div class="report_div">
+
+        <div class="text_name">
+            <p><strong>File MD5 </strong></p>
+            <p><strong>바이러스 탐지 결과</strong></p>
+            <p><strong>바이러스 분석 결과</strong></p>
+            <p><strong>File Type</strong></p>
+            <p><strong>File Size</strong></p>
+            <p><strong>File SHA1</strong></p>
+            <p><strong>File SHA256</strong></p>
+            <p><strong>File Uploaded Date</strong></p>
+        </div>
+    
+        <div class="text_data">
+            <p>{{ md5_form.fields.md5.initial }}</p>
+            <p>{{ md5_form.fields.detected.initial }}</p>
+            <p>>{{ md5_form.fields.result.initial }}</p>
+            <p>{{ md5_form.fields.magic.initial }}</p>
+            <p>{{ md5_form.fields.file_size.initial }}</p>
+            <p>{{ md5_form.fields.sha1.initial }}</p>
+            <p>{{ md5_form.fields.sha256.initial }}</p>
+            <p>{{ md5_form.fields.uploaded_date.initial }}</p>
+        </div>
+</div>
+{% endif %} 
+
+{% if ssdeep_forms != 0 %}
+<h1> 업로드한 파일과 유사한 파일에 대한 검색결과 입니다. </h1>
+<div class = 'report_div_2'>
+	<table id ='ssdeep_table'>
+		<form action="" id="idxButtonForm" >
+		</form>
+		<tbody>
+			{% for ssdeep_form in ssdeep_forms %}
+				<tr>
+                    <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
+					<td> {{ ssdeep_form.fields.md5.initial }}</td>
+				</tr>
+				<tr>
+                    <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
+					<td> {{ ssdeep_form.fields.score.initial }} </td>
+				</tr>
+				<tr>-
+                    <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
+					<td> {{ ssdeep_form.fields.detected.initial }}</td>
+				</tr>
+				<tr>
+                    <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
+						<td> {{ ssdeep_form.fields.result.initial }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% else %}
+<br/>
+<div class = 'report_div_2'>
+	<h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>
+</div>
+{% endif %}
+
+
+
+
+<script src = "{% static  '/js/detail_script.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/detail.css' %}" />
+{% endblock %}
+
+{% block sidebar %}
+{% load staticfiles %}
+
+
+<ul class="nav-list">
+    <li class="nav-item"><a href='/upload' class="nav-link">Menu-1</a></li>
+    <li class="nav-item"><a href='/detail' class="nav-link">Menu-2</a></li>
+</ul>
+
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/nav_cont.css' %}" /> 
+{% endblock %}
+
