@@ -1,4 +1,4 @@
-"""web URL Configuration
+"""capstoneweb URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
+from upload_app.views import detail
+from upload_app.views import upload
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('result/<str:md5>/',detail, name="report-detail"),
+    path('upload/', upload),
 ]
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
