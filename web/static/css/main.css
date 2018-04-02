@@ -5,12 +5,63 @@
 html {}
 
 body {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif !important;
     color: #8ad5dd;
-    background-color: #ffffff;
-    padding: 0px 0px;
+    background-color: #FEFEFE !important;
+    padding: 50px 0px;
     margin: 0;
 }
+
+.navbar-custom{
+    background-color: #ffffff;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05) !important;
+    margin: 0px 0px 0px 0px;
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header{
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.navbar-brand-custom1 {
+    float: left;
+    height: 50px;
+    padding: 13px 0px;
+    font-size: 25pt;
+    line-height: 20px;
+    font-weight: 900;
+    color: #2f2f33;
+    margin: 0px -2.5px;
+}
+
+.navbar-brand-custom2 {
+    float: left;
+    height: 50px;
+    padding: 13px 0px;
+    font-size: 25pt;
+    line-height: 20px;
+    font-weight: 900;
+    color: #8ad5dd;
+    margin: 0px -2.5px;
+}
+
+.navbar-brand-project{
+    float: left;
+    height: 50px;
+    padding: 15px 0px;
+    line-height: 20px;
+    font-weight: 300;
+    color: #2f2f33;
+    font-size: 15pt;
+}
+
+.navbar-right-li {
+    font-weight: 200;
+    color: #2f2f33;
+    font-size: 12pt;
+    margin: 0px 0px 0px 0px;
+}
+
 
 .box__logo {
     max-height: 200px;
@@ -20,40 +71,83 @@ body {
     /* 800 */
     margin: auto;
     position: relative;
-    padding: 4% 0%;
-    font-weight: 900;
+    padding: 3% 0%;
+    font-weight: 700;
     color: #2f2f33;
     font-size: 4.8vw;
 
     text-align: center;
+    margin-top: 0%;
+    margin-bottom: 5%;
+}
+
+a:hover, 
+a:focus {
+	color: #2f2f33 !important; 
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+
+
+.img-logo{
+    width: 60px;
+    height: auto;
+}
+
+#h4-logo {
+	margin-top: -3px !important;
+    font-family: 'Nanum Gothic', sans-serif !important; 
 }
 
 .img__logo {
-    max-width: 195px;
+    max-width: 170px;
     width: 25%;
 
 }
 
-.container {
+.container_form {
     width: 100%;
     max-width: 800px;
     /* 800 */
     text-align: center;
     margin: 0 auto;
-    max-height: 200px;
-
+    min-height: 230px;
+    margin-top: -4%;
+    color: #8ad5dd;
 }
 
-.container h1 {
+.container_form h1 {
     font-size: 42px;
     font-weight: 300;
     color: #2f2f33;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
-.container h1 a:hover,
-.container h1 a:focus {
+.container_form h1 a:hover,
+.container_form h1 a:focus {
     color: #39bfd3;
+}
+
+.control_pannel{
+    color: #2f2f33; 
+    border:1px none #000000;border-width:1px 0px 0px 0px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.control_analysistime{
+    width: 40%;
+}
+
+#analysistime_range{
+    width: 100%;
+}
+#range_180sec{
+    float: right;
 }
 
 
@@ -62,7 +156,7 @@ body {
     /* 20 */
     background-color: #2f2f33;
     position: relative;
-    padding: 100px 20px;
+    padding: 80px 20px;
 
 }
 
@@ -95,16 +189,17 @@ body {
 }
 
 .box.has-advanced-upload {
-    height: 80px;
+    max-height: 260px;
+    height: 100%;
     fill: #92b0b3;
     display: block;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .box.is-uploading .box__input,
 .box.is-success .box__input,
 .box.is-error .box__input {
-    visibility: hidden;
+    display: none;
 }
 
 .box__uploading,
@@ -116,8 +211,8 @@ body {
 .box.is-uploading .box__uploading,
 .box.is-success .box__success,
 .box.is-error .box__error {
-    display: block;
-    position: absolute;
+    display: inline;
+    position: inherit;
     top: 50%;
     right: 0;
     left: 0;
@@ -226,24 +321,3 @@ body {
 .box__button:focus {
     background-color: #0f3c4b;
 }
-
-
-
-            .nav_box {
-                float: left;
-                width: 150px;
-                height: 100%;
-                position: absolute;
-                display:table;
-                background-color: #2f2f33;
-                
-            }
-
-            .con_box {
-	           float: left;
-                max-width: 1200px;
-                width: 100%;
-                margin-left:150px;
-                height: 100%;
-            }
-            

@@ -1,5 +1,7 @@
 ## Ignore File ##
 
+web/web_sqlite3
 web/media/*
 web/upload_app/__pycache__/*
+web/upload_app/migrations/*
 web/web/__pycache__/*
