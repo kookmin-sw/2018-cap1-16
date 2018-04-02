@@ -6,7 +6,7 @@ from django.conf import settings
 from .models import UploadFile, UploadFileMeta
 from .forms import UploadForm, ReportForm
 from .es_view import *
-#from .ida_make_ops import make_ops
+from .ida_make_ops import make_ops
 import hashlib, sys,os, ssdeep, json
 
 
