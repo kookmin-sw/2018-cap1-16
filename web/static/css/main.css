@@ -63,6 +63,88 @@ body {
 }
 
 
+/*btn-form*/
+
+.btn-form {
+	position: relative;
+    display:flex;
+    margin-top: -4%;
+    font-size: 9pt;
+    margin-bottom: -1%;
+    align-items:center;
+  justify-content:center;
+ 
+  display:-webkit-flex;
+  -webkit-justify-content:center;
+}
+
+.btn-form div{
+	float: left;
+}
+
+.btn-form label {
+  width: 150px;
+  border: 1px solid #2f2f33;
+    background-color: #2f2f33;
+}
+
+/* hide input */
+input.radio:empty {
+	margin-left: -999px;
+}
+
+/* style label */
+input.radio:empty ~ label {
+	position: relative;
+	float: left;
+	line-height: 2.5em;
+	text-indent: 3.25em;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input.radio:empty ~ label:before {
+	position: absolute;
+	display: block;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 2.5em;
+	background: #575757;
+}
+
+/* toggle hover */
+input.radio:hover:not(:checked) ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #8ad5dd;
+}
+
+input.radio:hover:not(:checked) ~ label {
+	color: #8ad5dd;
+}
+
+/* toggle on */
+input.radio:checked ~ label:before {
+	content:'\2714';
+	text-indent: .9em;
+	color: #b74848;
+	background-color: #8ad5dd;
+}
+
+input.radio:checked ~ label {
+	color: #8ad5dd;
+}
+
+
+/*btn-form end*/
+
+
+
 .box__logo {
     max-height: 200px;
     height: 100%;
@@ -113,8 +195,8 @@ a:focus {
     text-align: center;
     margin: 0 auto;
     min-height: 230px;
-    margin-top: -4%;
     color: #8ad5dd;
+    
 }
 
 .container_form h1 {
@@ -201,6 +283,7 @@ a:focus {
 .box.is-error .box__input {
     display: none;
 }
+
 
 .box__uploading,
 .box__success,

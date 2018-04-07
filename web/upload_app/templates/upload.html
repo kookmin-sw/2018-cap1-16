@@ -1,6 +1,4 @@
-{% extends 'layout.html' %} 
-{% block content %}
-{% load staticfiles %}
+{% extends 'layout.html' %} {% block content %} {% load staticfiles %}
 <div class="row">
     <div class="box__logo">
         <img src="{% static 'logo.png' %}" class="img__logo" align="absmiddle"> <span>악성코드 검사</span>
@@ -8,35 +6,55 @@
 </div>
 
 <div class="row">
-<div class="container_form" role="main">
-    <form method="POST" action="/upload/" enctype="multipart/form-data" novalidate class="box">
-        {% csrf_token %}
-        <div class="box__input">
-            <div>
-                <img src="{% static 'download.png' %}" class="box__icon" id="upload">
-            </div>
-            <input type="file" name="upload_file" id="file" class="box__file" style="display: none;" data-multiple-caption="{count} files selected" multiple>
-            <label for="file"><strong><i>Choose a file</i></strong><span class="box__dragndrop"> or drag it here</span>.</label>
 
-        </div>
-        
-        <div class="box__uploading">
-            <div><img src="{% static 'download.gif' %}" class="box__icon" id="uploading">
-            </div>
-            Uploading&hellip;
-        </div>
-
-    </form>
-</div>
+    <div class="btn-form">
+<div>
+<input type="radio" name="radio" id="radio1" class="radio" checked/>
+<label for="radio1">Dynamic Analysis</label>
 </div>
 
+<div>
+<input type="radio" name="radio" id="radio2" class="radio"/>
+<label for="radio2">Static Analysis</label>
+</div>
+
+<div>	
+<input type="radio" name="radio" id="radio3" class="radio"/>
+<label for="radio3">Both Anlaysis</label>
+</div>
+</div>
+    
+</div>
 <div class="row">
+    <div class="container_form" role="main">
+
+        <form method="POST" action="/upload/" enctype="multipart/form-data" novalidate class="box">
+            {% csrf_token %}
+
+            <div class="box__input">
+                <div>
+                    <img src="{% static 'download.png' %}" class="box__icon" id="upload">
+                </div>
+                <input type="file" name="upload_file" id="file" class="box__file" style="display: none;" data-multiple-caption="{count} files selected" multiple>
+                <label id="label-style" for="file"><strong><i>Choose a file</i></strong><span class="box__dragndrop"> or drag it here</span>.</label>
+
+            </div>
+
+            <div class="box__uploading">
+                <div><img src="{% static 'download.gif' %}" class="box__icon" id="uploading">
+                </div>
+                Uploading&hellip;
+            </div>
+
+        </form>
+    </div>
 </div>
 
 
-    <script src = "{% static  '/js/upload_script.js' %}">    </script>
+<script src="{% static  '/js/upload_script.js' %}">
+
+
+</script>
 
 
 {% endblock %}
-
-
