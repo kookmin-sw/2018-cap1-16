@@ -1,6 +1,7 @@
 ## Ignore File ##
-
+.idea/*
 web/web_sqlite3
+web/db.sqlite3
 web/media/*
 web/upload_app/__pycache__/*
 web/upload_app/migrations/*
