@@ -62,10 +62,13 @@ body {
     margin: 0px 0px 0px 0px;
 }
 
+.row_upload{
+    padding: 0 15%;
+}
 
 /*btn-form*/
 
-.btn-form {
+.btn_form {
 	position: relative;
     display:flex;
     margin-top: -4%;
@@ -77,14 +80,12 @@ body {
   display:-webkit-flex;
   /*-webkit-justify-content:center;*/
 }
-.row-upload{
-    padding: 0 15%;
-}
-.btn-form div{
+
+.btn_form div{
 	float: left;
 }
 
-.btn-form label {
+.btn_form label {
   /*width: 150px;*/
   width: 100%;
   padding-left: 38px;
@@ -235,7 +236,7 @@ a:focus {
 }
 
 
-.box {
+.box_upload {
     font-size: 1.25rem;
     /* 20 */
     background-color: #2f2f33;
@@ -244,7 +245,7 @@ a:focus {
 
 }
 
-.box.has-advanced-upload {
+.box_upload.has-advanced-upload {
     outline: 2px dashed #8ad5dd;
     outline-offset: -10px;
 
@@ -252,7 +253,7 @@ a:focus {
     transition: outline-offset .15s ease-in-out, background-color .15s linear;
 }
 
-.box.is-dragover {
+.box_upload.is-dragover {
     outline-offset: -20px;
     outline-color: #8ad5dd;
     background-color: #575757;
@@ -268,11 +269,11 @@ a:focus {
     display: none;
 }
 
-.box.has-advanced-upload .box__dragndrop {
+.box_upload.has-advanced-upload .box__dragndrop {
     display: inline;
 }
 
-.box.has-advanced-upload {
+.box_upload.has-advanced-upload {
     max-height: 260px;
     height: 100%;
     fill: #92b0b3;
@@ -280,22 +281,22 @@ a:focus {
     margin-bottom: 30px;
 }
 
-.box.is-uploading .box__input,
-.box.is-success .box__input,
-.box.is-error .box__input {
+.box_upload.is-uploading .box_upload_input,
+.box_upload.is-success .box_upload_input,
+.box_upload.is-error .box_upload_input {
     display: none;
 }
 
 
-.box__uploading,
+.box_upload_uploading,
 .box__success,
 .box__error {
     display: none;
 }
 
-.box.is-uploading .box__uploading,
-.box.is-success .box__success,
-.box.is-error .box__error {
+.box_upload.is-uploading .box_upload_uploading,
+.box_upload.is-success .box__success,
+.box_upload.is-error .box__error {
     display: inline;
     position: inherit;
     top: 50%;
@@ -306,7 +307,7 @@ a:focus {
     transform: translateY( -50%);
 }
 
-.box__uploading {
+.box_upload_uploading {
     font-style: italic;
 }
 

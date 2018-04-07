@@ -17,6 +17,8 @@ def upload(request):
         upload_form = UploadForm()
 
     elif request.method == "POST":
+        analysis_type = request.POST.get('analysis_radio')
+        sys.stderr.write(analysis_type+"\n")
         up_file = request.FILES['upload_file']
         up_file_md5 = get_hash_str(up_file)
         UploadFile_obj = UploadFile(id=up_file_md5,upload_file=up_file)

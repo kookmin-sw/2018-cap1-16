@@ -11,10 +11,11 @@
                 
             
             // applying the effect for every form
-            var forms = document.querySelectorAll('.box');
+            var forms = document.querySelectorAll('#form_upload');
             Array.prototype.forEach.call(forms, function(form) {
                 var input = form.querySelector('input[type="file"]'),
-                    label = form.querySelector('label'),
+                    label = form.querySelector('#box_upload_filename'),
+                    box = form.querySelector('.box_upload'),
                     errorMsg = form.querySelector('.box__error span'),
                     restart = form.querySelectorAll('.box__restart'),
                     droppedFiles = false, 
@@ -26,6 +27,7 @@
                         event.initEvent('submit', true, false);
                         form.dispatchEvent(event);
                     };
+                    console.log(form.getAttribute("method"));
 
 
                 // letting the server side to know we are going to make an Ajax request
@@ -38,26 +40,26 @@
                 });
                 // drag&drop files if the feature is available
                 if (isAdvancedUpload) {
-                    form.classList.add('has-advanced-upload'); // letting the CSS part to know drag&drop is supported by the browser
+                    box.classList.add('has-advanced-upload'); // letting the CSS part to know drag&drop is supported by the browser
 
                     ['drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop'].forEach(function(event) {
-                        form.addEventListener(event, function(e) {
+                        box.addEventListener(event, function(e) {
                             // preventing the unwanted behaviours
                             e.preventDefault();
                             e.stopPropagation();
                         });
                     });
                     ['dragover', 'dragenter'].forEach(function(event) {
-                        form.addEventListener(event, function() {
-                            form.classList.add('is-dragover');
+                        box.addEventListener(event, function() {
+                            box.classList.add('is-dragover');
                         });
                     });
                     ['dragleave', 'dragend', 'drop'].forEach(function(event) {
-                        form.addEventListener(event, function() {
-                            form.classList.remove('is-dragover');
+                        box.addEventListener(event, function() {
+                            box.classList.remove('is-dragover');
                         });
                     });
-                    form.addEventListener('drop', function(e) {
+                    box.addEventListener('drop', function(e) {
                         droppedFiles = e.dataTransfer.files; // the files that were dropped
 
                         //attach event handlers here...
@@ -77,8 +79,8 @@
                     // preventing the duplicate submissions if the current one is in progress
                     if (form.classList.contains('is-uploading')) return false;
 
-                    form.classList.add('is-uploading');
-                    form.classList.remove('is-error');
+                    box.classList.add('is-uploading');
+                    box.classList.remove('is-error');
 
 
                     if (isAdvancedUpload) // ajax file upload for modern browsers
@@ -109,6 +111,7 @@
                         if(isLarge){ // startIF
                         var ajax = new XMLHttpRequest();
                         ajax.open(form.getAttribute('method'),form.getAttribute('action'), true);
+
                         ajax.onload = function() {
                             form.classList.remove('is-uploading');
                             var data = JSON.parse(ajax.responseText);
