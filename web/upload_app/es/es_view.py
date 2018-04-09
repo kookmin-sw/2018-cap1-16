@@ -1,19 +1,10 @@
 from elasticsearch import Elasticsearch
 import sys
 
-es = Elasticsearch([{'host':'203.246.112.133','port':9200}])
-
-def es_md5_search(file_md5):
-    #request_data = {'query':{'term':{'_id':file_md5}}}
-    request_data = {'query':{'term':{'_id':'ac7dd458cd8569199c67f0253cf039ec'}}}
-
-    res = es.search(index="seclab",  body=request_data)
-    if res['hits']['total'] is not 0 :
-        return res['hits']['hits'][0]
-    else:
-        return 0
+es = Elasticsearch([{'host':'203.246.112.131','port':9200}])
 
 def es_ssdeep_search(ssdeep):
+    return 0
     ssdeep_data = ssdeep.split(":")
     ssdeep_size = int(ssdeep_data[0])
     ssdeep_chunk = ssdeep_data[1]

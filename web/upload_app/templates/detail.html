@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 {% load staticfiles %}
-{% if md5_form != 0 %}
+{% if report_form != 0 %}
 
 
 <h1> DB내 검색 결과 입니다. </h1>
@@ -11,7 +11,6 @@
             <p><strong>File MD5 </strong></p>
             <p><strong>바이러스 탐지 결과</strong></p>
             <p><strong>바이러스 분석 결과</strong></p>
-            <p><strong>File Type</strong></p>
             <p><strong>File Size</strong></p>
             <p><strong>File SHA1</strong></p>
             <p><strong>File SHA256</strong></p>
@@ -19,19 +18,18 @@
         </div>
     
         <div class="text_data">
-            <p>{{ md5_form.fields.md5.initial }}</p>
-            <p>{{ md5_form.fields.detected.initial }}</p>
-            <p>>{{ md5_form.fields.result.initial }}</p>
-            <p>{{ md5_form.fields.magic.initial }}</p>
-            <p>{{ md5_form.fields.file_size.initial }}</p>
-            <p>{{ md5_form.fields.sha1.initial }}</p>
-            <p>{{ md5_form.fields.sha256.initial }}</p>
-            <p>{{ md5_form.fields.uploaded_date.initial }}</p>
+            <p>{{ report_form.fields.md5.initial }}</p>
+            <p>{{ report_form.fields.detected.initial }}</p>
+            <p>{{ report_form.fields.label.initial }}</p>
+            <p>{{ report_form.fields.file_size.initial }}</p>
+            <p>{{ report_form.fields.sha1.initial }}</p>
+            <p>{{ report_form.fields.sha256.initial }}</p>
+            <p>{{ report_form.fields.uploaded_date.initial }}</p>
         </div>
 </div>
 {% endif %} 
 
-{% if ssdeep_forms != 0 %}
+{% if similar_report_forms != 0 %}
 <h1> 업로드한 파일과 유사한 파일에 대한 검색결과 입니다. </h1>
 <div class = 'report_div_2'>
 	<table id ='ssdeep_table'>

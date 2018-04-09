@@ -10,7 +10,7 @@ IDB_PATH = os.path.normpath(os.path.abspath('./media'))
 OPS_PATH = IDB_PATH
 
 # ida python script 저장 경로
-IDA_PYTHON_SCRIPT_PATH = os.path.normpath(os.path.abspath('./upload_app/ida_script'))
+IDA_PYTHON_SCRIPT_PATH = os.path.normpath(os.path.abspath('./upload_app/ida/ida_script'))
 
 # CPU COUNT
 CPU_COUNT = 4
