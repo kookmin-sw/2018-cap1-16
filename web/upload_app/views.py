@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from django.conf import settings
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
-#from .ida.make_ops import make_ops
-#from .ida.make_fh import make_fh
 from .mongodb.md5_search import md5_search
 from .es.es_view import es_ssdeep_search
 import hashlib, sys,os, json
@@ -27,11 +25,11 @@ def upload(request):
         upload_file = request.FILES['upload_file']
         upload_file_md5 = get_hash_str(upload_file)
 
-        UploadFile_obj = UploadFile(id=test_md5,upload_file=upload_file,analysis_type=analysis_type)
+        UploadFile_obj = UploadFile(id=upload_file_md5,upload_file=upload_file,analysis_type=analysis_type)
         UploadFile_obj.save()
 
-        #response = {'status':200,'pk':up_file_md5}
-        response = {'status': 200, 'pk': test_md5}
+        response = {'status':200,'pk':upload_file_md5}
+        #response = {'status': 200, 'pk': test_md5}
         return HttpResponse(json.dumps(response), content_type='application/json')
 		
     ctx = {'upload_form': upload_form,}
@@ -53,14 +51,14 @@ def detail(request, md5):
         analysis_type = upload_file_obj.analysis_type
 
         md5_search_data = md5_search(md5)
-        if md5_search_data is not 0:
+        if md5_search_data is not None:
             md5_search_result_form = create_report_form(report_form,md5_search_data)
             ctx['report_form'] = md5_search_result_form
         else:
             if analysis_type == 0:
-                #ops_path = get_ops_file_path(upload_file_obj)
-                #fh_path = get_fh_file_path(upload_file_obj)
-                ctx['report_form'] = 0
+                static_analysis_data = run_static_analysis(upload_file_obj)
+                static_analysis_report_form = create_report_form(report_form,static_analysis_data)
+                ctx['report_form'] = static_analysis_report_form
 
         #es_ssdeep_report = es_ssdeep_search(UploadFileMeta_obj.ssdeep)
         #if es_ssdeep_report is not 0:
@@ -100,10 +98,21 @@ def get_hash_str(upload_file, block_size = 8192 ) :
         md5.update(buf)
     return md5.hexdigest()
 
-#def get_ops_file_path(upload_file_obj):
-#    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-#    ops_file_path = make_ops(up_file_path)
-#    return ops_file_path
+def run_static_analysis(upload_file_obj):
+
+    IDA_ROOT = os.path.join(settings.PROJECT_DIR,'opseq_ida')
+    upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+
+    ops_file_path = os.path.join(IDA_ROOT,'ops')
+    fh_file_path = os.path.join(IDA_ROOT,'fh')
+
+    cmd_run_ida_ops = 'python ' + IDA_ROOT + os.sep + 'make_idb_ops.py ' + upload_file_path
+    cmd_run_ida_fh = 'python ' + IDA_ROOT + os.sep + 'make_fh_ops.py ' + upload_file_path
+    os.system(cmd_run_ida_ops)
+    os.system(cmd_run_ida_fh)
+
+
+
 
 #def get_fh_file_path(upload_file_obj):
 #    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
