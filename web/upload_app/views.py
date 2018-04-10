@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.conf import settings
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
-from .ida.ida_make_ops import make_ops
+#from .ida.make_ops import make_ops
+#from .ida.make_fh import make_fh
 from .mongodb.md5_search import md5_search
 from .es.es_view import es_ssdeep_search
 import hashlib, sys,os, json
@@ -40,27 +41,26 @@ def upload(request):
 
 def detail(request, md5):
     if request.method == "GET":
-
-        #upload_file_ssdeep = ssdeep.hash_from_file(get_ops_file_url(upload_file_obj))
-
-        report_form = ReportForm()
-        similar_report_forms = list()
-        ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
-
         try:
             upload_file_obj = UploadFile.objects.get(pk=md5)
         except:
             return HttpResponse("Abnormal approach")
 
+        report_form = ReportForm()
+        similar_report_forms = list()
+        ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
+
         analysis_type = upload_file_obj.analysis_type
 
         md5_search_data = md5_search(md5)
-        sys.stderr.write(str(md5_search_data)+'\n')
         if md5_search_data is not 0:
             md5_search_result_form = create_report_form(report_form,md5_search_data)
             ctx['report_form'] = md5_search_result_form
         else:
-            ctx['report_form'] = 0
+            if analysis_type == 0:
+                #ops_path = get_ops_file_path(upload_file_obj)
+                #fh_path = get_fh_file_path(upload_file_obj)
+                ctx['report_form'] = 0
 
         #es_ssdeep_report = es_ssdeep_search(UploadFileMeta_obj.ssdeep)
         #if es_ssdeep_report is not 0:
@@ -100,7 +100,12 @@ def get_hash_str(upload_file, block_size = 8192 ) :
         md5.update(buf)
     return md5.hexdigest()
 
-def get_ops_file_url(upload_file_obj):
-    up_file_url = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-    ops_file_url = make_ops(up_file_url)
-    return ops_file_url
+def get_ops_file_path(upload_file_obj):
+    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+    ops_file_path = make_ops(up_file_path)
+    return ops_file_path
+
+def get_fh_file_path(upload_file_obj):
+    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+    fh_file_path = make_fh(up_file_path)
+    return fh_file_path
