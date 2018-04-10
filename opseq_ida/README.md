@@ -4,6 +4,11 @@
 #### Version 2018.04.06
 * IDA Pro를 이용한 opcode seq 및 피쳐해싱을 하는 코드 작성
 
+#### Version 2018.04.10
+* make_idb_ops.py 파일 독립적으로 실행 가능하게 수정
+* make_fh.py 파일 독립적으로 실행 가능하게 수정
+* opcode sequence 파일 피클로 수정
+
 ### Requirement
 * IDA Pro
 * Python 3.6.x
