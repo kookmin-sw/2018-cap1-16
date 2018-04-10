@@ -1,25 +1,25 @@
 import os
 
 # IDA 경로
-IDA_PATH = "IDAT 경로"
+IDA_PATH = os.path.normpath('C:/Program Files/IDA 7.0/idat64.exe')
 
-# malware 경로
-MALWARE_PATH = os.path.normpath(os.path.abspath('./malware'))
+# ZIP FILE PATH
+ZIP_FILE_PATH = os.path.normpath(os.path.abspath('./zipfile'))
 
 # idb(i64) 저장 경로
 IDB_PATH = os.path.normpath(os.path.abspath('./idb'))
 
 # ops 저장 경로
-OPS_PATH = IDB_PATH.replace('idb','ops')
+OPS_PATH = os.path.normpath(os.path.abspath('./ops'))
 
 # fh 저장 경로
-FH_PATH = IDB_PATH.replace('idb','fh')
+FH_PATH = os.path.normpath(os.path.abspath('./fh'))
 
 # ida python script 저장 경로
 IDA_PYTHON_SCRIPT_PATH = os.path.normpath(os.path.abspath('./ida_script'))
 
 # CPU COUNT
-CPU_COUNT = 1
+CPU_COUNT = 6
 
 # Feature Hashing 관련 상수 정의
 # 최대 리스트 크기
