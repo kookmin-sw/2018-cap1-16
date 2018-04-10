@@ -1,86 +1,133 @@
-{% extends 'layout.html' %}
-{% block content %}
-{% load staticfiles %}
-{% if report_form != 0 %}
+{% extends 'layout.html' %} {% block content %} {% load staticfiles %}
+<script src="{% static  '/js/detail_script.js' %}"></script>
+<script src="{% static  '/js/progress.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/detail.css' %}" /> {% if md5_form != 0 %}
+<!--Basic Properties-->
+<div class="row">
+    <div class="row_detail">
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <span>파일 정보</span>
+            </div>
+            <div class="panel-body">
+
+                <img src="{% static 'result_file.png' %}" class="img_file" align="absmiddle">
 
 
-<h1> DB내 검색 결과 입니다. </h1>
-<div class="report_div">
+                <div class="text_name">
+                    <p><strong>File MD5 </strong></p>
+                    <p><strong>바이러스 탐지 결과</strong></p>
+                    <p><strong>바이러스 분석 결과</strong></p>
+                    <p><strong>File Type</strong></p>
+                    <p><strong>File Size</strong></p>
+                    <p><strong>File SHA1</strong></p>
+                    <p><strong>File SHA256</strong></p>
+                    <p><strong>File Uploaded Date</strong></p>
+                </div>
 
-        <div class="text_name">
-            <p><strong>File MD5 </strong></p>
-            <p><strong>바이러스 탐지 결과</strong></p>
-            <p><strong>바이러스 분석 결과</strong></p>
-            <p><strong>File Size</strong></p>
-            <p><strong>File SHA1</strong></p>
-            <p><strong>File SHA256</strong></p>
-            <p><strong>File Uploaded Date</strong></p>
+                <div class="text_data">
+                    <p>{{ md5_form.fields.md5.initial }}</p>
+                    <p>{{ md5_form.fields.detected.initial }}</p>
+                    <p>{{ md5_form.fields.result.initial }}</p>
+                    <p>{{ md5_form.fields.magic.initial }}</p>
+                    <p>{{ md5_form.fields.file_size.initial }}</p>
+                    <p>{{ md5_form.fields.sha1.initial }}</p>
+                    <p>{{ md5_form.fields.sha256.initial }}</p>
+                    <p>{{ md5_form.fields.uploaded_date.initial }}</p>
+                </div>
+            </div>
         </div>
-    
-        <div class="text_data">
-            <p>{{ report_form.fields.md5.initial }}</p>
-            <p>{{ report_form.fields.detected.initial }}</p>
-            <p>{{ report_form.fields.label.initial }}</p>
-            <p>{{ report_form.fields.file_size.initial }}</p>
-            <p>{{ report_form.fields.sha1.initial }}</p>
-            <p>{{ report_form.fields.sha256.initial }}</p>
-            <p>{{ report_form.fields.uploaded_date.initial }}</p>
-        </div>
+    </div>
 </div>
-{% endif %} 
+{% endif %} {% if ssdeep_forms != 0 %}
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
 
-{% if similar_report_forms != 0 %}
-<h1> 업로드한 파일과 유사한 파일에 대한 검색결과 입니다. </h1>
-<div class = 'report_div_2'>
-	<table id ='ssdeep_table'>
-		<form action="" id="idxButtonForm" >
-		</form>
-		<tbody>
-			{% for ssdeep_form in ssdeep_forms %}
-				<tr>
-                    <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
-					<td> {{ ssdeep_form.fields.md5.initial }}</td>
-				</tr>
-				<tr>
-                    <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
-					<td> {{ ssdeep_form.fields.score.initial }} </td>
-				</tr>
-				<tr>-
-                    <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
-					<td> {{ ssdeep_form.fields.detected.initial }}</td>
-				</tr>
-				<tr>
-                    <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
-						<td> {{ ssdeep_form.fields.result.initial }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+            <div class="panel-heading">
+                <span>유사 파일</span>
+            </div>
+            <div class="panel-body">
+
+                <table id='ssdeep_table'>
+                    <form action="" id="idxButtonForm">
+                    </form>
+                    <tbody>
+                        {% for ssdeep_form in ssdeep_forms %}
+                        <tr>
+                            <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
+                            <td> {{ ssdeep_form.fields.md5.initial }}</td>
+                        </tr>
+                        <tr>
+                            <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
+                            <td> {{ ssdeep_form.fields.score.initial }} </td>
+                        </tr>
+                        <tr>-
+                            <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
+                            <td> {{ ssdeep_form.fields.detected.initial }}</td>
+                        </tr>
+                        <tr>
+                            <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
+                            <td> {{ ssdeep_form.fields.result.initial }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {% else %}
-<br/>
-<div class = 'report_div_2'>
-	<h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <span>유사 파일</span>
+            </div>
+            <div class="panel-body">
+                <h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
 
+<!--Tags-->
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
 
+            <div class="panel-heading">
+                <span>AI</span>
+            </div>
+            <div class="panel-body">
+                <div class="progress skill-bar">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">safe<i class="val">55%</i></span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
 
+<!--Process bar-->
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
 
-<script src = "{% static  '/js/detail_script.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static '/css/detail.css' %}" />
+            <div class="panel-heading">
+                <span>시그니처</span>
+            </div>
+            <div class="panel-body">
+                <span class="badge badge-pill light-blue" id="badge_color">Primary</span>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
-
-{% block sidebar %}
-{% load staticfiles %}
-
-
-<ul class="nav-list">
-    <li class="nav-item"><a href='/upload' class="nav-link">Menu-1</a></li>
-    <li class="nav-item"><a href='/detail' class="nav-link">Menu-2</a></li>
-</ul>
-
-
-<link rel="stylesheet" type="text/css" href="{% static '/css/nav_cont.css' %}" /> 
-{% endblock %}
-

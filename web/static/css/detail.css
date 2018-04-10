@@ -14,202 +14,124 @@ body {
     height: 99%;
 }
 
+.row_detail{
+    padding: 10% 8% 2% 8%;
+}
 
-@media only screen and (max-width: 1050px) {
+.row_detail_2{
+    padding: 0% 8% 2% 8%;
+}
 
-    .report_div {
-
-        max-height: 220px;
-
-        height: 100%;
-        max-width: 1000px;
-        min-width: 550px;
-        width: 100%;
-        margin: inherit;
-        margin-bottom: 3%;
-        position: relative;
-        padding: 0% 0%;
-        background-color: #2f2f33;
-        text-align: center;
-        font-size: 1vw;
-
-        outline: 2px dashed #8ad5dd;
-        outline-offset: -10px;
-
-        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-        transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    }
-    
-    .report_div_2 {
-
-        max-height: 130px;
-
-        height: 100%;
-        max-width: 1000px;
-        min-width: 550px;
-        width: 100%;
-        margin: inherit;
-        margin-bottom: 4%;
-        position: relative;
-        padding: 0% 0%;
-        background-color: #2f2f33;
-        text-align: justify;
-        font-size: 1vw;
-
-        outline: 2px dashed #8ad5dd;
-        outline-offset: -10px;
-
-        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-        transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    }
-    
-    h2 {
-    font-size: 2.4vw;
-    text-align: center;
-    margin: inherit;
-    margin-left: 31%;
-    margin-top: 5%;
-    display: inline-block;
-    position: relative;
-    color: #8ad5dd;
-    }
-    
-    h1 {
-    max-height: 80px;
-    height: 100%;
+.box_title{
     width: 100%;
-    max-width: 1000px;
-    /* 800 */
-    margin: inherit;
-    margin-bottom: -5%;
-    margin-top: 5%;
     position: relative;
-    padding: 1% 0%;
-    font-weight: 900;
-    color: #2f2f33;
-    font-size: 2.3vw;
+    margin-bottom: -20px;
+    background-color: #2f2f33;
+}
 
+/*
+.report_div {
+
+    width: 100%;
     text-align: center;
+
+    min-height: 260px;
+    height: 100%;
+    border-left: 1px solid #2f2f33;
+    border-right: 1px solid #2f2f33;
+    border-bottom: 1px solid #2f2f33;
+
 }
-    .report_div_2 td {
-    padding: 5px 10px;
+*/
+
+.panel {
+    box-shadow: 0 2px 2px rgba(0,0,0,.05);
 }
-    .report_div_2 table {
-    margin-top: -5px;
+
+.panel-heading {
+	background-color: #2f2f33 !important;
+    color:  #8ad5dd !important;
+    font-size: 1vw;
+    font-weight: 700;
 }
-    
+
+.report_div_2 {
+
+    width: 100%;
+    /*max-width: 800px;*/
+    /* 800 */
+    text-align: center;
+    /*margin: 0 auto;*/
+    color: #8ad5dd;
+
 }
-@media only screen and (min-width: 1050px) {
 
-    .report_div {
-
-        max-height: 340px;
-
-        height: 100%;
-        max-width: 1000px;
-        min-width: 550px;
-        width: 100%;
-        margin: inherit;
-        margin-bottom: 3%;
-        position: relative;
-        padding: 0% 0%;
-        background-color: #2f2f33;
-        text-align: center;
-        font-size: 1vw;
-
-        outline: 2px dashed #8ad5dd;
-        outline-offset: -10px;
-
-        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-        transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    }
-    
-    .report_div_2 {
-
-        max-height: 180px;
-
-        height: 100%;
-        max-width: 1000px;
-        min-width: 550px;
-        width: 100%;
-        margin: inherit;
-        margin-bottom: 2%;
-        position: absolute;
-        vertical-align: middle;
-        display: table-cell;
-        padding: 0% 0%;
-        background-color: #2f2f33;
-        font-size: 1vw;
-
-        outline: 2px dashed #8ad5dd;
-        outline-offset: -10px;
-
-        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
-        transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    }
-    
-    h2 {
+h2 {
     font-size: 2.2vw;
     text-align: center;
-    margin: inherit;
     margin-top: 6%;
-    margin-left: 22%;
     display: inline-block;
     position: relative;
     color: #8ad5dd;
-    }
-    
-    h1 {
+}
+
+h1 {
     max-height: 80px;
     height: 100%;
-    width: 100%;
-    max-width: 1000px;
+    width: 20%;
+    max-width: 125px;
     /* 800 */
     margin: inherit;
-    margin-bottom: -2%;
     position: relative;
     padding: 1% 0%;
     font-weight: 900;
     color: #2f2f33;
-    font-size: 2.3vw;
-
+    font-size: 1.8vw;
+    display: inline-block;
     text-align: center;
-    }
-    .report_div_2 td {
+}
+
+.report_div_2 td {
     padding: 8px 10px;
 }
-    
-    .report_div_2 table {
+
+.report_div_2 table {
     margin-top: -10px;
 }
 
+.img_file {
+    width: 10%;
+    height: 100%;
+    float: left;
+    margin: 5% 1% 1% 2%;
+    position: relative;
 }
 
 .text_name {
-    width: 20%;
+    width: 15%;
     height: 100%;
     float: left;
     text-align: justify;
-    margin: 1% 1% 1% 3%;
+    margin: 0% 0% 0% 2%;
     position: relative;
-    color: #ffffff;
+    font-size: 0.9vw;
+    color: #505054;
 
 }
 
 .text_data {
-    width: 72%;
+    width: 75%;
     height: 100%;
     text-align: left;
-    margin: 1% 3% 1% 1%;
-    margin-bottom: 1%;
-    color: #8ad5dd;
+    margin: 0% 3% 0% 0%;
+    font-size: 0.9vw;
+    color: #2f2f33;
     float: left;
 
 }
 
 
-.report_div_2 table {
-    width: 100%;
+.report_div_2 table {    width: 100%;
     padding-bottom: 45px;
 }
 
@@ -240,14 +162,46 @@ body {
 
 #nav a.active {
     background: #575757;
-    color: #fff;
+    color: #8ad5dd;
 }
 
-.nav_list {
-    
-}
 
 .name_td {
     width: 24%;
-    color: #fff;
+    color: #8ad5dd;
+}
+
+/*Progress bar*/ 
+.progress {
+  height: 35px;
+
+}
+.progress .skill {
+  line-height: 35px;
+  padding: 0;
+  margin: 0 0 0 20px;
+  text-transform: uppercase;
+}
+.progress .skill .val {
+  float: right;
+  font-style: normal;
+  margin: 0 20px 0 0;
+}
+
+.progress-bar {
+  text-align: left;
+  transition-duration: 3s;
+   	background: #e5405e;
+	/* Old browsers */
+	background: -moz-linear-gradient(left, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
+
+}
+
+/*Tags*/
+#badge_color {
+	background-color: #8ad5dd !important;
 }
