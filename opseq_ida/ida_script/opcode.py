@@ -1,3 +1,5 @@
+import pickle
+
 idaapi.autoWait()
 
 save_path =idc.ARGV[1]
@@ -9,7 +11,7 @@ for seg_ea in Segments() :
         if isCode(GetFlags(head)):
             opcode.append('%02x' %(Byte(head)))
 
-with open(save_path, 'w') as f :
-    f.write('\n'.join(opcode))
+with open(save_path, 'wb') as f :
+    pickle.dump(opcode, f)
 
 idc.Exit(0)
