@@ -100,12 +100,12 @@ def get_hash_str(upload_file, block_size = 8192 ) :
         md5.update(buf)
     return md5.hexdigest()
 
-def get_ops_file_path(upload_file_obj):
-    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-    ops_file_path = make_ops(up_file_path)
-    return ops_file_path
+#def get_ops_file_path(upload_file_obj):
+#    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+#    ops_file_path = make_ops(up_file_path)
+#    return ops_file_path
 
-def get_fh_file_path(upload_file_obj):
-    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-    fh_file_path = make_fh(up_file_path)
-    return fh_file_path
+#def get_fh_file_path(upload_file_obj):
+#    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+#    fh_file_path = make_fh(up_file_path)
+#    return fh_file_path

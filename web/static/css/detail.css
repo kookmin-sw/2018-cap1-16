@@ -10,12 +10,12 @@ body {
     font-family: 'Nanum Gothic', sans-serif;
     color: #8ad5dd;
     background-color: #ffffff;
-    padding: 0px 0px;
+    padding-top: 5%;
     height: 99%;
 }
 
 .row_detail{
-    padding: 10% 8% 2% 8%;
+    padding: 0% 8% 2% 8%;
 }
 
 .row_detail_2{
@@ -103,7 +103,7 @@ h1 {
     width: 10%;
     height: 100%;
     float: left;
-    margin: 5% 1% 1% 2%;
+    margin: 3% 1% 1% 2%;
     position: relative;
 }
 
@@ -120,7 +120,7 @@ h1 {
 }
 
 .text_data {
-    width: 75%;
+    width: 67%;
     height: 100%;
     text-align: left;
     margin: 0% 3% 0% 0%;

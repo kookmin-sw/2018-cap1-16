@@ -17,31 +17,63 @@
 
 
                 <div class="text_name">
-                    <p><strong>File MD5 </strong></p>
-                    <p><strong>바이러스 탐지 결과</strong></p>
+                    <p><strong>파일 MD5 </strong></p>
+                    <p><strong>파일 크기</strong></p>
+                    <p><strong>파일 SHA1</strong></p>
+                    <p><strong>파일 SHA256</strong></p>
+                    <p><strong>바이러스 유무</strong></p>
                     <p><strong>바이러스 분석 결과</strong></p>
-                    <p><strong>File Type</strong></p>
-                    <p><strong>File Size</strong></p>
-                    <p><strong>File SHA1</strong></p>
-                    <p><strong>File SHA256</strong></p>
                     <p><strong>File Uploaded Date</strong></p>
                 </div>
 
                 <div class="text_data">
-                    <p>{{ md5_form.fields.md5.initial }}</p>
-                    <p>{{ md5_form.fields.detected.initial }}</p>
-                    <p>{{ md5_form.fields.result.initial }}</p>
-                    <p>{{ md5_form.fields.magic.initial }}</p>
-                    <p>{{ md5_form.fields.file_size.initial }}</p>
-                    <p>{{ md5_form.fields.sha1.initial }}</p>
-                    <p>{{ md5_form.fields.sha256.initial }}</p>
-                    <p>{{ md5_form.fields.uploaded_date.initial }}</p>
+                    <p>{{ report_form.fields.md5.initial }}</p>
+                    <p>{{ report_form.fields.file_size.initial }} Byte</p>
+                    <p>{{ report_form.fields.sha1.initial }}</p>
+                    <p>{{ report_form.fields.sha256.initial }}</p>
+                    <p>{{ report_form.fields.detected.initial }}</p>
+                    <p>{{ report_form.fields.label.initial }}</p>
+                    <p>{{ report_form.fields.uploaded_date.initial }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endif %} {% if ssdeep_forms != 0 %}
+<!--Tags-->
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <span>AI</span>
+            </div>
+            <div class="panel-body">
+                <div class="progress skill-bar">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">safe<i class="val">55%</i></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Process bar-->
+<div class="row">
+    <div class="row_detail_2">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <span>시그니처</span>
+            </div>
+            <div class="panel-body">
+                <span class="badge badge-pill light-blue" id="badge_color">Primary</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% if ssdeep_forms != 0 %}
 <div class="row">
     <div class="row_detail_2">
         <div class="panel panel-default">
@@ -79,6 +111,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% else %}
 <div class="row">
     <div class="row_detail_2">
@@ -95,39 +128,6 @@
 </div>
 {% endif %}
 
-<!--Tags-->
-<div class="row">
-    <div class="row_detail_2">
-        <div class="panel panel-default">
 
-            <div class="panel-heading">
-                <span>AI</span>
-            </div>
-            <div class="panel-body">
-                <div class="progress skill-bar">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100">
-                        <span class="skill">safe<i class="val">55%</i></span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--Process bar-->
-<div class="row">
-    <div class="row_detail_2">
-        <div class="panel panel-default">
-
-            <div class="panel-heading">
-                <span>시그니처</span>
-            </div>
-            <div class="panel-body">
-                <span class="badge badge-pill light-blue" id="badge_color">Primary</span>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}
