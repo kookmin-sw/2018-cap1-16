@@ -1,4 +1,4 @@
-import pefile, os, shutil, hashlib
+import pefile, os, shutil, hashlib, sys
 
 import multiprocessing as mp
 
@@ -122,3 +122,17 @@ def run( root ) :
     print("Start copy 64bit DLL: {}".format(len(path_64bit_dll)))
     p.map(crawling_64bit_dll, path_64bit_dll)
     print("Done")
+
+
+if __name__ == '__main__' :
+    argv_cnt = len(sys.argv)
+    if argv_cnt != 2:
+        print("pefile_crawling.py")
+        print("디렉토리를 입력받아 그 디렉토리 하위에 있는 pefile 을 크롤링 하는 코드")
+        print("python pefile_crawling.py <디렉토리>")
+    if argv_cnt == 2:
+        path = sys.argv[1]
+        if os.path.isdir(path) :
+            run(path)
+        else:
+            print("존재하는 폴더가 아닙니다.")

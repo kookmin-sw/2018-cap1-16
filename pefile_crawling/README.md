@@ -9,9 +9,16 @@
 #### Version 2018.03.26
 * `DESTINATION_PATH` 가 없을경우 생성 하도록 수정
 
+#### Version 2018.04.10
+* main.py 제거
+* benign_crawling.py 이름 pefile_crawling.py 로 수정
+* pefile_crawling.py 를 독립적으로 실행 가능하게 수정
+
 ### Requirement
-* [peframe](https://github.com/guelfoweb/peframe)
+* [pefile](https://github.com/erocarrera/pefile)
 * [python 3](https://www.python.org/downloads/)
 
 ### Usage
-1. `run(<PATH>)` : `<PATH>` 를 기준으로 하위 폴더에 있는 모든 pe파일을 32bit 와 64bit로 구분해서 저장 한다.
+```bash
+$ python pefile_crawling.py <디렉토리> : <디렉토리> 에 있는 pefile을 크롤링 한다.
+```
