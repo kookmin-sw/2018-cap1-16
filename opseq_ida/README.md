@@ -8,6 +8,7 @@
 * make_idb_ops.py 파일 독립적으로 실행 가능하게 수정
 * make_fh.py 파일 독립적으로 실행 가능하게 수정
 * opcode sequence 파일 피클로 수정
+* main.py 및 `MALWARE_PATH` 제거
 
 ### Requirement
 * IDA Pro
