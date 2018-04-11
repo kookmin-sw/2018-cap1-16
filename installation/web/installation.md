@@ -19,3 +19,13 @@ cd <Project_ROOT>/web
 $ python manage.py makemigrations upload_app
 $ python manage.py migrate
 ```
+
+### Configuration
+* Goto web/upload_app/mongodb
+ - modify md5_search.py
+ - client = SeclabMongoClient([your db server ip], 27017, [DB name])
+
+
+* Goto web/upload_app/es
+ - modify es_view.py
+ - es = Elasticsearch([{'host':[your elasticsearch ip],'port':9200}])
