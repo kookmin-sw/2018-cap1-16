@@ -41,3 +41,24 @@
 ![CUDA_14](./resource/CUDA®_Toolkit/CUDA_14.png)
 ![CUDA_15](./resource/CUDA®_Toolkit/CUDA_15.png)
 ![CUDA_16](./resource/CUDA®_Toolkit/CUDA_16.png)
+
+### cuDNN
+1. Download [cuDNN](https://developer.nvidia.com/cudnn) Version 7.0.
+![cuDNN_1](./resource/cuDNN/cuDNN_1.png)
+![cuDNN_2](./resource/cuDNN/cuDNN_2.png)
+![cuDNN_3](./resource/cuDNN/cuDNN_3.png)
+2. Extract downloaded file and place them in `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0`.
+![cuDNN_4](./resource/cuDNN/cuDNN_4.png)
+![cuDNN_5](./resource/cuDNN/cuDNN_5.png)
+
+### GPU Version of TensorFlow r1.7 - Python
+1. Open command prompt, enter `pip3 install --upgrade tensorflow-gpu` to install TensorFlow.
+![TensorFlow_1](./resource/Tensorflow/Tensorflow_1.png)
+2. Enter `python` to run `python` and enter the following code to verify installed.
+![TensorFlow_2](./resource/Tensorflow/Tensorflow_2.png)
+```Python
+import tensorflow as tf
+hello = tf.constant('Hello, TensorFlow!')
+sess = tf.Session()
+print(sess.run(hello))
+```
