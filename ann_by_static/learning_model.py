@@ -59,7 +59,9 @@ def run() :
     warnings.filterwarnings('ignore')
     logger = logging.getLogger()
     logger.disabled = True
-    
+
+    tf.reset_default_graph()
+
     ben_data_list, mal_data_list = load_data()
 
     print('Load ANN network architecture')

@@ -13,6 +13,13 @@ RESULT = [ False, True ]
 CHECK_POINT = os.path.normpath(os.path.abspath('./static_model.ckpt'))
 
 def run( path ) :
+    if not os.path.exists(TEST_RESULT_PATH) :
+        os.makedirs(TEST_RESULT_PATH)
+    warnings.filterwarnings('ignore')
+    logger = logging.getLogger()
+    logger.disabled = True
+
+    tf.reset_default_graph()
     with tf.device('/gpu:0'):
         x = tf.placeholder(tf.float32, shape=[None, INPUT_SIZE])
         y = tf.placeholder(tf.float32, shape=[None, OUTPUT_SIZE])
