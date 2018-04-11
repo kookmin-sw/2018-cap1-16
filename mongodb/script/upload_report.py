@@ -12,9 +12,6 @@ def upload_report(dir_url,collection):
 		with open(absolute_url,"r") as f:
 			data = json.load(f)
 			md5 = data['md5']
-			sha1 = data['sha1']
-			sha256 = data['sha256']
-			filesize = int(data['file_size'])
 			detected = data['detected']
 			label = data['label']
 			#ssdeep = data['SSDeep']
@@ -24,7 +21,7 @@ def upload_report(dir_url,collection):
 			#ssdeep_double_chunk = ssdeep_split[2]
 			collected_date=datetime.datetime.now()
 			try:
-				collection.insert({"md5":md5,\
+				collection.insert({'_id':md5,"md5":md5,\
 					"detected":detected,'label':label,\
 					#"SSDeep": ssdeep, "SSDeep_chunk_size":ssdeep_chunk_size,\
 					#"SSDeep_chunk":ssdeep_chunk,"SSDeep_double_chunk": ssdeep_double_chunk,\
