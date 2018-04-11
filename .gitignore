@@ -9,4 +9,3 @@ web/upload_app/mongodb/__pycache__/*
 web/upload_app/es/__pycache__/*
 web/upload_app/migrations/*
 web/web/__pycache__/*
-opseq_ida/*
