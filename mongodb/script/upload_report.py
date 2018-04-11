@@ -12,7 +12,10 @@ def upload_report(dir_url,collection):
 		with open(absolute_url,"r") as f:
 			data = json.load(f)
 			md5 = data['md5']
-			detected = data['detected']
+			if data['detected'] == 0:
+				detected = False
+			elif data['detected'] == 1:
+				detected = True
 			label = data['label']
 			#ssdeep = data['SSDeep']
 			#ssdeep_split = ssdeep.split(":")
@@ -29,7 +32,7 @@ def upload_report(dir_url,collection):
 				print("%s is inserted (%d/%d) "%(md5,remain_count,file_count))
 			except:
 				try:
-					collection.update({"md5": md5}, {'$set': {"md5":md5,"label": label, "dectected":detected,\
+					collection.update({"md5": md5}, {'$set': {"md5":md5,"label": label, "detected":detected,\
 										"collected_date": collected_date}}, upsert=True)
 					print("%s is updated (%d/%d) " % (md5, remain_count, file_count))
 				except:
