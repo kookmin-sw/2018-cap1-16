@@ -29,3 +29,10 @@ $ python manage.py migrate
 * Goto web/upload_app/es
  - modify es_view.py
  - es = Elasticsearch([{'host':[your elasticsearch ip],'port':9200}])
+
+### How to run server
+```
+cd <Project_ROOT>/web
+$ python manage.py runserver <ip>:<port>
+ex) python manage.py runserver 192.168.0.1:80
+```
