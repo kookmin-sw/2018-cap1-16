@@ -1,7 +1,7 @@
 from connect import SeclabMongoClient
 import os,datetime,json
 
-DIRECTORY = '/home/seclab/samples_vt'
+DIRECTORY = '/home/seclab/sample_report'
 
 def upload_report(dir_url,collection):
 	files = os.listdir(dir_url)
@@ -15,17 +15,19 @@ def upload_report(dir_url,collection):
 			#magic = data['Magic']
 			sha1 = data['sha1']
 			sha256 = data['sha256']
-			#filesize = int(data['File Size'])
-			#detected = data['detected']
-			#result = data['result']
+			filesize = int(data['file_size'])
+			detected = data['detected']
+			label = data['label']
 			#ssdeep = data['SSDeep']
 			#ssdeep_split = ssdeep.split(":")
 			#ssdeep_chunk_size = ssdeep_split[0]
 			#ssdeep_chunk = ssdeep_split[1]
 			#ssdeep_double_chunk = ssdeep_split[2]
 			try:
-				collection.insert({"_id":md5,\
+				collection.insert({"md5":md5,\
 					"SHA-1":sha1,"SHA-256":sha256,\
+					"file_size":filesize,"detected":detected,\
+					"label":label,\
 					#"SSDeep": ssdeep, "SSDeep_chunk_size":ssdeep_chunk_size,\
 					#"SSDeep_chunk":ssdeep_chunk,"SSDeep_double_chunk": ssdeep_double_chunk,\
 					"Uploaded_Date":datetime.datetime.now()})
