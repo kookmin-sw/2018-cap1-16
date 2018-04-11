@@ -1,5 +1,26 @@
-# Cuckoo Sandbox Settings Manual
+# Cuckoo Sandbox 2.0.x Settings Manual
 
+### 0. 설치 환경
+#### 1) 호스트 스펙
+##### (1) 203.246.112.133 : Cuckoo sandbox 2.0.5
+* Xeon® CPU E5-2630v2
+* 4T HDD * 5, 1T HDD * 1
+* 56G RAM
+* Ubuntu 16.04
+
+##### (2) 203.246.112.138 : Cuckoo sandbox 2.0.4
+* Xeon® CPU E5-2620 v3
+* 2T HDD * 5
+* 64G RAM
+* Ubuntu 16.04
+
+#### 2) 게스트 스펙 - Sandbox
+* Win7 enterprise SP1 32bit
+* VirtualBox
+* 2048 MB
+* ip : 192.168.0.2 ~ 192.168.0.9
+
+* * *
 ### 1. 기본 패키지 / C 라이브러리 설치
 ```bash
 $ sudo apt-get install -y python-pip python-dev libssl-dev libjpeg-dev zlib1g-dev tcpdump apparmor-utils libffi-dev swig python-setuptools
@@ -120,10 +141,78 @@ UAC(User Account Control) :사용자 계정을 제어하는데 사용
 ![Imgur](https://i.imgur.com/q5k7bbb.png)
 
 폴더 경로 : /home/’<계정>’/.cuckoo/agent
+
 ![Imgur](https://i.imgur.com/2K6YSnk.png)
 
 시작 > Computer > Network > 공유 폴더 > agent.py 파일을 바탕화면에 복사하기
 바탕화면에서 agent.py 실행하기
+
 ![Imgur](https://i.imgur.com/Honpk1l.png)
 
 스냅샷 이름 : Snapshot1(추후 설정에 필요)
+
+
+```bash
+$ sudo vi ~/.cuckoo/conf/virtualbox.conf
+```
+guest OS에 맞게 설정 바꿔주기(ip, snapshot...)
+![Imgur](https://i.imgur.com/LUPWtMF.png)
+
+```bash
+$ sudo vi ~/.cuckoo/conf/cuckoo.conf
+```
+샌드박스(가상머신)에서 default gateway에 적은 ip를 resultserver ip에 적기
+
+![Imgur](https://i.imgur.com/GwjTL0W.png)
+
+* * *
+### 4. MongoDB 설치 및 설정
+```bash
+$ sudo apt-get install mongodb
+$ sudo vi /etc/mongodb.conf #bind_ip 확인
+$ mongo [bind_ip] #127.0.0.1일 경우 생략
+> use cuckoo
+> db.createUser({user:"cuckoo",pwd:"[password]",roles:[{role:"readWrite",db:"cuckoo"}]})
+```
+```bash
+$ sudo vi ~/.cuckoo.conf/reporting.conf
+```
+아래와 같이 바꿔주기
+
+![Imgur](https://i.imgur.com/51lRQtD.png)
+
+* * *
+### 5. MySQL 설정
+```bash
+$ sudo apt-get install mysql-server python-mysqldb -y #패스워드 설정
+$ sudo myhsql -u root -p #패스워드 입력하기
+> create database cuckoo;
+> grant all privileges on cuckoo.* to cuckoo@localhost identified by 'Cuck00@n@lyst!';
+> flush privileges;
+```
+```bash
+$ sudo vi ~/.cuckoo/conf/cuckoo.conf
+```
+아래와 같이 설정해주기
+
+![Imgur](https://i.imgur.com/4KrAWo8.png)
+
+
+* * *
+### 6. 샌드박스를 여러 개 구성할 경우
+```bash
+$ sudo vi ~/.cuckoo/conf/virtualbox.conf
+```
+샌드박스 추가 후 machines에 샌드박스 이름 추가하고 각 머신에 대한 label, platform, ip 추가하기
+
+![Imgur](https://i.imgur.com/0Yamlfr.png)
+![Imgur](https://i.imgur.com/ceZ7Ajy.png)
+
+* * *
+### 7. 기타 추가 설정
+```bash
+sudo vi ~/.cuckoo/conf/memory.conf
+```
+Guest profile을 guest OS에 맞게 수정하기
+
+![Imgur](https://i.imgur.com/W9jNd5w.png)
