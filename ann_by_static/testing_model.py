@@ -43,10 +43,10 @@ def run( path ) :
         model_saver.restore(sess, CHECK_POINT)
         with open(path, 'rb') as f :
             fh_vector = pickle.load(f)
-        output = np.array(sess.run(y_test, feed_dict={x: [fh_vector]}))
-        malware_score = int(output[0][1] * 100)
-        result=RESULT[int(output.reshape([-1]).argmax(-1))]
+        output = np.array(sess.run(y_test, feed_dict={x: [fh_vector]})).reshape([-1])
+        malware_score = int(output[-1] * 100)
+        detected=RESULT[int(output.argmax(-1))]
         md5 = os.path.splitext(os.path.basename(path))[0]
-        result_dict = { 'md5' : md5, 'detected' : result, 'result' : 'None', 'score' : malware_score}
+        result_dict = { 'md5' : md5, 'detected' : detected, 'label' : 'None', 'score' : malware_score}
         with open(os.path.join(TEST_RESULT_PATH, md5 + '.json'), 'w') as f :
             json.dump(result_dict, f)
