@@ -12,3 +12,10 @@ $ pip install django
 $ pip install pymongo
 $ pip install elasticsearch
 ```
+
+### Build DB
+```
+cd <Project_ROOT>/web
+$ python manage.py makemigrations upload_app
+$ python manage.py migrate
+```
