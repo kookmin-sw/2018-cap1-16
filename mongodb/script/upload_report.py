@@ -12,7 +12,6 @@ def upload_report(dir_url,collection):
 		with open(absolute_url,"r") as f:
 			data = json.load(f)
 			md5 = data['md5']
-			#magic = data['Magic']
 			sha1 = data['sha1']
 			sha256 = data['sha256']
 			filesize = int(data['file_size'])
@@ -23,18 +22,21 @@ def upload_report(dir_url,collection):
 			#ssdeep_chunk_size = ssdeep_split[0]
 			#ssdeep_chunk = ssdeep_split[1]
 			#ssdeep_double_chunk = ssdeep_split[2]
+			collected_date=datetime.datetime.now()
 			try:
 				collection.insert({"md5":md5,\
-					"SHA-1":sha1,"SHA-256":sha256,\
-					"file_size":filesize,"detected":detected,\
-					"label":label,\
+					"detected":detected,'label':label,\
 					#"SSDeep": ssdeep, "SSDeep_chunk_size":ssdeep_chunk_size,\
 					#"SSDeep_chunk":ssdeep_chunk,"SSDeep_double_chunk": ssdeep_double_chunk,\
-					"Uploaded_Date":datetime.datetime.now()})
+					"collected_date":collected_date})
 				print("%s is inserted (%d/%d) "%(md5,remain_count,file_count))
 			except:
-				print("%s is already in db (%d/%d) "%(md5,remain_count,file_count))
-
+				try:
+					collection.update({"md5": md5}, {'$set': {"md5":md5,"label": label, "dectected":detected,\
+										"collected_date": collected_date}}, upsert=True)
+					print("%s is updated (%d/%d) " % (md5, remain_count, file_count))
+				except:
+					print("update %s throws error! So Skipped! (%d/%d) " % (md5, remain_count, file_count))
 		remain_count -=1
 
 
