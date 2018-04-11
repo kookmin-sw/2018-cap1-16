@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.conf import settings
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
 from .mongodb.md5_search import md5_search
 from .es.es_view import es_ssdeep_search
+from .static_anlysis import run_static_analysis
 import hashlib, sys,os, json
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
@@ -56,7 +56,7 @@ def detail(request, md5):
         else:
             if analysis_type == 0:
                 static_analysis_data = run_static_analysis(upload_file_obj)
-                static_analysis_report_form = create_report_form(report_form,static_analysis_data)
+                static_analysis_report_form = create_static_report_form(report_form,static_analysis_data)
 
                 ctx['report_form'] = static_analysis_report_form
 
@@ -76,10 +76,15 @@ def detail(request, md5):
 
 def create_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['_id']
-    #report_form.fields['file_size'].initial = int(search_data['file_size'])
-    #report_form.fields['sha1'].initial = search_data['SHA-1']
-    #report_form.fields['sha256'].initial = search_data['SHA-256']
-    #report_form.fields['ssdeep'].initial = search_data['SSDeep']
+    report_form.fields['detected'].initial = search_data['detected']
+    report_form.fields['label'].initial = search_data['label']
+    report_form.fields['uploaded_date'].initial = search_data['Uploaded_Date']
+    report_form.fields['score'].initial = int(search_data['score'])
+
+    return report_form
+
+def create_static_report_form(report_form, search_data):
+    report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['detected'].initial = search_data['detected']
     report_form.fields['label'].initial = search_data['label']
     #report_form.fields['uploaded_date'].initial = search_data['Uploaded_Date']
@@ -97,33 +102,6 @@ def get_hash_str(upload_file, block_size = 8192 ) :
             break
         md5.update(buf)
     return md5.hexdigest()
-
-def run_static_analysis(upload_file_obj):
-
-    IDA_ROOT = os.path.join(settings.PROJECT_DIR,'opseq_ida')
-    ANN_ROOT = os.path.join(settings.PROJECT_DIR, 'ann_by_static')
-
-    upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-
-    ops_folder_path = os.path.join(IDA_ROOT,'ops')
-    ops_file_path = os.path.join(ops_folder_path,os.path.splitext(upload_file_obj.upload_file.name)[0]+'.ops')
-    fh_folder_path = os.path.join(IDA_ROOT,'fh')
-    fh_file_path = os.path.join(fh_folder_path,os.path.splitext(upload_file_obj.upload_file.name)[0]+'.fh')
-    static_analysis_json_path = os.path.join(os.path.join(ANN_ROOT,'test_result'),os.path.splitext(upload_file_obj.upload_file.name)[0]+'.json')
-
-    cmd_run_ida_ops = 'python ' + IDA_ROOT + os.sep + 'make_idb_ops.py ' + upload_file_path
-    cmd_run_ida_fh = 'python ' + IDA_ROOT + os.sep + 'make_fh.py ' + ops_file_path
-    os.system(cmd_run_ida_ops)
-    os.system(cmd_run_ida_fh)
-
-    cmd_run_ann = 'python ' + ANN_ROOT + os.sep + 'ann_by_static.py -t ' + fh_file_path
-    os.system(cmd_run_ann)
-
-    static_analysis_json = open(static_analysis_json_path)
-    ret_data = json.load(static_analysis_json)
-    return ret_data
-
-
 
 
 
