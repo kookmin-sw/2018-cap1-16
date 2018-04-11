@@ -1,4 +1,3 @@
-## Welcome to team NCPC Pages
 
 ### 프로젝트 목표
 글로벌 보안제품 인증 기관 [AV-TEST](https://www.av-test.org/)에 통계에 따르면, 해마다 총 악성코드의 개수가 늘어나고 있습니다.
@@ -73,3 +72,6 @@ member_5 = {
 
 ### 사용법
 * 준비중입니다.
+
+### License
+[![LICENSE](https://img.shields.io/aur/license/yaourt.svg)](https://www.tensorflow.org/api_docs/) [![LICENSE](https://img.shields.io/badge/license-BSD-green.svg)](https://www.tensorflow.org/api_docs/) [![LICENSE](https://img.shields.io/badge/license-Apache 2.0-red.svg)](https://www.tensorflow.org/api_docs/) [![LICENSE](https://img.shields.io/badge/license-AGPL 3.0-blue.svg)](https://www.tensorflow.org/api_docs/)
