@@ -4,8 +4,6 @@ import pickle, os
 
 from settings import *
 
-CHECK_POINT = os.path.normpath(os.path.abspath('./static_model.ckpt'))
-
 # for using tensorflow as hyper parameter
 INPUT_SIZE = 12288
 OUTPUT_SIZE = 2

@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-import pickle, os, json
+import pickle, os, json, warnings, logging
 
 from settings import *
 
@@ -9,8 +9,6 @@ INPUT_SIZE = 12288
 OUTPUT_SIZE = 2
 
 RESULT = [ False, True ]
-
-CHECK_POINT = os.path.normpath(os.path.abspath('./static_model.ckpt'))
 
 def run( path ) :
     if not os.path.exists(TEST_RESULT_PATH) :
@@ -45,11 +43,12 @@ def run( path ) :
         model_saver.restore(sess, CHECK_POINT)
         with open(path, 'rb') as f :
             fh_vector = pickle.load(f)
-        result=RESULT[int(np.array(sess.run(y_test, feed_dict={x: [fh_vector]})).reshape([-1]).argmax(-1))]
-        print(result)
+        output = np.array(sess.run(y_test, feed_dict={x: [fh_vector]}))
+        malware_score = int(output[0][1] * 100)
+        result=RESULT[int(output.reshape([-1]).argmax(-1))]
         md5 = os.path.splitext(os.path.basename(path))[0]
-        result_dict = { 'md5' : md5, 'detected' : result, 'result' : 'None'}
+        result_dict = { 'md5' : md5, 'detected' : result, 'result' : 'None', 'score' : malware_score}
         with open(os.path.join(TEST_RESULT_PATH, md5 + '.json'), 'w') as f :
             json.dump(result_dict, f)
 
-
+run('C:\\Users\\COREA\\Desktop\\train_data\\00cbb2a740993dc96b7b2135177df97a.fh')
