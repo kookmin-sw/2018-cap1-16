@@ -76,9 +76,9 @@ def detail(request, md5):
 
 def create_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['_id']
-    report_form.fields['file_size'].initial = int(search_data['file_size'])
-    report_form.fields['sha1'].initial = search_data['SHA-1']
-    report_form.fields['sha256'].initial = search_data['SHA-256']
+    #report_form.fields['file_size'].initial = int(search_data['file_size'])
+    #report_form.fields['sha1'].initial = search_data['SHA-1']
+    #report_form.fields['sha256'].initial = search_data['SHA-256']
     #report_form.fields['ssdeep'].initial = search_data['SSDeep']
     report_form.fields['detected'].initial = search_data['detected']
     report_form.fields['label'].initial = search_data['label']
@@ -103,11 +103,13 @@ def run_static_analysis(upload_file_obj):
     IDA_ROOT = os.path.join(settings.PROJECT_DIR,'opseq_ida')
     upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
 
-    ops_file_path = os.path.join(IDA_ROOT,'ops')
-    fh_file_path = os.path.join(IDA_ROOT,'fh')
+    ops_folder_path = os.path.join(IDA_ROOT,'ops')
+    ops_file_path = os.path.join(ops_folder_path,os.path.splitext(upload_file_obj.upload_file.name)[0]+'.ops')
+    fh_folder_path = os.path.join(IDA_ROOT,'fh')
+    fh_file_path = os.path.join(fh_folder_path,os.path.splitext(upload_file_obj.upload_file.name)[0]+'.fh')
 
     cmd_run_ida_ops = 'python ' + IDA_ROOT + os.sep + 'make_idb_ops.py ' + upload_file_path
-    cmd_run_ida_fh = 'python ' + IDA_ROOT + os.sep + 'make_fh_ops.py ' + upload_file_path
+    cmd_run_ida_fh = 'python ' + IDA_ROOT + os.sep + 'make_fh.py ' + ops_file_path
     os.system(cmd_run_ida_ops)
     os.system(cmd_run_ida_fh)
 
