@@ -50,5 +50,3 @@ def run( path ) :
         result_dict = { 'md5' : md5, 'detected' : result, 'result' : 'None', 'score' : malware_score}
         with open(os.path.join(TEST_RESULT_PATH, md5 + '.json'), 'w') as f :
             json.dump(result_dict, f)
-
-run('C:\\Users\\COREA\\Desktop\\train_data\\00cbb2a740993dc96b7b2135177df97a.fh')
