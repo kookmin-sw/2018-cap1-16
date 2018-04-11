@@ -15,5 +15,5 @@ class ReportForm(forms.Form):
     detected = forms.CharField(max_length=255)
     label = forms.CharField(max_length=255)
     score = forms.CharField(max_length=255)
-    uploaded_date = forms.DateTimeField()
+    collected_date = forms.DateTimeField()
 

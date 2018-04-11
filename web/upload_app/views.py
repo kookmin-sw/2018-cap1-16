@@ -78,8 +78,8 @@ def create_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['_id']
     report_form.fields['detected'].initial = search_data['detected']
     report_form.fields['label'].initial = search_data['label']
-    report_form.fields['uploaded_date'].initial = search_data['Uploaded_Date']
-    report_form.fields['score'].initial = int(search_data['score'])
+    report_form.fields['collected_date'].initial = search_data['collected_date']
+    #report_form.fields['score'].initial = int(search_data['score'])
 
     return report_form
 
@@ -87,7 +87,7 @@ def create_static_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['detected'].initial = search_data['detected']
     report_form.fields['label'].initial = search_data['label']
-    #report_form.fields['uploaded_date'].initial = search_data['Uploaded_Date']
+    #report_form.fields['collected_date'].initial = search_data['collected_date']
     report_form.fields['score'].initial = int(search_data['score'])
 
     return report_form
