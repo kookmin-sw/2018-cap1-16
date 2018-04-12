@@ -9,3 +9,5 @@ web/upload_app/mongodb/__pycache__/*
 web/upload_app/es/__pycache__/*
 web/upload_app/migrations/*
 web/web/__pycache__/*
+mongodb/script/__pycache__/*
+elasticsearch/script/__pycache__/*
