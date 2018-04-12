@@ -16,6 +16,11 @@ MASK(Malware Analysis System in Kookmin)는 파일을 동적, 정적 분석 기�
 tensorflow 이용하여 탐지 모델을 학습하고 분석 결과를 보여줍니다.
 추가로 우리의 데이터베이스에 있는 데이터의 검색을 위해 Elastic Search를 도입하였습니다.
 
+### 프로젝트 소개영상
+
+[![MASK](https://img.youtube.com/vi/ofUCoVY2yBI/0.jpg)](https://www.youtube.com/watch?v=ofUCoVY2yBI)
+
+
 ### Abstract
 Recently, the number of newly discovered malwares has increased exponentially.
 However, the number of experts analyzing malware is significantly lacking.
