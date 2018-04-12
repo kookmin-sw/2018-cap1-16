@@ -36,6 +36,7 @@ In addition, Elastic Search was introduced to retrieve similar data.
 
 ### Contributors
 <img src="https://i.imgur.com/2WTxfI9.jpg" width="200px">
+
 ```Python
 member_1 = {
   "name" : "한채연",
@@ -48,6 +49,7 @@ member_1 = {
 }
 ```
 <img src="https://i.imgur.com/1BKQzug.jpg" width="200px">
+
 ```Python
 member_2 = {
   "name" : "김영재",
@@ -61,6 +63,7 @@ member_2 = {
 }
 ```
 <img src="https://i.imgur.com/yCDBMRV.jpg" width="200px">
+
 ```Python
 member_3 = {
   "name" : "명준우",
@@ -74,6 +77,7 @@ member_3 = {
 }
 ```
 <img src="https://i.imgur.com/XTcxVog.jpg" width="200px">
+
 ```Python
 member_4 = {
   "name" : "이유정",
@@ -85,6 +89,7 @@ member_4 = {
 }
 ```
 <img src="https://i.imgur.com/QeXONTh.jpg" width="200px">
+
 ```Python
 member_5 = {
   "name" : "허준녕",
