@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/RuYuzTJ.png" width="70%" height="70%">
+  <img src="https://i.imgur.com/RuYuzTJ.png" width="40%" height="40%">
 </div>
 
 ### 프로젝트 소개
@@ -106,4 +106,4 @@ member_5 = {
 
 ### License
 
- [![LICENSE](https://img.shields.io/badge/license-Apache 2.0-red.svg)](https://github.com/kookmin-sw/2018-cap1-16/blob/master/LICENSE.md)
+ [![LICENSE](https://img.shields.io/badge/license-Apache2.0-red.svg)](https://github.com/kookmin-sw/2018-cap1-16/blob/master/LICENSE.md)
