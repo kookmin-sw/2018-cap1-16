@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpRequest
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
 from .mongodb.md5_search import md5_search
+from .mongodb.upload import upload_analysis_report
 from .es.es_view import es_ssdeep_search
 from .static_anlysis import run_static_analysis
 import hashlib, sys,os, json
@@ -36,29 +38,28 @@ def upload(request):
 
     return render(request, 'upload.html',  ctx)
 
-
 def detail(request, md5):
     if request.method == "GET":
-        try:
-            upload_file_obj = UploadFile.objects.get(pk=md5)
-        except:
-            return HttpResponse("Abnormal approach")
 
         report_form = ReportForm()
         similar_report_forms = list()
         ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
-        analysis_type = upload_file_obj.analysis_type
+        #analysis_type = upload_file_obj.analysis_type
 
         md5_search_data = md5_search(md5)
         if md5_search_data is not None:
             md5_search_result_form = create_report_form(report_form,md5_search_data)
             ctx['report_form'] = md5_search_result_form
         else:
+            return HttpResponse("Abnormal approach")
+            '''
             if analysis_type == 0:
+            
                 static_analysis_data = run_static_analysis(upload_file_obj)
                 static_analysis_report_form = create_static_report_form(report_form,static_analysis_data)
 
                 ctx['report_form'] = static_analysis_report_form
+            '''
 
         #es_ssdeep_report = es_ssdeep_search(UploadFileMeta_obj.ssdeep)
         #if es_ssdeep_report is not 0:
@@ -71,8 +72,33 @@ def detail(request, md5):
         #else:
         #    ctx['ssdeep_forms'] = 0
 
-    return render(request, 'detail.html', ctx)
+    return render(request, 'detail.html',ctx)
 
+def analysis(request,md5):
+    if request.method == "GET":
+        ctx = {'file_md5': md5}
+        return render(request,'analysis.html',ctx)
+
+    elif request.method == "POST":
+        file_md5 = md5
+        try:
+            upload_file_obj = UploadFile.objects.get(pk=file_md5)
+        except:
+            return HttpResponse("Abnormal approach")
+
+        ctx = {'status':500}
+        analysis_type = upload_file_obj.analysis_type
+
+        md5_search_data = md5_search(file_md5)
+        if md5_search_data is not None:
+            ctx['status'] = 200
+        else:
+            if analysis_type == 0:
+                static_analysis_data = run_static_analysis(upload_file_obj)
+                upload_analysis_report(static_analysis_data)
+                ctx['status'] = 200
+
+        return HttpResponse(ctx)
 
 def create_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['_id']

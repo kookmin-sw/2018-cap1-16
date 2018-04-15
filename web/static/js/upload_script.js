@@ -109,29 +109,29 @@
 
                         // ajax request
                         if(isLarge){ // startIF
-                        var ajax = new XMLHttpRequest();
-                        ajax.open(form.getAttribute('method'),form.getAttribute('action'), true);
+                            var ajax = new XMLHttpRequest();
+                            ajax.open(form.getAttribute('method'),form.getAttribute('action'), true);
 
-                        ajax.onload = function() {
-                            form.classList.remove('is-uploading');
-                            var data = JSON.parse(ajax.responseText);
-                            if ( parseInt(data.status) >= 200 && parseInt(data.status) < 400) {
-                                
-                                //form.classList.add(data.success == true ? 'is-success' : 'is-error');
-                                //if (!data.success) errorMsg.textContent = data.error;
-                                
+                            ajax.onload = function() {
+                                form.classList.remove('is-uploading');
+                                var data = JSON.parse(ajax.responseText);
+                                if ( parseInt(data.status) >= 200 && parseInt(data.status) < 400) {
 
-                                location.href = "/result/"+data.pk;
+                                    //form.classList.add(data.success == true ? 'is-success' : 'is-error');
+                                    //if (!data.success) errorMsg.textContent = data.error;
 
 
-                            } else alert('Error. Please, contact the webmaster!');
-                        }
+                                    location.href = "/analysis/"+data.pk;
 
-                        ajax.onerror = function() {
-                            form.classList.remove('is-uploading');
-                            alert('Error. Please, try again!');
-                        }; 
-                        
+
+                                } else alert('Error. Please, contact the webmaster!');
+                            }
+
+                            ajax.onerror = function() {
+                                form.classList.remove('is-uploading');
+                                alert('Error. Please, try again!');
+                            };
+
                             ajax.send(ajaxData);
                         
                         } //endIF

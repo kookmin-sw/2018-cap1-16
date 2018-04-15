@@ -10,11 +10,11 @@ body {
     font-family: 'Nanum Gothic', sans-serif;
     color: #8ad5dd;
     background-color: #ffffff;
-    padding-top: 5%;
+    padding-top: 60px;
     height: 99%;
 }
 
-.row_detail{
+.row-detail{
     padding: 0% 8% 2% 8%;
 }
 

@@ -20,11 +20,13 @@ from django.conf import settings
 
 from upload_app.views import detail
 from upload_app.views import upload
+from upload_app.views import analysis
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('result/<str:md5>/',detail, name="report-detail"),
+    path('detail/<str:md5>/',detail, name="report-detail"),
     path('upload/', upload),
+    path('analysis/<str:md5>/',analysis)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
