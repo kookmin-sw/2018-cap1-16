@@ -26,3 +26,8 @@ body {
     font-size: 4.8vw;
     text-align: center;
 }
+
+.Loading_img {
+	width: 120px;
+    height: 100%;
+}
