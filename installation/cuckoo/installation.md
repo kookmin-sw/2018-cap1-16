@@ -2,13 +2,13 @@
 
 ### 0. 설치 환경
 #### 1) 호스트 스펙
-##### (1) 203.246.112.133 : Cuckoo sandbox 2.0.5
+##### (1) server1 : Cuckoo sandbox 2.0.5
 * Xeon® CPU E5-2630v2
 * 4T HDD * 5, 1T HDD * 1
 * 56G RAM
 * Ubuntu 16.04
 
-##### (2) 203.246.112.138 : Cuckoo sandbox 2.0.4
+##### (2) server2 : Cuckoo sandbox 2.0.4
 * Xeon® CPU E5-2620 v3
 * 2T HDD * 5
 * 64G RAM
