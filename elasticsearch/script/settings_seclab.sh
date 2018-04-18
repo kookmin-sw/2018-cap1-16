@@ -1,8 +1,10 @@
 #curl -XPUT http://203.246.112.133:9200/seclab?pretty
 
 #curl -XPOST http://203.246.112.133:9200/seclab/_close?pretty
+ip="203.246.112.137"
+port="9200"
 
-curl -XPUT -H "Content-Type: application/json" "http://203.246.112.133:9200/seclab?pretty" -d '
+curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/seclab?pretty" -d '
 {
 	"settings": {
 		"analysis" : {
@@ -33,9 +35,6 @@ curl -XPUT -H "Content-Type: application/json" "http://203.246.112.133:9200/secl
 				},
 				"SSDeep_chunk_size" :{
 					"type" : "integer"
-				},
-				"Uploaded_Date" : {
-					"type" : "date"
 				}
 			}
 		}

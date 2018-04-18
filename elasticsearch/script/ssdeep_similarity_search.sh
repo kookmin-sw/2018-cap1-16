@@ -1,8 +1,10 @@
 #!/bin/sh
 chunk_size=24576
 chunk="SS6Cqp3hVbl9HxvLhgAFlMlCcmpElsnevdxK1NpF"
+ip="203.246.112.137"
+port="9200"
 
-curl -XPOST -H "Content-Type: application/json" "203.246.112.133:9200/seclab/_search?pretty" -d '
+curl -XPOST -H "Content-Type: application/json" "'$ip':'$port'/seclab/_search?pretty" -d '
 {
 "query":
 	{

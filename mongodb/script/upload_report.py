@@ -41,6 +41,6 @@ def upload_report(dir_url,collection):
 
 
 if __name__ == '__main__':
-	client = SeclabMongoClient('203.246.112.131',27017,'seclab')
+	client = SeclabMongoClient('203.246.112.137',27017,'seclab')
 	collection = client.db['analyzed_report']
 	upload_report(DIRECTORY,collection)

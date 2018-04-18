@@ -1,7 +1,7 @@
 from .connect import SeclabMongoClient
 import sys, datetime
 def upload_analysis_report(analysis_data):
-    client = SeclabMongoClient('203.246.112.131', 27017, 'seclab')
+    client = SeclabMongoClient('203.246.112.137', 27017, 'seclab')
     collection = client.db['analyzed_report']
 
     md5 = analysis_data['md5']

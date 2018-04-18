@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 import sys
 
-es = Elasticsearch([{'host':'203.246.112.131','port':9200}])
+es = Elasticsearch([{'host':'203.246.112.137','port':9200}])
 
 def es_ssdeep_search(ssdeep):
     return 0
