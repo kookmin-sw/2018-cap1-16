@@ -13,5 +13,4 @@ def run_dynamic_analysis(upload_file_obj):
     #cmd_run_cuckoo_upload = 'python ' + CUCKOO_SCRIPT_ROOT + os.sep + 'upload_file.py ' + upload_file_path
     #os.system(cmd_run_cuckoo_upload)
     dynamic_analysis_data = upload_file.run(upload_file_path)
-    print(dynamic_analysis_data)
     return dynamic_analysis_data

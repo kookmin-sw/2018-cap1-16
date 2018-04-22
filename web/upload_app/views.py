@@ -4,7 +4,6 @@ from django.http import HttpRequest
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
 from .mongodb.md5_search import md5_search
-from .mongodb.upload import upload_analysis_report
 from .es.es_view import es_ssdeep_search
 from .static_anlysis import run_static_analysis
 from .dynamic_anlysis import run_dynamic_analysis
@@ -96,12 +95,10 @@ def analysis(request,md5):
         else:
             if analysis_type == 0:
                 static_analysis_data = run_static_analysis(upload_file_obj)
-                upload_analysis_report(static_analysis_data)
+                #upload_analysis_report(static_analysis_data)
                 ctx['status'] = 200
             elif analysis_type == 1:
-                dynamic_analysis_data = run_dynamic_analysis(upload_file_obj)
-                sys.stderr.write(dynamic_analysis_data+'\n')
-                upload_analysis_report(dynamic_analysis_data)
+                run_dynamic_analysis(upload_file_obj)
                 ctx['status'] =200
 
         return HttpResponse(ctx)
