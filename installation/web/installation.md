@@ -11,6 +11,7 @@
 $ pip install django
 $ pip install pymongo
 $ pip install elasticsearch
+$ pip install requests
 ```
 
 ### Build DB

@@ -26,19 +26,24 @@ def send_file( file_path ) :
         file_name = get_file_name(file_path)
         fs = {'file' : (file_name, f)}
         r = requests.post(REST_URL,files=fs)
+        print(r)
         if r.status_code == 200 :
-            print("{} is succeeded".format(file_name))
+            print("Dynamic Analysis upload : {} is succeeded".format(file_name))
             #global task_id
             task_id = r.json()["task_ids"][0]
-            print(task_id)
-            status_check(task_id)
+            json_reply = status_check(task_id)
+            print(json_reply)
+            return json_reply
         else :
             print("{} is failed".format(file_name))
+            return None
+
 
 def run( root , process_count = os.cpu_count() ) :
     file_path = root
     mp.freeze_support()
-    send_file(file_path)
+    response_data = send_file(file_path)
+    return response_data
 
 def status_check(taskid = None):
     if taskid is None or taskid < 1:
@@ -46,15 +51,18 @@ def status_check(taskid = None):
         return
     global request
     api_url = os.path.join(REPORT_URL, str(taskid))
+    print(api_url)
     previous_time = time.time()
     while True:
         if  time.time() - previous_time  > 1:
             response = api_request(api_url)
+            print(response.status_code)
+            print(response.text)
             if response.status_code == 200 :
                 break
             previous_time = time.time()
-    jsonreply = json.loads(response.text)
-    print(jsonreply)
+    json_reply = json.loads(response.text)
+    return json_reply
 
 def api_request(url):
     response = requests.get(url)

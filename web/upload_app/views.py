@@ -7,6 +7,7 @@ from .mongodb.md5_search import md5_search
 from .mongodb.upload import upload_analysis_report
 from .es.es_view import es_ssdeep_search
 from .static_anlysis import run_static_analysis
+from .dynamic_anlysis import run_dynamic_analysis
 import hashlib, sys,os, json
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
@@ -97,6 +98,11 @@ def analysis(request,md5):
                 static_analysis_data = run_static_analysis(upload_file_obj)
                 upload_analysis_report(static_analysis_data)
                 ctx['status'] = 200
+            elif analysis_type == 1:
+                dynamic_analysis_data = run_dynamic_analysis(upload_file_obj)
+                sys.stderr.write(dynamic_analysis_data+'\n')
+                upload_analysis_report(dynamic_analysis_data)
+                ctx['status'] =200
 
         return HttpResponse(ctx)
 
