@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpRequest
 from .models import UploadFile
 from .forms import UploadForm, ReportForm
-from .mongodb.md5_search import md5_search
-from .es.es_view import es_ssdeep_search
+from .es.es_search import es_md5_search
 from .static_anlysis import run_static_analysis
 from .dynamic_anlysis import run_dynamic_analysis
 import hashlib, sys,os, json
@@ -38,28 +37,28 @@ def upload(request):
 
     return render(request, 'upload.html',  ctx)
 
-def detail(request, md5):
+def detail(request, md5,type):
     if request.method == "GET":
 
         report_form = ReportForm()
         similar_report_forms = list()
         ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
-        #analysis_type = upload_file_obj.analysis_type
 
-        md5_search_data = md5_search(md5)
+        # Let's search from elasticsearch
+        if type == 0:
+            md5_search_data = es_md5_search(0,md5)
+        elif type == 1:
+            md5_search_data = es_md5_search(1,md5)
+
+        # Create report form
         if md5_search_data is not None:
-            md5_search_result_form = create_report_form(report_form,md5_search_data)
+            if type == 0:
+                md5_search_result_form = create_static_report_form(report_form,md5_search_data)
+            if type == 1:
+                md5_search_result_form = create_dynamic_report_form(report_form,md5_search_data)
             ctx['report_form'] = md5_search_result_form
         else:
             return HttpResponse("Abnormal approach")
-            '''
-            if analysis_type == 0:
-            
-                static_analysis_data = run_static_analysis(upload_file_obj)
-                static_analysis_report_form = create_static_report_form(report_form,static_analysis_data)
-
-                ctx['report_form'] = static_analysis_report_form
-            '''
 
         #es_ssdeep_report = es_ssdeep_search(UploadFileMeta_obj.ssdeep)
         #if es_ssdeep_report is not 0:
@@ -75,6 +74,7 @@ def detail(request, md5):
     return render(request, 'detail.html',ctx)
 
 def analysis(request,md5):
+
     if request.method == "GET":
         ctx = {'file_md5': md5}
         return render(request,'analysis.html',ctx)
@@ -86,10 +86,12 @@ def analysis(request,md5):
         except:
             return HttpResponse("Abnormal approach")
 
-        ctx = {'status':500}
         analysis_type = upload_file_obj.analysis_type
 
-        md5_search_data = md5_search(file_md5)
+        # Hard coding : analysis_type:''
+        ctx = {analysis_type:'','status': 500}
+
+        md5_search_data = es_md5_search(analysis_type,file_md5)
         if md5_search_data is not None:
             ctx['status'] = 200
         else:
@@ -99,18 +101,9 @@ def analysis(request,md5):
                 ctx['status'] = 200
             elif analysis_type == 1:
                 run_dynamic_analysis(upload_file_obj)
-                ctx['status'] =200
+                ctx['status'] = 200
 
         return HttpResponse(ctx)
-
-def create_report_form(report_form, search_data):
-    report_form.fields['md5'].initial = search_data['_id']
-    report_form.fields['detected'].initial = search_data['detected']
-    report_form.fields['label'].initial = search_data['label']
-    report_form.fields['collected_date'].initial = search_data['collected_date']
-    #report_form.fields['score'].initial = int(search_data['score'])
-
-    return report_form
 
 def create_static_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['md5']
@@ -118,6 +111,11 @@ def create_static_report_form(report_form, search_data):
     report_form.fields['label'].initial = search_data['label']
     #report_form.fields['collected_date'].initial = search_data['collected_date']
     report_form.fields['score'].initial = int(search_data['score'])
+
+    return report_form
+
+def create_dynamic_report_form(report_form,search_data):
+    report_form.fields['md5'].initial = search_data['target']['file']['md5']
 
     return report_form
 

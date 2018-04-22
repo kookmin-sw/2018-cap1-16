@@ -24,7 +24,7 @@ from upload_app.views import analysis
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('detail/<str:md5>/',detail, name="report-detail"),
+    path('detail/<str:md5>/<int:type>',detail, name="report-detail"),
     path('upload/', upload),
     path('analysis/<str:md5>/',analysis)
 ]

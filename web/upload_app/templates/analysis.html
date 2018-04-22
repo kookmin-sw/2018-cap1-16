@@ -9,7 +9,7 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function(response){
-                    location.href = "/detail/"+'{{ file_md5 }}';
+                    location.href = "/detail/"+'{{ file_md5 }}'+"/"+response[0];
                 }
             });
     })()
