@@ -1,39 +1,29 @@
+from datetime import datetime
 from elasticsearch import Elasticsearch
 from .settings import *
-import sys
-
-es = Elasticsearch([{'host': IP, 'port': Port}])
+import json,os
 
 
-def upload_report_documnet(ssdeep):
-    ssdeep_data = ssdeep.split(":")
-    ssdeep_size = int(ssdeep_data[0])
-    ssdeep_chunk = ssdeep_data[1]
-    ssdeep_double_chunk = ssdeep_data[2]
+es = Elasticsearch([{'host':IP,'port':PORT}])
 
-    request_data = \
-        {
-            'query': {
-                'bool': {
-                    'must': [{
-                        'term': {'SSDeep_chunk_size': ssdeep_size},
-                    }, {
-                        'bool': {
-                            'should': {
-                                'match': {
-                                    'SSDeep_chunk': {
-                                        'query': ssdeep_chunk
-                                    }
-                                }
-                            }
-                        }
-                    }]
-                }
-            }
-        }
-    res = es.search(index="seclab", body=request_data)
-    # sys.stderr.write(str(res['hits']['hits']))
-    if res['hits']['total'] is not 0:
-        return res['hits']['hits']
-    else:
-        return 0
+INDEX = 'seclab'
+DOC_TYPE = 'analyzed_report'
+
+DIRECTORY_PATH = '/home/seclab/sample_report/'
+
+def index_report(path):
+    files = os.listdir(path)
+    file_count = len(files)
+    remain_count = file_count
+    for file in files:
+        absolute_path = os.path.join(path,file)
+        report_json = open(absolute_path).read()
+        doc = json.loads(report_json)
+        doc['collected_date'] = datetime.now()
+        md5 = doc['md5']
+        res = es.index(index=INDEX, doc_type=DOC_TYPE,id = md5,body=doc)
+        print('Index suecceeded ('+str(remain_count)+'/'+str(file_count)+')')
+        remain_count -=1
+
+if __name__ == '__main__':
+    index_report(DIRECTORY_PATH)
