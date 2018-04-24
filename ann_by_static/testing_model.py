@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import pickle, os, json, warnings, logging
+import datetime
 
 from settings import *
 
@@ -47,6 +48,6 @@ def run( path ) :
         malware_score = int(output[-1] * 100)
         detected=RESULT[int(output.argmax(-1))]
         md5 = os.path.splitext(os.path.basename(path))[0]
-        result_dict = { 'md5' : md5, 'detected' : detected, 'label' : 'None', 'score' : malware_score}
+        result_dict = { 'md5' : md5, 'detected' : detected, 'label' : 'None', 'score' : malware_score, 'collected_date': datetime.datetime.now()}
         with open(os.path.join(TEST_RESULT_PATH, md5 + '.json'), 'w') as f :
             json.dump(result_dict, f)

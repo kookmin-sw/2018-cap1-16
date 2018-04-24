@@ -8,8 +8,15 @@ def es_md5_search(report_type,md5):
 
 
     if(report_type == 0 ):
-        res = 0
-        #res = es.search(index=main_index, body=request_data)
+        request_data = \
+            {
+                'query': {
+                    "term": {
+                        "md5": md5
+                    }
+                }
+            }
+        res = es.search(index=main_index, body=request_data)
     elif(report_type == 1 ):
         request_data = \
             {
