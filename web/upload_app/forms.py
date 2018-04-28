@@ -21,3 +21,6 @@ class SignatureForm(forms.Form):
     severity = forms.IntegerField()
     description = forms.CharField(max_length=255)
 
+class DLLForm(forms.Form):
+    DLL_name = forms.CharField(max_length=255)
+

@@ -70,11 +70,31 @@
                                 <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span></p>
                             {% elif signature_form.fields.severity.initial == 2 %}
                                 <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span></p>
-                            {% elif signature_form.fields.severity.initial == 3 %}
+                            {% elif signature_form.fields.severity.initial >= 3 %}
                                 <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span></p>
                             {% endif %}
                         {% endfor %}
                     {% else %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>Import DLL</span>
+                </div>
+                <div class="panel-body">
+                    {% if DLL_forms != None %}
+                        {% for DLL_form in DLL_forms %}
+                            <span class="badge badge-pill light-blue" id="badge_color_blue">{{ DLL_form.fields.DLL_name.initial }}</span></p>
+                        {% endfor %}
+                    {% else %}
+                            <span>There is not Import DLL</span>
                     {% endif %}
                 </div>
             </div>

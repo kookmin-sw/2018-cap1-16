@@ -1,6 +1,7 @@
-from .forms import UploadForm, ReportForm, SignatureForm
+from .forms import UploadForm, ReportForm, SignatureForm, DLLForm
 
-def create_static_report_form(report_form, search_data):
+def create_static_report_form(search_data):
+    report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['detected'].initial = search_data['detected']
     report_form.fields['label'].initial = search_data['label']
@@ -20,4 +21,13 @@ def create_dynamic_report_form(search_data):
         signature_form.fields['severity'].initial = search_data['signatures'][idx]['severity']
         signature_forms.append(signature_form)
 
-    return report_form, signature_forms
+    DLL_forms = list()
+    try:
+        for idx in range(len(search_data['summary']['dll_loaded'])):
+            DLL_form = DLLForm()
+            DLL_form.fields['DLL_name'].initial = search_data['summary']['dll_loaded'][idx]
+            DLL_forms.append(DLL_form)
+    except:
+        DLL_forms = None
+
+    return report_form, signature_forms, DLL_forms
