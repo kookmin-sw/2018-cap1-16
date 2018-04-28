@@ -115,7 +115,7 @@ def static_report_view(request, md5):
         #else:
         #    ctx['ssdeep_forms'] = 0
 
-    return render(request, 'detail.html',ctx)
+    return render(request, 'static_report.html',ctx)
 
 def dynamic_report_view(request, md5):
     if request.method == "GET":
@@ -134,7 +134,7 @@ def dynamic_report_view(request, md5):
         else:
             return HttpResponse("Abnormal approach")
 
-    return render(request, 'detail.html',ctx)
+    return render(request, 'dynamic_report.html',ctx)
 
 def create_static_report_form(report_form, search_data):
     report_form.fields['md5'].initial = search_data['md5']

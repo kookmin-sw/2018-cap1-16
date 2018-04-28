@@ -1,10 +1,9 @@
 {% extends 'layout.html' %} {% block content %} {% load staticfiles %}
 <script src="{% static  '/js/detail_script.js' %}"></script>
 <script src="{% static  '/js/progress.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static '/css/detail.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/report.css' %}" />
 
 <!-- Start Report Row -->
-{% if md5_form != 0 %}
 <div class="container-report">
     <div class="row">
         <div class="row-detail">
@@ -70,61 +69,6 @@
             </div>
         </div>
     </div>
-    {% if ssdeep_forms != 0 %}
-    <div class="row">
-        <div class="row_detail_2">
-            <div class="panel panel-default">
-
-                <div class="panel-heading">
-                    <span>유사 파일</span>
-                </div>
-                <div class="panel-body">
-
-                    <table id='ssdeep_table'>
-                        <form action="" id="idxButtonForm">
-                        </form>
-                        <tbody>
-                            {% for ssdeep_form in ssdeep_forms %}
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
-                                <td> {{ ssdeep_form.fields.md5.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
-                                <td> {{ ssdeep_form.fields.score.initial }} </td>
-                            </tr>
-                            <tr>-
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
-                                <td> {{ ssdeep_form.fields.detected.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
-                                <td> {{ ssdeep_form.fields.result.initial }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    {% else %}
-    <div class="row">
-        <div class="row_detail_2">
-            <div class="panel panel-default">
-
-                <div class="panel-heading">
-                    <span>유사 파일</span>
-                </div>
-                <div class="panel-body">
-                    <h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </div>
-
 
 {% endblock %}
