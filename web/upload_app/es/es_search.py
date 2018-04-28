@@ -24,7 +24,7 @@ def es_dynamic_report_search(md5):
 
     request_data = \
         {
-            '_source': ["target.file"],
+            '_source': ["target.file","signatures"],
             'query': {
                 "term": {
                     "target.file.md5": md5
@@ -32,6 +32,7 @@ def es_dynamic_report_search(md5):
             }
         }
     res = es.search(index=cuckoo_index, body=request_data)
+
     if res['hits']['total'] is not 0:
         return res['hits']['hits'][0]['_source']
     else:

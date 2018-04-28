@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpRequest
 from .models import UploadFile
-from .forms import UploadForm, ReportForm
-from .es.es_search import es_static_report_search
-from .es.es_search import es_dynamic_report_search
+from .forms import UploadForm
+from .md5 import get_hash_str
+from .es.es_search import *
 from .static_anlysis import run_static_analysis
 from .dynamic_anlysis import run_dynamic_analysis
-import hashlib, sys,os, json
+from .create_report import *
+import sys,os, json
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
 
@@ -89,17 +90,14 @@ def dynamic_analysis(request,md5):
 def static_report_view(request, md5):
     if request.method == "GET":
 
-        report_form = ReportForm()
-        similar_report_forms = list()
-        ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
+        ctx = {'report_form': None, 'similar_report_forms' : None}
 
         # Let's search from elasticsearch
         md5_search_data = es_static_report_search(md5)
 
-
         # Create report form
         if md5_search_data is not None:
-            md5_search_result_form = create_static_report_form(report_form,md5_search_data)
+            md5_search_result_form = create_static_report_form(md5_search_data)
             ctx['report_form'] = md5_search_result_form
         else:
             return HttpResponse("Abnormal approach")
@@ -120,50 +118,17 @@ def static_report_view(request, md5):
 def dynamic_report_view(request, md5):
     if request.method == "GET":
 
-        report_form = ReportForm()
-        similar_report_forms = list()
-        ctx = {'report_form': report_form, 'similar_report_forms' : similar_report_forms}
+        ctx = {'report_form': None, 'signature_forms':None}
 
         # Let's search from elasticsearch
         md5_search_data = es_dynamic_report_search(md5)
 
         # Create report form
         if md5_search_data is not None:
-            md5_search_result_form = create_dynamic_report_form(report_form,md5_search_data)
-            ctx['report_form'] = md5_search_result_form
+            dynamic_report_form, signature_forms = create_dynamic_report_form(md5_search_data)
+            ctx['report_form'] = dynamic_report_form
+            ctx['signature_forms'] = signature_forms
         else:
             return HttpResponse("Abnormal approach")
 
     return render(request, 'dynamic_report.html',ctx)
-
-def create_static_report_form(report_form, search_data):
-    report_form.fields['md5'].initial = search_data['md5']
-    report_form.fields['detected'].initial = search_data['detected']
-    report_form.fields['label'].initial = search_data['label']
-    report_form.fields['collected_date'].initial = search_data['collected_date']
-    #report_form.fields['score'].initial = int(search_data['score'])
-    report_form.fields['score'].initial = 100
-    return report_form
-
-def create_dynamic_report_form(report_form,search_data):
-    report_form.fields['md5'].initial = search_data['target']['file']['md5']
-
-    return report_form
-
-
-def get_hash_str(upload_file, block_size = 8192 ) :
-    md5 = hashlib.md5()
-    f = upload_file
-    while True :
-        buf = f.read(block_size)
-        if not buf :
-            break
-        md5.update(buf)
-    return md5.hexdigest()
-
-
-
-#def get_fh_file_path(upload_file_obj):
-#    up_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-#    fh_file_path = make_fh(up_file_path)
-#    return fh_file_path

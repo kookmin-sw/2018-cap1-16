@@ -64,11 +64,22 @@
                     <span>시그니처</span>
                 </div>
                 <div class="panel-body">
-                    <span class="badge badge-pill light-blue" id="badge_color">Primary</span>
+                    {% if signature_forms != 0 %}
+                        {% for signature_form in signature_forms %}
+                            {% if signature_form.fields.severity.initial == 1 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span></p>
+                            {% elif signature_form.fields.severity.initial == 2 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span></p>
+                            {% elif signature_form.fields.severity.initial == 3 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span></p>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 {% endblock %}

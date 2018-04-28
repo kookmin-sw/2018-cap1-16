@@ -17,3 +17,7 @@ class ReportForm(forms.Form):
     score = forms.CharField(max_length=255)
     collected_date = forms.DateTimeField()
 
+class SignatureForm(forms.Form):
+    severity = forms.IntegerField()
+    description = forms.CharField(max_length=255)
+

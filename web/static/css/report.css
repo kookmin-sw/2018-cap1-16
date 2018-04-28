@@ -202,6 +202,12 @@ h1 {
 }
 
 /*Tags*/
-#badge_color {
+#badge_color_blue {
 	background-color: #8ad5dd !important;
+}
+#badge_color_yellow {
+	background-color: #f2cb61 !important;
+}
+#badge_color_red {
+	background-color: #f15f5f !important;
 }
