@@ -54,6 +54,16 @@ body {
     font-size: 1vw;
     font-weight: 700;
 }
+.panel-vertical-left{
+    width: 47.5%;
+    margin-right: 2.5%;
+    float: left;
+}
+.panel-vertical-right{
+    width: 47.5%;
+    margin-left: 2.5%;
+    float: left;
+}
 
 .report_div_2 {
 

@@ -118,17 +118,19 @@ def static_report_view(request, md5):
 def dynamic_report_view(request, md5):
     if request.method == "GET":
 
-        ctx = {'report_form': None, 'signature_forms':None, 'DLL_forms': None}
+        ctx = {'report_form': None, 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
 
         # Let's search from elasticsearch
         md5_search_data = es_dynamic_report_search(md5)
 
         # Create report form
         if md5_search_data is not None:
-            dynamic_report_form, signature_forms, DLL_forms = create_dynamic_report_form(md5_search_data)
+            dynamic_report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms = create_dynamic_report_form(md5_search_data)
             ctx['report_form'] = dynamic_report_form
             ctx['signature_forms'] = signature_forms
             ctx['DLL_forms'] = DLL_forms
+            ctx['connects_host_forms'] = connects_host_forms
+            ctx['connects_ip_forms'] = connects_ip_forms
         else:
             return HttpResponse("Abnormal approach")
 

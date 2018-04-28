@@ -24,7 +24,7 @@ def es_dynamic_report_search(md5):
 
     request_data = \
         {
-            '_source': ["target.file","signatures","summary.dll_loaded"],
+            '_source': ["target.file","signatures","summary.dll_loaded",'summary.connects_host','summary.connects_ip'],
             'query': {
                 "term": {
                     "target.file.md5": md5

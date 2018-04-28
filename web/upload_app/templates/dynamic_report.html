@@ -64,7 +64,7 @@
                     <span>시그니처</span>
                 </div>
                 <div class="panel-body">
-                    {% if signature_forms != 0 %}
+                    {% if signature_forms != None %}
                         {% for signature_form in signature_forms %}
                             {% if signature_form.fields.severity.initial == 1 %}
                                 <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span></p>
@@ -75,6 +75,7 @@
                             {% endif %}
                         {% endfor %}
                     {% else %}
+                        <span>There are no signatures </span>
                     {% endif %}
                 </div>
             </div>
@@ -91,10 +92,57 @@
                 <div class="panel-body">
                     {% if DLL_forms != None %}
                         {% for DLL_form in DLL_forms %}
-                            <span class="badge badge-pill light-blue" id="badge_color_blue">{{ DLL_form.fields.DLL_name.initial }}</span></p>
+                            <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span></p>
                         {% endfor %}
                     {% else %}
-                            <span>There is not Import DLL</span>
+                            <span>There are no Import DLLs</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default panel-vertical-left">
+                <div class="panel-heading">
+                    <span>Connects Host</span>
+                </div>
+                <div class="panel-body">
+                    {% if connects_host_forms != None %}
+                    <table>
+                        <thead>
+                        <tr><th>Name</th></tr>
+                        </thead>
+                        <tbody>
+                        {% for connects_host_form in connect_host_forms %}
+                            <tr><td>{{ connects_host_form.fields.host.initial }}</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                            <span>There are no Connects Hosts</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel panel-default panel-vertical-right">
+                <div class="panel-heading">
+                     <span>Connects IP</span>
+                </div>
+                <div class="panel-body">
+                    {% if connects_ip_forms != None %}
+                    <table>
+                        <thead>
+                        <tr><th>Address</th></tr>
+                        </thead>
+                        <tbody>
+                        {% for connects_ip_form in connect_ip_forms %}
+                            <tr><td>{{ connects_ip_form.fields.ip.initial }}</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                            <span>There are no Connects IPs</span>
                     {% endif %}
                 </div>
             </div>

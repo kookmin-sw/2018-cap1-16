@@ -1,5 +1,4 @@
-from .forms import UploadForm, ReportForm, SignatureForm, DLLForm
-
+from .forms import UploadForm, ReportForm, SignatureForm, DLLForm, ConnectsHostForm, ConnectsIpForm
 def create_static_report_form(search_data):
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['md5']
@@ -15,11 +14,14 @@ def create_dynamic_report_form(search_data):
     report_form.fields['md5'].initial = search_data['target']['file']['md5']
 
     signature_forms = list()
-    for idx in range(len(search_data['signatures'])):
-        signature_form = SignatureForm()
-        signature_form.fields['description'].initial = search_data['signatures'][idx]['description']
-        signature_form.fields['severity'].initial = search_data['signatures'][idx]['severity']
-        signature_forms.append(signature_form)
+    try:
+        for idx in range(len(search_data['signatures'])):
+            signature_form = SignatureForm()
+            signature_form.fields['description'].initial = search_data['signatures'][idx]['description']
+            signature_form.fields['severity'].initial = search_data['signatures'][idx]['severity']
+            signature_forms.append(signature_form)
+    except:
+        signature_forms = None
 
     DLL_forms = list()
     try:
@@ -30,4 +32,22 @@ def create_dynamic_report_form(search_data):
     except:
         DLL_forms = None
 
-    return report_form, signature_forms, DLL_forms
+    connects_host_forms = list()
+    try:
+        for idx in range(len(search_data['summary']['connects_host'])):
+            connects_host_form = ConnectsHostForm()
+            connects_host_form.fields['host'].initial = search_data['summary']['connects_host'][idx]
+            connects_host_forms.append(connects_host_form)
+    except:
+        connects_host_forms = None
+
+    connects_ip_forms = list()
+    try:
+        for idx in range(len(search_data['summary']['connects_ip'])):
+            connects_ip_form = ConnectsIpForm()
+            connects_ip_form.fields['host'].initial = search_data['summary']['connects_ip'][idx]
+            connects_ip_forms.append(connects_ip_form)
+    except:
+        connects_ip_forms = None
+
+    return report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
