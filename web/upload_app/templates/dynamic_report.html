@@ -95,13 +95,12 @@
                             <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span></p>
                         {% endfor %}
                     {% else %}
-                            <span>There are no Import DLLs</span>
+                            <span>There is no Import DLL</span>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default panel-vertical-left">
@@ -115,13 +114,13 @@
                         <tr><th>Name</th></tr>
                         </thead>
                         <tbody>
-                        {% for connects_host_form in connect_host_forms %}
+                        {% for connects_host_form in connects_host_forms %}
                             <tr><td>{{ connects_host_form.fields.host.initial }}</td></tr>
                         {% endfor %}
                         </tbody>
                     </table>
                     {% else %}
-                            <span>There are no Connects Hosts</span>
+                            <span>There is no Connects Hosts</span>
                     {% endif %}
                 </div>
             </div>
@@ -136,18 +135,19 @@
                         <tr><th>Address</th></tr>
                         </thead>
                         <tbody>
-                        {% for connects_ip_form in connect_ip_forms %}
+                        {% for connects_ip_form in connects_ip_forms %}
                             <tr><td>{{ connects_ip_form.fields.ip.initial }}</td></tr>
                         {% endfor %}
                         </tbody>
                     </table>
                     {% else %}
-                            <span>There are no Connects IPs</span>
+                            <span>There is no Connects IP</span>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 {% endblock %}
