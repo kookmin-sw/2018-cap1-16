@@ -35,7 +35,8 @@
             </div>
         </div>
     </div>
-    <!--Tags-->
+    
+    <!--Process bar-->
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
@@ -55,7 +56,7 @@
         </div>
     </div>
 
-    <!--Process bar-->
+    <!--Tags-->
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
@@ -67,11 +68,11 @@
                     {% if signature_forms != None %}
                         {% for signature_form in signature_forms %}
                             {% if signature_form.fields.severity.initial == 1 %}
-                                <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span></p>
+                                <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span> <br/>
                             {% elif signature_form.fields.severity.initial == 2 %}
-                                <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span></p>
+                                <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span> <br/>
                             {% elif signature_form.fields.severity.initial >= 3 %}
-                                <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span></p>
+                                <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span> <br/>
                             {% endif %}
                         {% endfor %}
                     {% else %}
@@ -92,7 +93,7 @@
                 <div class="panel-body">
                     {% if DLL_forms != None %}
                         {% for DLL_form in DLL_forms %}
-                            <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span></p>
+                            <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span>
                         {% endfor %}
                     {% else %}
                             <span>There is no Import DLL</span>
@@ -109,16 +110,12 @@
                 </div>
                 <div class="panel-body">
                     {% if connects_host_forms != None %}
-                    <table>
-                        <thead>
-                        <tr><th>Name</th></tr>
-                        </thead>
-                        <tbody>
+                    <ul>
                         {% for connects_host_form in connects_host_forms %}
-                            <tr><td>{{ connects_host_form.fields.host.initial }}</td></tr>
+                            <li>{{ connects_host_form.fields.host.initial }}1234</li>
                         {% endfor %}
-                        </tbody>
-                    </table>
+                        
+                    </ul>
                     {% else %}
                             <span>There is no Connects Hosts</span>
                     {% endif %}
@@ -129,20 +126,19 @@
                      <span>Connects IP</span>
                 </div>
                 <div class="panel-body">
-                    {% if connects_ip_forms != None %}
-                    <table>
-                        <thead>
-                        <tr><th>Address</th></tr>
-                        </thead>
-                        <tbody>
+                     {% if connects_ip_forms != None %}
+                    <ul>
+                        
                         {% for connects_ip_form in connects_ip_forms %}
-                            <tr><td>{{ connects_ip_form.fields.ip.initial }}</td></tr>
+                        <li>{{ connects_ip_form.fields.ip.initial }}</li>
                         {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
+                        
+                    </ul>
+                    
+                    {% else %}               
                             <span>There is no Connects IP</span>
                     {% endif %}
+
                 </div>
             </div>
         </div>

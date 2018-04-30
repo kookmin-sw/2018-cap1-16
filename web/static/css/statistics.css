@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    color: #8ad5dd;
+    background-color: #ffffff;
+    padding-top: 60px;
+    height: 99%;
+}
+
+
+.container-report {
+	margin-top: 2%;
+}
+
+.row-detail{
+    padding: 0% 8% 2% 8%;
+}
+
+
+.panel {
+    box-shadow: 0 2px 2px rgba(0,0,0,.05);
+}
+
+.panel-heading {
+	background-color: #2f2f33 !important;
+    color:  #8ad5dd !important;
+    font-size: 1vw;
+    font-weight: 700;
+}
+
+.panel-body {
+	color: #2f2f33;
+    font-weight: 500;
+}
