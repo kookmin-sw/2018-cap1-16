@@ -23,6 +23,7 @@ from upload_app.views import dynamic_report_view
 from upload_app.views import upload
 from upload_app.views import static_analysis
 from upload_app.views import dynamic_analysis
+from upload_app.views import statistics_view
  
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +31,8 @@ urlpatterns = [
     path('dynamic_analysis/<str:md5>/',dynamic_analysis),
     path('upload/', upload),
     path('static_report/<str:md5>/',static_report_view),
-    path('dynamic_report/<str:md5>/',dynamic_report_view)
+    path('dynamic_report/<str:md5>/',dynamic_report_view),
+    path('statistics/',statistics_view)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

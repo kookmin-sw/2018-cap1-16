@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" >
     <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="{% static  '/js/layout.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}" />
 
 </head>
@@ -37,8 +38,8 @@
             </div>
             <div class= "navbar-collapse collapse" id="navbar" >
                 <ul class="nav navbar-nav">
-                    <li class="active"><a class="navbar-right-li" href="/upload">분석</a></li>
-                    <li><a class="navbar-right-li" href="#">통계</a></li>
+                    <li><a class="navbar-right-li" href="/upload/">분석</a></li>
+                    <li><a class="navbar-right-li" href="/statistics/">통계</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a class="navbar-right-li" href="#">Sign in</a></li>
