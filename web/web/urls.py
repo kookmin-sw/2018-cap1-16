@@ -18,12 +18,12 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from upload_app.views import static_report_view
-from upload_app.views import dynamic_report_view
-from upload_app.views import upload
-from upload_app.views import static_analysis
-from upload_app.views import dynamic_analysis
-from upload_app.views import statistics_view
+from analysisapp.views import static_report_view
+from analysisapp.views import dynamic_report_view
+from analysisapp.views import upload
+from analysisapp.views import static_analysis
+from analysisapp.views import dynamic_analysis
+from statisticsapp.views import statistics_view
  
 urlpatterns = [
     path('admin/', admin.site.urls),

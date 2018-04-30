@@ -135,6 +135,3 @@ def dynamic_report_view(request, md5):
             return HttpResponse("Abnormal approach")
 
     return render(request, 'dynamic_report.html',ctx)
-
-def statistics_view(request):
-    return render(request, "statistics.html")
