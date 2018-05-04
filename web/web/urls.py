@@ -24,6 +24,7 @@ from analysisapp.views import upload
 from analysisapp.views import static_analysis
 from analysisapp.views import dynamic_analysis
 from statisticsapp.views import statistics_view
+from mainapp.views import home_view
  
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,8 @@ urlpatterns = [
     path('upload/', upload),
     path('static_report/<str:md5>/',static_report_view),
     path('dynamic_report/<str:md5>/',dynamic_report_view),
-    path('statistics/',statistics_view)
+    path('statistics/',statistics_view),
+    path('',home_view)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
