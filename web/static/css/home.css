@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {}
+
+body {
+    font-family: 'Nanum Gothic', sans-serif !important;
+    color: #2f2f33;
+    background-color: #FEFEFE !important;
+    padding: 50px 0px;
+    margin: 0;
+    height: 100%;
+}
+
+h1{
+    font-weight: 800;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.col-lg-2 p {
+    font-weight: 500;
+    text-align: center;
+}
+
+.jumbotron {
+	background-color: #eee;
+    color: #2f2f33;
+    padding: 0px 0px;
+    display: inline-flex;
+}
+
+#jumbotron-id {
+    height: 380px;
+}
+
+#main-img {
+	margin-left: 10%;
+}
+
+.main-img {
+    width: 170px;
+    height: 100%;
+}
+
+.main-img-2 {
+    height: 70%;
+}
+
+#main-text {
+    margin: 6% 10% 6% 5%;
+    height: 100%;
+}
+
+#fadein-img {
+	margin-left: 20px;
+}
+
+.col-lg-2 {
+	margin: 0% 8% !important;
+    max-width: 200px !important;
+}
