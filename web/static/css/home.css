@@ -33,6 +33,7 @@ h3 {
     color: #2f2f33;
     padding: 0px 0px;
     display: inline-flex;
+    margin-top: -20px;
 }
 
 #jumbotron-id {
@@ -48,9 +49,6 @@ h3 {
     height: 100%;
 }
 
-.main-img-2 {
-    height: 70%;
-}
 
 #main-text {
     margin: 6% 10% 6% 5%;
@@ -58,10 +56,15 @@ h3 {
 }
 
 #fadein-img {
-	margin-left: 20px;
+	margin-left: 7%;
 }
 
 .col-lg-2 {
 	margin: 0% 8% !important;
     max-width: 200px !important;
+}
+
+.container {
+    display: inline;
+    margin: 0px 0px !important;
 }
