@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import pickle, os
-
+import ssdeep
 from settings import *
 
 # for using tensorflow as hyper parameter
@@ -54,7 +54,7 @@ def get_batch(mal_data_list):
         yield (batch_data_list, batch_label_list)
 
 def run() :
-    print("Train Multi Binary Classification")
+    print("Train Multi Classification")
     mal_data_list = load_data()
 
     print('Load ANN network architecture')
@@ -96,8 +96,10 @@ def run() :
 
     with tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)) as sess:
         sess.run(init)
-        if os.path.exists(STATIC_MC_CHECK_POINT) :
+        try :
             model_saver.restore(sess, STATIC_MC_CHECK_POINT)
+        except :
+            pass
         print('learning start')
         for i in range(EPOCH):
             (training_data, training_label) = next(train_iter)

@@ -95,8 +95,10 @@ def run() :
 
     with tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)) as sess:
         sess.run(init)
-        if os.path.exists(STATIC_BC_CHECK_POINT) :
+        try :
             model_saver.restore(sess, STATIC_BC_CHECK_POINT)
+        except :
+            pass
         print('learning start')
         for i in range(EPOCH):
             (training_data, training_label) = next(train_iter)
