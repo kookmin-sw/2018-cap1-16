@@ -1,7 +1,6 @@
 import tensorflow as tf
 import numpy as np
 import pickle, os
-import ssdeep
 from settings import *
 
 # for using tensorflow as hyper parameter
