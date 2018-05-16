@@ -4,35 +4,39 @@ import sys
 
 es = Elasticsearch([{'host':IP,'port':Port}])
 
-def es_md5_search(report_type,md5):
+def es_static_report_search(md5):
 
-
-    if(report_type == 0 ):
-        request_data = \
-            {
-                'query': {
-                    "term": {
-                        "md5": md5
-                    }
+    request_data = \
+        {
+            'query': {
+                "term": {
+                    "md5": md5
                 }
             }
-        res = es.search(index=main_index, body=request_data)
-    elif(report_type == 1 ):
-        request_data = \
-            {
-                '_source': ["target.file"],
-                'query': {
-                    "term": {
-                        "target.file.md5": md5
-                    }
-                }
-            }
-        res = es.search(index=cuckoo_index, body=request_data)
+        }
+    res = es.search(index=main_index, body=request_data)
     if res['hits']['total'] is not 0:
         return res['hits']['hits'][0]['_source']
     else:
         return None
 
+def es_dynamic_report_search(md5):
+
+    request_data = \
+        {
+            '_source': ["target.file","signatures","summary.dll_loaded","summary.connects_host","summary.connects_ip"],
+            'query': {
+                "term": {
+                    "target.file.md5": md5
+                }
+            }
+        }
+    res = es.search(index=cuckoo_index, body=request_data)
+    #print (res['hits']['hits'][0]['_source'])
+    if res['hits']['total'] is not 0:
+        return res['hits']['hits'][0]['_source']
+    else:
+        return None
 
 def es_ssdeep_search(ssdeep):
 

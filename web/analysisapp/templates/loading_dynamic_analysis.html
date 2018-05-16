@@ -3,13 +3,13 @@
     (function (){
             $.ajax({
                 type: "POST",
-                url: "/analysis/{{ file_md5 }}/",
+                url: "/dynamic_analysis/{{ file_md5 }}/",
                 data: {
                     file_md5 : '{{ file_md5 }}',
                     csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function(response){
-                    location.href = "/detail/"+'{{ file_md5 }}'+"/"+response[0];
+                    location.href = "/dynamic_report/"+'{{ file_md5 }}'
                 }
             });
     })()

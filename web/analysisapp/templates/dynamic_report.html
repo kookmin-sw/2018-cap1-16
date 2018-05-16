@@ -1,10 +1,9 @@
 {% extends 'layout.html' %} {% block content %} {% load staticfiles %}
 <script src="{% static  '/js/detail_script.js' %}"></script>
 <script src="{% static  '/js/progress.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static '/css/detail.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static '/css/report.css' %}" />
 
 <!-- Start Report Row -->
-{% if md5_form != 0 %}
 <div class="container-report">
     <div class="row">
         <div class="row-detail">
@@ -36,7 +35,8 @@
             </div>
         </div>
     </div>
-    <!--Tags-->
+    
+    <!--Process bar-->
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <!--Process bar-->
+    <!--Tags-->
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
@@ -65,65 +65,84 @@
                     <span>시그니처</span>
                 </div>
                 <div class="panel-body">
-                    <span class="badge badge-pill light-blue" id="badge_color">Primary</span>
+                    {% if signature_forms != None %}
+                        {% for signature_form in signature_forms %}
+                            {% if signature_form.fields.severity.initial == 1 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% elif signature_form.fields.severity.initial == 2 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% elif signature_form.fields.severity.initial >= 3 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <span>There are no signatures </span>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {% if ssdeep_forms != 0 %}
+
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <span>유사 파일</span>
+                    <span>Import DLL</span>
                 </div>
                 <div class="panel-body">
-
-                    <table id='ssdeep_table'>
-                        <form action="" id="idxButtonForm">
-                        </form>
-                        <tbody>
-                            {% for ssdeep_form in ssdeep_forms %}
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
-                                <td> {{ ssdeep_form.fields.md5.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
-                                <td> {{ ssdeep_form.fields.score.initial }} </td>
-                            </tr>
-                            <tr>-
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
-                                <td> {{ ssdeep_form.fields.detected.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
-                                <td> {{ ssdeep_form.fields.result.initial }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% if DLL_forms != None %}
+                        {% for DLL_form in DLL_forms %}
+                            <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span>
+                        {% endfor %}
+                    {% else %}
+                            <span>There is no Import DLL</span>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
-    {% else %}
     <div class="row">
         <div class="row_detail_2">
-            <div class="panel panel-default">
-
+            <div class="panel panel-default panel-vertical-left">
                 <div class="panel-heading">
-                    <span>유사 파일</span>
+                    <span>Connects Host</span>
                 </div>
                 <div class="panel-body">
-                    <h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>
+                    {% if connects_host_forms != None %}
+                    <ul>
+                        {% for connects_host_form in connects_host_forms %}
+                            <li>{{ connects_host_form.fields.host.initial }}1234</li>
+                        {% endfor %}
+                        
+                    </ul>
+                    {% else %}
+                            <span>There is no Connects Hosts</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel panel-default panel-vertical-right">
+                <div class="panel-heading">
+                     <span>Connects IP</span>
+                </div>
+                <div class="panel-body">
+                     {% if connects_ip_forms != None %}
+                    <ul>
+                        
+                        {% for connects_ip_form in connects_ip_forms %}
+                        <li>{{ connects_ip_form.fields.ip.initial }}</li>
+                        {% endfor %}
+                        
+                    </ul>
+                    
+                    {% else %}               
+                            <span>There is no Connects IP</span>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
 </div>
 
 
