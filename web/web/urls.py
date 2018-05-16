@@ -18,15 +18,23 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from upload_app.views import detail
-from upload_app.views import upload
-from upload_app.views import analysis
+from analysisapp.views import static_report_view
+from analysisapp.views import dynamic_report_view
+from analysisapp.views import upload
+from analysisapp.views import static_analysis
+from analysisapp.views import dynamic_analysis
+from statisticsapp.views import statistics_view
+from mainapp.views import home_view
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('detail/<str:md5>/',detail, name="report-detail"),
+    path('static_analysis/<str:md5>/',static_analysis),
+    path('dynamic_analysis/<str:md5>/',dynamic_analysis),
     path('upload/', upload),
-    path('analysis/<str:md5>/',analysis)
+    path('static_report/<str:md5>/',static_report_view),
+    path('dynamic_report/<str:md5>/',dynamic_report_view),
+    path('statistics/',statistics_view),
+    path('',home_view)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

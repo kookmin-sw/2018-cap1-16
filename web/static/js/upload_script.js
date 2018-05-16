@@ -120,8 +120,12 @@
                                     //form.classList.add(data.success == true ? 'is-success' : 'is-error');
                                     //if (!data.success) errorMsg.textContent = data.error;
 
-
-                                    location.href = "/analysis/"+data.pk;
+                                    if( parseInt(data.analysis_type) == 0) {
+                                        location.href = "/static_analysis/" + data.pk;
+                                    }
+                                    else if( parseInt(data.analysis_type) == 1){
+                                        location.href = "/dynamic_analysis/" + data.pk;
+                                    }
 
 
                                 } else alert('Error. Please, contact the webmaster!');

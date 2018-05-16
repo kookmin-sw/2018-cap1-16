@@ -2,9 +2,12 @@
 '''
     Author : Chaeyeon Han
     Date created : 04/18/2018
+    Date modified : 04/22/2018
     Python version : 3.6
 
+    pip install request
     execution : "python3 upload_file.py [file directory] ([cpu count])"
+
 '''
 
 import requests, os
@@ -25,40 +28,40 @@ def send_file( file_path ) :
     with open(file_path, 'rb') as f :
         file_name = get_file_name(file_path)
         fs = {'file' : (file_name, f)}
-        r = requests.post(REST_URL,files=fs)
-        if r.status_code == 200 :
-            print("{} is succeeded".format(file_name))
-            #global task_id
-            task_id = r.json()["task_ids"][0]
-            print(task_id)
+
+        res = requests.post(REST_URL,files=fs)
+        if res.status_code == 200 :
+            print("upload : {} is succeeded".format(file_name))
+            task_id = res.json()["task_ids"][0]
             status_check(task_id)
+            return True
         else :
-            print("{} is failed".format(file_name))
+            print("upload : {} is failed".format(file_name))
+            return False
 
 def run( root , process_count = os.cpu_count() ) :
     file_path = root
     mp.freeze_support()
-    send_file(file_path)
+    res_status = send_file(file_path)
+    return res_status
 
 def status_check(taskid = None):
     if taskid is None or taskid < 1:
         print("Task id is wrong")
         return
-    global request
-    api_url = os.path.join(REPORT_URL, str(taskid))
+
+    api_url = REPORT_URL+ "/" + str(taskid)
     previous_time = time.time()
     while True:
         if  time.time() - previous_time  > 1:
-            response = api_request(api_url)
-            if response.status_code == 200 :
+            res = api_request(api_url)
+            if res.status_code == 200 :
                 break
             previous_time = time.time()
-    jsonreply = json.loads(response.text)
-    print(jsonreply)
 
 def api_request(url):
-    response = requests.get(url)
-    return response
+    res = requests.get(url)
+    return res
 
 
 if __name__ == '__main__' :

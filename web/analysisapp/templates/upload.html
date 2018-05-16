@@ -1,0 +1,51 @@
+{% extends 'layout.html' %} {% block content %} {% load staticfiles %}
+<div class="row">
+    <div class="box__logo">
+        <img src="{% static 'logo.png' %}" class="img__logo" align="absmiddle"> <span>악성코드 검사</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row_upload">
+        <form method="post" action="/upload/" enctype="multipart/form-data" id="form_upload">
+            {% csrf_token %}
+            <div class="btn_form">
+                <div>
+                <input type="radio" name="analysis_radio" id="analysis_select_static" class="radio" checked value="static"/>
+                <label for="analysis_select_static">정적 분석</label>
+                </div>
+
+                <div>
+                <input type="radio" name="analysis_radio" id="analysis_select_dynamic" class="radio" value="dynamic"/>
+                <label for="analysis_select_dynamic">동적 분석</label>
+                </div>
+
+            </div>
+            <div class="container_form" role="main">
+                <div class="box_upload">
+                    <div class="box_upload_input">
+                        <div>
+                            <img src="{% static 'download.png' %}" class="box__icon" id="upload">
+                        </div>
+                        <input type="file" name="upload_file" id="file" class="box__file" style="display: none;" data-multiple-caption="{count} files selected" multiple>
+                        <label id="box_upload_filename" for="file"><strong><i>Choose a file</i></strong><span class="box__dragndrop"> or drag it here</span>.</label>
+                    </div>
+
+                    <div class="box_upload_uploading">
+                        <div><img src="{% static 'download.gif' %}" class="box__icon" id="uploading"></div>
+                        Uploading&hellip;
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script src="{% static  '/js/upload_script.js' %}">
+
+
+</script>
+
+
+{% endblock %}

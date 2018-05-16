@@ -1,0 +1,149 @@
+{% extends 'layout.html' %} {% block content %} {% load staticfiles %}
+<script src="{% static  '/js/detail_script.js' %}"></script>
+<script src="{% static  '/js/progress.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/report.css' %}" />
+
+<!-- Start Report Row -->
+<div class="container-report">
+    <div class="row">
+        <div class="row-detail">
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>파일 정보</span>
+                </div>
+                <div class="panel-body">
+
+                    <img src="{% static 'result_file.png' %}" class="img_file" align="absmiddle">
+
+
+                    <div class="text_name">
+                        <p><strong>파일 MD5 </strong></p>
+                        <p><strong>바이러스 유무</strong></p>
+                        <p><strong>바이러스 분석 결과</strong></p>
+                        <p><strong>리포트 수집 날짜</strong></p>
+                    </div>
+
+                    <div class="text_data">
+                        <p>{{ report_form.fields.md5.initial }}</p>
+                        <p>{{ report_form.fields.detected.initial }}</p>
+                        <p>{{ report_form.fields.label.initial }}</p>
+                        <p>{{ report_form.fields.collected_date.initial }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--Process bar-->
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>AI</span>
+                </div>
+                <div class="panel-body">
+                    <div class="progress skill-bar">
+                        <div class="progress-bar" role="progressbar" aria-valuenow={{ report_form.fields.score.initial }} aria-valuemin="0" aria-valuemax="100">
+                            <span class="skill">safe<i class="val">{{ report_form.fields.score.initial }}%</i></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Tags-->
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>시그니처</span>
+                </div>
+                <div class="panel-body">
+                    {% if signature_forms != None %}
+                        {% for signature_form in signature_forms %}
+                            {% if signature_form.fields.severity.initial == 1 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_blue">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% elif signature_form.fields.severity.initial == 2 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_yellow">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% elif signature_form.fields.severity.initial >= 3 %}
+                                <span class="badge badge-pill light-blue" id="badge_color_red">{{ signature_form.fields.description.initial }}</span> <br/>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <span>There are no signatures </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>Import DLL</span>
+                </div>
+                <div class="panel-body">
+                    {% if DLL_forms != None %}
+                        {% for DLL_form in DLL_forms %}
+                            <span class="badge badge-pill light-blue" >{{ DLL_form.fields.DLL_name.initial }}</span>
+                        {% endfor %}
+                    {% else %}
+                            <span>There is no Import DLL</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default panel-vertical-left">
+                <div class="panel-heading">
+                    <span>Connects Host</span>
+                </div>
+                <div class="panel-body">
+                    {% if connects_host_forms != None %}
+                    <ul>
+                        {% for connects_host_form in connects_host_forms %}
+                            <li>{{ connects_host_form.fields.host.initial }}1234</li>
+                        {% endfor %}
+                        
+                    </ul>
+                    {% else %}
+                            <span>There is no Connects Hosts</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel panel-default panel-vertical-right">
+                <div class="panel-heading">
+                     <span>Connects IP</span>
+                </div>
+                <div class="panel-body">
+                     {% if connects_ip_forms != None %}
+                    <ul>
+                        
+                        {% for connects_ip_form in connects_ip_forms %}
+                        <li>{{ connects_ip_form.fields.ip.initial }}</li>
+                        {% endfor %}
+                        
+                    </ul>
+                    
+                    {% else %}               
+                            <span>There is no Connects IP</span>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

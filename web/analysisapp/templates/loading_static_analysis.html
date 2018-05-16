@@ -1,0 +1,26 @@
+{% extends 'layout.html' %} {% block content %} {% load staticfiles %}
+<script>
+    (function (){
+            $.ajax({
+                type: "POST",
+                url: "/static_analysis/{{ file_md5 }}/",
+                data: {
+                    file_md5 : '{{ file_md5 }}',
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response){
+                    location.href = "/static_report/"+'{{ file_md5 }}'
+                }
+            });
+    })()
+</script>
+
+<link rel="stylesheet" type="text/css" href="{% static '/css/analysis.css' %}" />
+
+
+<div class="Loading">
+        <img class="Loading_img" src="{% static 'loading.gif' %}">
+        <h3>분석 중 입니다...</h3>
+</div>
+
+{% endblock %}

@@ -3,11 +3,7 @@
 web/web_sqlite3
 web/db.sqlite3
 web/media/*
-web/upload_app/__pycache__/*
-web/upload_app/ida/__pycache__/*
-web/upload_app/mongodb/__pycache__/*
-web/upload_app/es/__pycache__/*
-web/upload_app/migrations/*
-web/web/__pycache__/*
-mongodb/script/__pycache__/*
-elasticsearch/script/__pycache__/*
+web/upload_app/migrations/
+__pycache__/
+normal_json/
+sample_report/
