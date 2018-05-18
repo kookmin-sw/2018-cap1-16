@@ -6,6 +6,6 @@ INSTANCE_NUM = '1'
 
 remote_raw_path = '/home/seclab/malwares/test/'+INSTANCE_NUM
 remote_zip_path = '/home/seclab/malwares/report/'
-local_report_path = '/home/ubuntu/report/'
+local_report_dir = '/home/ubuntu/report/'
 local_zip_dir = '/home/ubuntu/zip'
 local_zip_path = '/home/ubuntu/zip/'+INSTANCE_NUM

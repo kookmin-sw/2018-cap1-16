@@ -35,14 +35,16 @@ def run():
 		md5 = os.path.splitext(f)[0]
 		report['ip'] = get_ip_address()
 
-		if not os.path.exists(settings.local_report_path):
-			os.makedirs(settings.local_report_path)
-		out_file = open(settings.local_report_path+md5+'.json','w')
+		if not os.path.exists(settings.local_report_dir):
+			os.makedirs(settings.local_report_dir)
+		out_file = open(settings.local_report_dir+md5+'.json','w')
 		json.dump(report,out_file)
 		out_file.close()
 
-	make_zip(settings.local_report_path,settings.local_zip_path)	
+	make_zip(settings.local_report_dir,settings.local_zip_path)
 	upload_files(ftp,settings.local_zip_dir,settings.remote_zip_path)
+	shutil.rmtree(settings.local_report_dir)
+	shutil.rmtree(settings.local_zip_dir)
 
 if __name__ == '__main__':
 	run()
