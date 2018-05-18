@@ -33,10 +33,12 @@ def run():
 	for f in list_file:
 		report = dict()
 		md5 = os.path.splitext(f)[0]
-		local_ip = get_ip_address()
-		report['ip'] = local_ip
+		report['ip'] = get_ip_address()
+
+		if not os.path.exists(settings.local_report_path):
+			os.makedirs(settings.local_report_path)
 		out_file = open(settings.local_report_path+md5+'.json','w')
-		json_report = json.dump(report,out_file)
+		json.dump(report,out_file)
 		out_file.close()
 
 	make_zip(settings.local_report_path,settings.local_zip_path)	
