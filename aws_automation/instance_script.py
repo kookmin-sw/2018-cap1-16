@@ -28,16 +28,16 @@ def make_zip(dir_path,zip_path):
 
 def run():
     ftp = connect()
-    file_list = get_file_list(ftp,remote_raw_path)
+    file_list = get_file_list(ftp,REMOTE_FILE_PATH)
     md5_list = [ os.path.splitext(file)[0] for file in file_list ]
     key_list = [ API_KEY_LIST[i % len(API_KEY_LIST)] for i in range(len(md5_list))]
     report_path_list = [ LOCAL_REPORT_PATH for i in range(len(md5_list)) ]
     with multiprocessing.Pool(processes=os.cpu_count()) as pool:
-        pool.starmap(vt.retrieving_file_scan_report, zip(file_list, report_path_list, key_list))
-    make_zip( LOCAL_REPORT_PATH,local_zip_path)
-    upload_files(ftp,local_zip_dir,remote_zip_path)
+        pool.starmap(vt.retrieving_file_scan_report, zip(md5_list, report_path_list, key_list))
+    make_zip( LOCAL_REPORT_PATH,LOCAL_ZIP_PATH)
+    upload_files(ftp,LOCAL_ZIP_DIR,REMOTE_REPORT_PATH)
     shutil.rmtree( LOCAL_REPORT_PATH )
-    shutil.rmtree(local_zip_dir)
+    shutil.rmtree(LOCAL_ZIP_DIR)
 
 if __name__ == '__main__':
     run()

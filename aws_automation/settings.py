@@ -8,13 +8,13 @@ PASSWD = 'seclab4680'
 INSTANCE_NUM = '1'
 
 # ??
-remote_raw_path = '/home/seclab/malwares/test/'+ INSTANCE_NUM
-remote_zip_path = '/home/seclab/malwares/report/'
+REMOTE_FILE_PATH = '/home/seclab/malwares/test/'+ INSTANCE_NUM
+REMOTE_REPORT_PATH = '/home/seclab/malwares/report/'
 
 # ??
 LOCAL_REPORT_PATH = '/home/ubuntu/report/'
-local_zip_dir = '/home/ubuntu/zip'
-local_zip_path = '/home/ubuntu/zip/'+INSTANCE_NUM
+LOCAL_ZIP_DIR = '/home/ubuntu/zip'
+LOCAL_ZIP_PATH = '/home/ubuntu/zip/'+INSTANCE_NUM
 
 # Interval Time
 INTERVAL_TIME = 0.05
