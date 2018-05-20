@@ -67,6 +67,12 @@ def unzip_report() :
             error_instance_set.remove(i)
     pass
 
+def delete_malware() :
+    for i in range(INSTANCE_NUMBER) :
+        if i in error_instance_set :
+            continue
+        shutil.rmtree(FTP_BASE_PATH + os.sep + str(i))
+
 def run() :
     while True :
         malware_path_list = create_malware_path_list(MALWARE_PATH)
@@ -80,6 +86,7 @@ def run() :
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)
         unzip_report(instances)
+        delete_malware()
 
 if __name__ == '__main__' :
     run()
