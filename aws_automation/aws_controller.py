@@ -1,13 +1,13 @@
 import boto3, time, os, shutil, zipfile
 from settings import *
 
-MALWARE_PATH = ''
+MALWARE_PATH = '/home/seclab/malwares/malware'
 INSTANCE_MALWARE_PATH = ''
-FTP_BASE_PATH = ''
-REPORT_ZIP_PATH = ''
-REPORT_PATH = ''
+FTP_BASE_PATH = '/home/seclab/malwares/ftp_base'
+REPORT_ZIP_PATH = '/home/seclab/malwares/report_zip'
+REPORT_PATH = '/home/seclab/malwares/report'
 
-INSTANCE_NUMBER = 10
+INSTANCE_NUMBER = 20
 MAX_MALWARE_PER_INSTANCE = 10000
 
 error_instance_set = set()
@@ -28,6 +28,7 @@ def stop_ec2(ec2, instances) :
     for instance in instances:
         print(instance['InstanceId'])
         ec2.stop_instances(InstanceIds=[instance['InstanceId']])
+    time.sleep(60)
 
 def create_malware_path_list( path ) :
     malware_cnt = 0
@@ -74,8 +75,8 @@ def run() :
 
         move_malware_to_ftp(malware_path_list)
 
-        ec2 = boto3.client('ec2', region_name='us-west-2', aws_access_key_id='', aws_secret_access_key='')
-        instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['capstone*']}])['Reservations'][0]['Instances']
+        ec2 = boto3.client('ec2', region_name='us-west-2', aws_access_key_id='AKIAJCRNYBOWYXH3MCHA', aws_secret_access_key='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')
+        instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)
         unzip_report(instances)
