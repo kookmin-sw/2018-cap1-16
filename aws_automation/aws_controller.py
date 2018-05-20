@@ -45,7 +45,7 @@ def create_malware_path_list( path ) :
 def move_malware_to_ftp( malware_path_list ) :
     global error_instance_set
     for i in range(INSTANCE_NUMBER) :
-        dst_path = FTP_BASE_PATH + os.sep + str(i % INSTANCE_NUMBER + 1)
+        dst_path = FTP_BASE_PATH + os.sep + str(i % INSTANCE_NUMBER)
         if not os.path.exists(dst_path) :
             os.makedirs(dst_path)
 
@@ -81,7 +81,7 @@ def run() :
 
         move_malware_to_ftp(malware_path_list)
 
-        ec2 = boto3.client('ec2', region_name='us-west-2', aws_access_key_id='AKIAJCRNYBOWYXH3MCHA', aws_secret_access_key='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')
+        ec2 = boto3.client('ec2', region_name='ap-northeast-2', aws_access_key_id='AKIAJCRNYBOWYXH3MCHA', aws_secret_access_key='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')
         instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)
