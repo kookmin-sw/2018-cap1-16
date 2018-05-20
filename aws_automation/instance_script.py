@@ -1,4 +1,4 @@
-import ftplib, os, socket, json, shutil, time
+import ftplib, os, socket, json, shutil, time, zipfile
 
 import multiprocessing
 
@@ -23,8 +23,12 @@ def upload_files(ftp,local_dir_path,remote_dir_path):
         time.sleep(INTERVAL_TIME)
         ftp.storbinary("STOR " + f ,open(os.path.join(local_dir_path,f),'rb'))
 
-def make_zip(dir_path,zip_path):
-    shutil.make_archive(zip_path,'zip',dir_path)
+def make_zip():
+    zip = zipfile.ZipFile(LOCAL_ZIP_PATH + os.sep + INSTANCE_NUM + '.zip', 'w')
+    for path, dirs, files in os.walk(LOCAL_REPORT_PATH ):
+        for file in files:
+            zip.write(os.path.join(path, file), file, compress_type=zipfile.ZIP_DEFLATED)
+    zip.close()
 
 def run():
     start_time =time.time()
@@ -44,7 +48,7 @@ def run():
         json_md5_list = [ os.path.splitext(json_path)[0] for json_path in json_list ]
         md5_list = list( set(md5_list) - set(json_md5_list) )
 
-    make_zip( LOCAL_REPORT_PATH,LOCAL_ZIP_PATH)
+    make_zip()
     ftp = connect()
     upload_files(ftp,LOCAL_ZIP_DIR,REMOTE_REPORT_PATH)
     shutil.rmtree( LOCAL_REPORT_PATH )

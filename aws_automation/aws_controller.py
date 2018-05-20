@@ -7,6 +7,7 @@ FTP_BASE_PATH = ''
 REPORT_ZIP_PATH = ''
 REPORT_PATH = ''
 
+
 INSTANCE_NUMBER = 24
 MAX_MALWARE_PER_INSTANCE = 10000
 
@@ -43,7 +44,7 @@ def create_malware_path_list( path ) :
 
 def move_malware_to_ftp( malware_path_list ) :
     global error_instance_set
-    for i in range(1, INSTANCE_NUMBER + 1) :
+    for i in range(INSTANCE_NUMBER) :
         dst_path = FTP_BASE_PATH + os.sep + str(i % INSTANCE_NUMBER + 1)
         if not os.path.exists(dst_path) :
             os.makedirs(dst_path)
