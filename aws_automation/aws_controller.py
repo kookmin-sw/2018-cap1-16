@@ -29,6 +29,7 @@ def stop_ec2(ec2, instances) :
     for instance in instances:
         print(instance['InstanceId'])
         ec2.stop_instances(InstanceIds=[instance['InstanceId']])
+    time.sleep(60)
 
 def create_malware_path_list( path ) :
     malware_cnt = 0
