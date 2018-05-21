@@ -85,7 +85,7 @@ def run() :
         instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)
-        unzip_report(instances)
+        unzip_report()
         delete_malware()
 
 if __name__ == '__main__' :

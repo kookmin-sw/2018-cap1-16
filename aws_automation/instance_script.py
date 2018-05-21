@@ -32,6 +32,7 @@ def make_zip():
 
 def run():
     start_time =time.time()
+    shutil.rmtree(LOCAL_REPORT_PATH, ignore_errors=True)
     ftp = connect()
     file_list = get_file_list(ftp,REMOTE_FILE_PATH)
     md5_list = [ os.path.splitext(file)[0] for file in file_list ]
