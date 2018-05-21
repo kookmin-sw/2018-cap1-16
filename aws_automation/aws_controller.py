@@ -9,6 +9,7 @@ REPORT_PATH = '/home/seclab/malwares/report'
 
 INSTANCE_NUMBER = 20
 MAX_MALWARE_PER_INSTANCE = 10000
+WAIT_TIME =  int(MAX_MALWARE_PER_INSTANCE * 0.55)
 
 error_instance_set = set()
 
@@ -21,7 +22,7 @@ def start_ec2(ec2, instances) :
         ec2.start_instances(InstanceIds = [instance['InstanceId']])
 
     # 인스턴스 키는 시간(100sec) + 스타트업 스크립트 실행시간(3720sec)
-    time.sleep(3820)
+    time.sleep(WAIT_TIME)
 
 def stop_ec2(ec2, instances) :
     # 인스턴스 스탑 코드
@@ -74,11 +75,12 @@ def delete_malware() :
         shutil.rmtree(FTP_BASE_PATH + os.sep + str(i))
 
 def run() :
+    global WAIT_TIME
     while True :
         malware_path_list = create_malware_path_list(MALWARE_PATH)
         if len(malware_path_list) == 0 :
             break
-
+        WAIT_TIME = int(len(malware_path_list) / INSTANCE_NUMBER * 0.55)
         move_malware_to_ftp(malware_path_list)
 
         ec2 = boto3.client('ec2', region_name='ap-northeast-2', aws_access_key_id='', aws_secret_access_key='')
