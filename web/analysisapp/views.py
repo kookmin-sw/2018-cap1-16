@@ -64,21 +64,21 @@ def static_analysis(request,md5):
         return HttpResponse(ctx)
 
 def dynamic_analysis(request,md5):
-
+    dy_test_md5 = '82d22cb8665d7371492be3a9abcb9cb9'
     if request.method == "GET":
-        ctx = {'file_md5': md5}
+        ctx = {'file_md5': dy_test_md5}
         return render(request,'loading_dynamic_analysis.html',ctx)
 
     elif request.method == "POST":
         file_md5 = md5
-        try:
-            upload_file_obj = UploadFile.objects.get(pk=file_md5)
-        except:
-            return HttpResponse("Abnormal approach")
+        #try:
+        #    upload_file_obj = UploadFile.objects.get(pk=file_md5)
+        #except:
+        #    return HttpResponse("Abnormal approach")
 
         ctx = {'status': 500}
 
-        md5_search_data = es_dynamic_report_search(file_md5)
+        md5_search_data = es_dynamic_report_search(dy_test_md5)
         if md5_search_data is not None:
             ctx['status'] = 200
         else:
