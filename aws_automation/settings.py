@@ -15,7 +15,7 @@ REMOTE_REPORT_PATH = '/home/seclab/malwares/report_zip/'
 # ??
 LOCAL_REPORT_PATH = '/home/ubuntu/report/'
 LOCAL_ZIP_DIR = '/home/ubuntu/zip'
-LOCAL_ZIP_PATH = '/home/ubuntu/zip/'+INSTANCE_NUM
+LOCAL_ZIP_PATH = '/home/ubuntu/zip'
 
 # Interval Time
 INTERVAL_TIME = 0.05
