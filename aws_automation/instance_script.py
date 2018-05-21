@@ -24,6 +24,8 @@ def upload_files(ftp,local_dir_path,remote_dir_path):
         ftp.storbinary("STOR " + f ,open(os.path.join(local_dir_path,f),'rb'))
 
 def make_zip():
+    if not os.path.exists(LOCAL_ZIP_PATH) :
+        os.makedirs(LOCAL_ZIP_PATH)
     zip = zipfile.ZipFile(LOCAL_ZIP_PATH + os.sep + INSTANCE_NUM + '.zip', 'w')
     for path, dirs, files in os.walk(LOCAL_REPORT_PATH ):
         for file in files:
