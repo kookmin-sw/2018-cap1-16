@@ -61,7 +61,7 @@ def unzip_report() :
     global error_instance_set
     for i in range(INSTANCE_NUMBER) :
         if os.path.exists(REPORT_ZIP_PATH + os.sep + str(i) + '.zip') :
-            zip = zipfile.ZipFile(os.path.exists(REPORT_ZIP_PATH + os.sep + str(i) + '.zip'))
+            zip = zipfile.ZipFile(REPORT_ZIP_PATH + os.sep + str(i) + '.zip')
             zip.extractall(REPORT_PATH)
             zip.close()
             error_instance_set.remove(i)
