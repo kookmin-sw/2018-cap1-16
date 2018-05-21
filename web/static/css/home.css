@@ -23,6 +23,10 @@ h3 {
     text-align: center;
 }
 
+.jumbotron p {
+    font-size: 1.5em;
+}
+
 .col-lg-2 p {
     font-weight: 500;
     text-align: center;
@@ -60,8 +64,9 @@ h3 {
 }
 
 .col-lg-2 {
-	margin: 0% 8% !important;
-    max-width: 200px !important;
+    display: inline-grid !important; 
+	margin: 0% 7% !important;
+    max-width: 210px !important;
 }
 
 .container {

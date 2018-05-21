@@ -1,7 +1,14 @@
 {% extends 'layout.html' %} {% block content %} {% load staticfiles %}
 <script src="{% static  '/js/detail_script.js' %}"></script>
 <script src="{% static  '/js/progress.js' %}"></script>
+<script src="{% static  '/js/chart.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static '/css/report.css' %}" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="{% static  '/js/chart.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static '/css/chart.css' %}" />
+
 
 <!-- Start Report Row -->
 <div class="container-report">
@@ -108,6 +115,25 @@
         </div>
     </div>
     {% endif %}
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>Chart</span>
+                </div>
+                <div class="panel-body">
+
+                    <div id="canvas-holder">
+                        <canvas id="chart-area"></canvas>
+                    </div>
+                    <script src="{% static  '/js/chart-doughnut.js' %}"></script>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

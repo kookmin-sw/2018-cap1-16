@@ -1,0 +1,12 @@
+
+#canvas-holder {
+    width: auto !important;
+    height: auto !important;
+}
+
+
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
