@@ -20,15 +20,15 @@ def start_ec2(ec2, instances) :
         print(instance['InstanceId'])
         ec2.start_instances(InstanceIds = [instance['InstanceId']])
 
-    # 인스턴스 키는 시간(100sec) + 스타트업 스크립트 실행시간(2000sec)
-    time.sleep(2100)
+    # 인스턴스 키는 시간(100sec) + 스타트업 스크립트 실행시간(3720sec)
+    time.sleep(3820)
 
 def stop_ec2(ec2, instances) :
     # 인스턴스 스탑 코드
     for instance in instances:
         print(instance['InstanceId'])
         ec2.stop_instances(InstanceIds=[instance['InstanceId']])
-    time.sleep(60)
+    time.sleep(100)
 
 def create_malware_path_list( path ) :
     malware_cnt = 0
@@ -81,7 +81,7 @@ def run() :
 
         move_malware_to_ftp(malware_path_list)
 
-        ec2 = boto3.client('ec2', region_name='ap-northeast-2', aws_access_key_id='AKIAJCRNYBOWYXH3MCHA', aws_secret_access_key='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')
+        ec2 = boto3.client('ec2', region_name='ap-northeast-2', aws_access_key_id='', aws_secret_access_key='')
         instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)

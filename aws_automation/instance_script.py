@@ -41,7 +41,7 @@ def run():
         if not os.path.exists(LOCAL_REPORT_PATH):
             os.makedirs(LOCAL_REPORT_PATH)
 
-        with multiprocessing.Pool(processes=os.cpu_count()) as pool:
+        with multiprocessing.Pool(1) as pool:
             pool.starmap(vt.retrieving_file_scan_report, zip(md5_list, report_path_list, key_list))
 
         json_list = os.listdir(LOCAL_REPORT_PATH)
