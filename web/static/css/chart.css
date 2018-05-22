@@ -1,7 +1,9 @@
 
 #canvas-holder {
-    width: auto !important;
+    width: 400px;
     height: auto !important;
+    margin-left: -25%;
+    margin-top: 20px;
 }
 
 

@@ -62,6 +62,12 @@ body {
 .panel-body {
 	color: #2f2f33;
     font-weight: 500;
+    padding-top: 10px;
+}
+
+.panel-body-half {
+    width:50%;
+    float:left;
 }
 
 .panel-vertical-left{
@@ -191,34 +197,27 @@ h1 {
     color: #8ad5dd;
 }
 
-/*Progress bar*/ 
+/*Progress bar*/
 .progress {
-  height: 35px;
-
-}
-.progress .skill {
-  line-height: 35px;
-  padding: 0;
-  margin: 0 0 0 20px;
-  text-transform: uppercase;
-}
-.progress .skill .val {
-  float: right;
-  font-style: normal;
-  margin: 0 20px 0 0;
+  margin-left: 15%;
+  margin-top: 20px;
 }
 
-.progress-bar {
-  text-align: left;
-  transition-duration: 3s;
-   	background: #e5405e;
-	/* Old browsers */
-	background: -moz-linear-gradient(left, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
-	/* FF3.6-15 */
-	background: -webkit-linear-gradient(left, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
-	/* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to right, #1a9be0 0%, #7ae324 40%, #ffdb3a 60%, #e5405e 100%);
+.progress-bar-vertical {
+  width: 50px;
+  min-height: 200px;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 20px;
+  float: left;
+}
 
+.progress-bar-vertical .progress-bar {
+  width: 100%;
+  height: 0;
+  -webkit-transition: height 0.6s ease;
+  -o-transition: height 0.6s ease;
+  transition: height 0.6s ease;
 }
 
 /*Tags*/
@@ -242,4 +241,9 @@ h1 {
 li {
     color: #2f2f33;
     margin-left: -4%;
+}
+
+#virus-percent{
+    margin-top: 100px;
+    margin-left: 5%;
 }

@@ -5,15 +5,7 @@
 			type: 'doughnut',
 			data: {
 				datasets: [{
-					data: [
-						200,
-                        100,
-                        400,
-                        500,
-                        150,
-                        300,
-                        400,
-					],
+					data: $('#canvas-holder').attr("mc-data-set").split(','),
 					backgroundColor: [
 						window.chartColors.red,
 						window.chartColors.orange,
@@ -26,19 +18,19 @@
 					label: 'Dataset 1'
 				}],
 				labels: [
-					'Red',
-					'Orange',
-					'Yellow',
-					'Green',
-					'Blue',
-                    'Purple',
-                    'Grey'
+					'Trojan-Ransom',
+					'Virus',
+					'Trojan',
+					'Backdoor',
+					'not-a-virus:Downloader',
+                    'Worm',
+                    'Rootkit'
 				]
 			},
 			options: {
 				responsive: true,
 				legend: {
-					position: 'top',
+					position: 'right',
 				},
 				title: {
 					display: false
