@@ -77,6 +77,10 @@ if __name__ == '__main__' :
         path = sys.argv[1]
         if os.path.isfile(path) :
             make_idb(path)
+            file_name = os.path.splitext(os.path.basename(path))[0]
+            if os.path.exists(os.path.join(IDB_PATH, file_name + '.i64')) or os.path.exists(os.path.join(IDB_PATH, file_name + '.idb')) :
+                os.remove(path)
+
         else :
             print("존재하지 않는 파일입니다.")
     else :
