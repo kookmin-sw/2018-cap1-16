@@ -23,3 +23,6 @@ IDA_PYTHON_SCRIPT_PATH = os.path.normpath(os.path.abspath('./ida_script'))
 
 # CPU COUNT
 CPU_COUNT = 4
+
+# TIME OUT
+TIME_OUT = 60
