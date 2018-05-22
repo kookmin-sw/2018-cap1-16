@@ -22,7 +22,6 @@ def run_static_analysis(upload_file_obj):
 
     cmd_run_tensor_bc = 'python ' + TENSOR_ROOT + os.sep + 'testing_bc_static ' + fh_fops_file_path
     cmd_run_tensor_mc = 'python ' + TENSOR_ROOT + os.sep + 'testing_mc_static ' + fh_fops_file_path
-
     os.system(cmd_run_tensor_bc)
     os.system(cmd_run_tensor_mc)
 

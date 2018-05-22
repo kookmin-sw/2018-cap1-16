@@ -1,4 +1,5 @@
-from .forms import UploadForm, ReportForm, SignatureForm, DLLForm, ConnectsHostForm, ConnectsIpForm
+from .forms import *
+
 def create_static_report_form(search_data):
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['md5']
@@ -51,3 +52,9 @@ def create_dynamic_report_form(search_data):
         connects_ip_forms = None
 
     return report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
+
+def create_classfication_data_form(bc_data,mc_data):
+    classificationData = ClassificationDataForm()
+    classificationData.bc_data = bc_data
+    classificationData.mc_data = mc_data
+

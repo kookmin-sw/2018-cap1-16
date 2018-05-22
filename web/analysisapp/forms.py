@@ -29,3 +29,7 @@ class ConnectsHostForm(forms.Form):
 
 class ConnectsIpForm(forms.Form):
     ip = forms.CharField(max_length=255)
+
+class ClassificationDataForm(forms.Form):
+    bc_data = forms.CharField(max_length=255)
+    mc_data = forms.CharField(max_length=255)

@@ -2,12 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpRequest
 from .models import UploadFile
-from .forms import UploadForm
+from .forms import *
 from .md5 import get_hash_str
 from .es.es_search import *
-from .static_anlysis import run_static_analysis
-from .dynamic_anlysis import run_dynamic_analysis
-from .create_report import *
+from .static_anlysis import *
+from .dynamic_anlysis import *
+from .create_form import *
 import sys,os, json
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
@@ -84,6 +84,9 @@ def dynamic_analysis(request,md5):
         else:
             run_dynamic_analysis(upload_file_obj)
             ctx['status'] = 200
+
+        dynamic_bc_data, dynamic_mc_data = test_dynamic_clasification(dy_test_md5)
+        create_classfication_data_form(dynamic_bc_data,dynamic_mc_data)
 
         return HttpResponse(ctx)
 
