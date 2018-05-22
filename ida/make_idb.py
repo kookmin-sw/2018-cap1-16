@@ -39,20 +39,6 @@ def make_idb( file_path ) :
     except :
         print("{}을 분석하는데 실패하였습니다.".format(file_name))
 
-def create_delete_vir_list() :
-    ret_list = []
-    for path, dirs, files in os.walk(IDB_PATH) :
-        for file in files :
-            ext = os.path.splitext(file)[-1]
-            if ext == '.i64' :
-                ret_list.append(os.path.join(path, file.replace('.i64', '.vir')))
-            elif ext == '.idb' :
-                ret_list.append(os.path.join(path, file.replace('.idb', '.vir')))
-    return ret_list
-
-def delete_file( file_path ) :
-    os.remove(file_path)
-
 def print_help() :
     print("make_idb.py")
     print("IDA Database 을 생성해주는 파이썬 스크립트")
@@ -69,11 +55,8 @@ if __name__ == '__main__' :
         print("Total Malware Count : {}".format(len(file_list)))
         p = mp.Pool(CPU_COUNT)
         p.map(make_idb, file_list)
-        print("Delete Process Start")
-        vir_list = create_delete_vir_list()
-        p.map(delete_file, vir_list)
-        print("Done")
-    if argv_cnt == 2 :
+
+    elif argv_cnt == 2 :
         path = sys.argv[1]
         if os.path.isfile(path) :
             make_idb(path)
