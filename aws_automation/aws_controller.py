@@ -11,8 +11,6 @@ INSTANCE_NUMBER = 20
 MAX_MALWARE_PER_INSTANCE = 10000
 WAIT_TIME =  int(MAX_MALWARE_PER_INSTANCE * 0.55)
 
-error_instance_set = set()
-
 # 인스턴스 목록 뽑아내기.
 # Filters에 Values [] 안에 정규식을 넣어주면 걸러짐 현재 인스턴스 이름들은 capstone1, capstone2
 def start_ec2(ec2, instances) :
@@ -44,34 +42,30 @@ def create_malware_path_list( path ) :
     return ret_list
 
 def move_malware_to_ftp( malware_path_list ) :
-    global error_instance_set
     for i in range(INSTANCE_NUMBER) :
-        dst_path = FTP_BASE_PATH + os.sep + str(i % INSTANCE_NUMBER)
+        dst_path = FTP_BASE_PATH + os.sep + str(i)
         if not os.path.exists(dst_path) :
             os.makedirs(dst_path)
 
     for i, malware_path in enumerate(malware_path_list) :
-        if i % INSTANCE_NUMBER in error_instance_set :
-            continue
         malware_name = os.path.basename(malware_path)
         shutil.move(malware_path, FTP_BASE_PATH + os.sep + str(i % INSTANCE_NUMBER) + os.sep + malware_name)
 
-    error_instance_set = set([i for i in range(INSTANCE_NUMBER)])
-
 def unzip_report() :
-    global error_instance_set
     for i in range(INSTANCE_NUMBER) :
         if os.path.exists(REPORT_ZIP_PATH + os.sep + str(i) + '.zip') :
             zip = zipfile.ZipFile(REPORT_ZIP_PATH + os.sep + str(i) + '.zip')
             zip.extractall(REPORT_PATH)
             zip.close()
-            error_instance_set.remove(i)
+        else :
+            FTP_BASE_PATH + os.sep + str(i)
+            for path, dirs, files in os.walk(FTP_BASE_PATH) :
+                for file in files :
+                    shutil.move(os.path.join(path, file), os.path.join(MALWARE_PATH, file))
     pass
 
 def delete_malware() :
     for i in range(INSTANCE_NUMBER) :
-        if i in error_instance_set :
-            continue
         shutil.rmtree(FTP_BASE_PATH + os.sep + str(i))
 
 def run() :
