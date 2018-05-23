@@ -4,7 +4,7 @@ from pymongo.errors import OperationFailure
 import re, getpass
 
 
-class SeclabMongoClient:
+class MyMongoClient:
     def __init__(self, ip, port, db):
         self.client = self.connect_db(ip, port)
         self.check_connection()

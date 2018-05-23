@@ -64,7 +64,7 @@ def static_analysis(request,md5):
         return HttpResponse(ctx)
 
 def dynamic_analysis(request,md5):
-    dy_test_md5 = 'c5b60e098483e47f54312a74ff4b7d0d'
+    dy_test_md5 = '2a545b3bfed1b0d9b19bb18042770e09'
     if request.method == "GET":
         ctx = {'file_md5': dy_test_md5}
         return render(request,'loading_dynamic_analysis.html',ctx)
@@ -86,7 +86,7 @@ def dynamic_analysis(request,md5):
             ctx['status'] = 200
 
         dynamic_bc_data, dynamic_mc_data = test_dynamic_clasification(dy_test_md5)
-        create_classfication_data_form(dynamic_bc_data,dynamic_mc_data)
+        #create_classfication_data_form(dynamic_bc_data,dynamic_mc_data)
 
         return HttpResponse(ctx)
 

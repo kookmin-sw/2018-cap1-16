@@ -16,8 +16,8 @@ import time, sys
 import multiprocessing as mp
 import json
 
-REST_URL = "http://203.246.112.138:8090/tasks/create/submit"
-REPORT_URL = "http://203.246.112.138:8090/tasks/report"
+REST_URL = "http://203.246.112.133:8090/tasks/create/submit"
+REPORT_URL = "http://203.246.112.133:8090/tasks/report"
 
 status = ''
 
