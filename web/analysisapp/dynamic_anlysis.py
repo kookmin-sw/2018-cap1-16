@@ -38,7 +38,6 @@ def test_dynamic_clasification(md5):
     # make 'run feature Hash' command
     cmd_ida_fh_acs = 'python ' + FEATURE_ROOT + os.sep + 'make_fh_acs.py ' + acs_file_path
     os.system(cmd_ida_fh_acs)
-
     # make fh_acs file path
     fh_acs_file_path = os.path.join(os.path.join(FEATURE_ROOT, 'fh_acs'),md5+'.fh_acs')
 
@@ -50,7 +49,6 @@ def test_dynamic_clasification(md5):
 
     # remove the temp file
     shutil.rmtree(acs_folder_path)
-    shutil.rmtree(acs_folder_path)
 
-    result_bc, result_mc = None
+    result_bc, result_mc = None, None
     return result_bc, result_mc
