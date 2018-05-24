@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-import pickle, warnings, logging, sys
+import pickle
 
 from settings import *
 
@@ -11,9 +11,6 @@ OUTPUT_SIZE = 2
 RESULT = [ False, True ]
 
 def bc_run( feature_vector ) :
-    warnings.filterwarnings('ignore')
-    logger = logging.getLogger()
-    logger.disabled = True
     tf.reset_default_graph()
     with tf.device('/gpu:0'):
         x = tf.placeholder(tf.float32, shape=[None, INPUT_SIZE])
@@ -39,7 +36,7 @@ def bc_run( feature_vector ) :
         sess.run(init)
         model_saver.restore(sess, DYNAMIC_BC_CHECK_POINT)
         output = np.array(sess.run(y_test, feed_dict={x: [feature_vector]})).reshape([-1])
-        malware_score = output[-1]
+        malware_score = int(output[-1] * 100)
         detected=RESULT[int(output.argmax(-1))]
     return detected, malware_score
 
@@ -47,8 +44,6 @@ def load_data( file_path ) :
     with open(file_path, 'rb') as f :
         return pickle.load(f)
 
-if __name__ == '__main__' :
-    fh_path = sys.argv[1]
-    feature_vector = load_data( fh_path )
-    detected, malware_score = bc_run(feature_vector)
-    print("{},{:.6f}".format(detected, malware_score))
+def run( file_path ) :
+    feature_vector = load_data(file_path)
+    return bc_run(feature_vector)
