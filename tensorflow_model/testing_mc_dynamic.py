@@ -1,6 +1,6 @@
 import tensorflow as tf
 import numpy as np
-import pickle, warnings, logging, sys
+import pickle
 
 from settings import *
 
@@ -8,12 +8,7 @@ from settings import *
 INPUT_SIZE = 12288
 OUTPUT_SIZE = 7
 
-LABEL = ['Virus', 'Worm', 'Trojan', 'Downloader', 'Rootkit', 'Ransomware', 'Backdoor' ]
-
 def mc_run( feature_vector ) :
-    warnings.filterwarnings('ignore')
-    logger = logging.getLogger()
-    logger.disabled = True
     tf.reset_default_graph()
     with tf.device('/gpu:0'):
         x = tf.placeholder(tf.float32, shape=[None, INPUT_SIZE])
@@ -40,17 +35,15 @@ def mc_run( feature_vector ) :
         print(DYNAMIC_MC_CHECK_POINT)
         model_saver.restore(sess, DYNAMIC_MC_CHECK_POINT)
         output = np.array(sess.run(y_test, feed_dict={x: [feature_vector]})).reshape([-1])
-        group = {}
-        for i in range(OUTPUT_SIZE) :
-            group[i] = output[i]
-        label=LABEL[int(output.argmax(-1))]
-    return label, group
+        group = []
+        for i in range(OUTPUT_SIZE):
+            group.append(int(output[i] * 100))
+    return group
 
 def load_data( file_path ) :
     with open(file_path, 'rb') as f :
         return pickle.load(f)
-if __name__ == '__main__' :
-    fh_path = sys.argv[1]
-    feature_vector = load_data( fh_path )
-    label, group = mc_run(feature_vector)
-    print("{},{:.6f},{:.6f},{:.6f},{:.6f},{:.6f},{:.6f}".format(label, group[0], group[1], group[2], group[3], group[4], group[5], group[6]))
+
+def run( file_path ) :
+    feature_vector = load_data(file_path)
+    return mc_run(feature_vector)
