@@ -64,7 +64,7 @@ def static_analysis(request,md5):
         return HttpResponse(ctx)
 
 def dynamic_analysis(request,md5):
-    dy_test_md5 = '2a545b3bfed1b0d9b19bb18042770e09'
+    dy_test_md5 = 'a1f1c980d0bdc805633f2340eecdcb93'
     if request.method == "GET":
         ctx = {'file_md5': dy_test_md5}
         return render(request,'loading_dynamic_analysis.html',ctx)

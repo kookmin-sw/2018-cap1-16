@@ -39,13 +39,13 @@ def test_dynamic_clasification(md5):
     cmd_ida_fh_acs = 'python ' + FEATURE_ROOT + os.sep + 'make_fh_acs.py ' + acs_file_path
     os.system(cmd_ida_fh_acs)
     # make fh_acs file path
-    fh_acs_file_path = os.path.join(os.path.join(FEATURE_ROOT, 'fh_acs'),md5+'.fh_acs')
+    fh_acs_file_path = os.path.join(os.path.join(FEATURE_ROOT, 'fh_acs'),md5+'.fhacs')
 
     # make 'run bc&mc test' command
-    #cmd_tensor_bc = 'python ' + TENSOR_ROOT + os.sep + 'testing_bc_static ' + fh_acs_file_path
-    #cmd_tensor_mc = 'python ' + TENSOR_ROOT + os.sep + 'testing_mc_static ' + fh_acs_file_path
-    #os.system(cmd_tensor_bc)
-    #os.system(cmd_tensor_mc)
+    cmd_tensor_bc = 'python ' + TENSOR_ROOT + os.sep + 'testing_bc_dynamic.py ' + fh_acs_file_path
+    cmd_tensor_mc = 'python ' + TENSOR_ROOT + os.sep + 'testing_mc_dynamic.py ' + fh_acs_file_path
+    os.system(cmd_tensor_bc)
+    os.system(cmd_tensor_mc)
 
     # remove the temp file
     shutil.rmtree(acs_folder_path)
