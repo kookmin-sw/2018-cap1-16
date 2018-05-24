@@ -31,5 +31,6 @@ class ConnectsIpForm(forms.Form):
     ip = forms.CharField(max_length=255)
 
 class ClassificationDataForm(forms.Form):
-    bc_data = forms.CharField(max_length=255)
-    mc_data = forms.CharField(max_length=255)
+    detected = forms.CharField(max_length=255)
+    result_bc = forms.CharField(max_length=255)
+    result_mc = forms.CharField(max_length=255)

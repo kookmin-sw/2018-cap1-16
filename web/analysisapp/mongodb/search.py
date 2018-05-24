@@ -19,3 +19,14 @@ def mongo_acs_search(md5):
 
 
     return acs
+
+def mongo_testing_result_search(md5):
+    client = MyMongoClient('203.246.112.137', 27017, 'seclab')
+    collection = client.db['dynamic_testing_result']
+
+    response = collection.find_one({"_id":md5})
+    detected = response['detected']
+    result_bc = response['result_bc']
+    result_mc = response['result_mc']
+
+    return detected, result_bc, result_mc

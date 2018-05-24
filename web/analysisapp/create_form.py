@@ -53,8 +53,11 @@ def create_dynamic_report_form(search_data):
 
     return report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
 
-def create_classfication_data_form(bc_data,mc_data):
+def create_classfication_data_form(detected, result_bc, result_mc):
     classificationData = ClassificationDataForm()
-    classificationData.bc_data = bc_data
-    classificationData.mc_data = mc_data
+    classificationData.fields['detected'].initial = detected
+    classificationData.fields['result_bc'].initial = result_bc
+    classificationData.fields['result_mc'].initial = result_mc
+    return classificationData
+
 

@@ -41,6 +41,8 @@
         </div>
     </div>
 
+
+    {% if classification_data_form.fields.detected.initial == True %}
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
@@ -51,14 +53,13 @@
                     <div class="panel-body-half">
                         <label id="virus-percent">바이러스 확률</label>
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow={{ report_form.fields.score.initial }} aria-valuemin="0" aria-valuemax="100">
-                                {{ report_form.fields.score.initial }}%
-                                <!--{{ report_form.fields.score.initial }}%-->
+                            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow={{ classification_data_form.fields.result_bc.initial }} aria-valuemin="0" aria-valuemax="100">
+                                {{ classification_data_form.fields.result_bc.initial }}%
                             </div>
                         </div>
                     </div>
                     <div class="panel-body-half">
-                        <div id="canvas-holder" mc-data-set="20,10,20,10,20,10,10">
+                        <div id="canvas-holder" mc-data-set={{ classification_data_form.fields.result_mc.initial }}>
                             <canvas id="chart-area"></canvas>
                         </div>
                         <script src="{% static  '/js/chart-doughnut.js' %}"></script>
@@ -67,6 +68,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+
     <!--Tags-->
     <div class="row">
         <div class="row_detail_2">

@@ -10,6 +10,8 @@ from .dynamic_anlysis import *
 from .create_form import *
 import sys,os, json
 
+from .mongodb.search import mongo_testing_result_search
+
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
 
 def upload(request):
@@ -85,8 +87,8 @@ def dynamic_analysis(request,md5):
             run_dynamic_analysis(upload_file_obj)
             ctx['status'] = 200
 
-        dynamic_bc_data, dynamic_mc_data = test_dynamic_clasification(dy_test_md5)
-        #create_classfication_data_form(dynamic_bc_data,dynamic_mc_data)
+        run_dynamic_clasification(dy_test_md5)
+        mongo_testing_result_search(dy_test_md5)
 
         return HttpResponse(ctx)
 
@@ -121,7 +123,7 @@ def static_report_view(request, md5):
 def dynamic_report_view(request, md5):
     if request.method == "GET":
 
-        ctx = {'report_form': None, 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
+        ctx = {'report_form': None,'classification_data_form':None , 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
 
         # Let's search from elasticsearch
         md5_search_data = es_dynamic_report_search(md5)
@@ -129,6 +131,7 @@ def dynamic_report_view(request, md5):
         # Create report form
         if md5_search_data is not None:
             dynamic_report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms = create_dynamic_report_form(md5_search_data)
+
             ctx['report_form'] = dynamic_report_form
             ctx['signature_forms'] = signature_forms
             ctx['DLL_forms'] = DLL_forms
@@ -136,5 +139,10 @@ def dynamic_report_view(request, md5):
             ctx['connects_ip_forms'] = connects_ip_forms
         else:
             return HttpResponse("Abnormal approach")
+
+        detected, result_bc, result_mc = mongo_testing_result_search(md5)
+        classification_data_form = create_classfication_data_form(detected, result_bc,result_mc)
+        ctx['classification_data_form'] = classification_data_form
+
 
     return render(request, 'dynamic_report.html',ctx)

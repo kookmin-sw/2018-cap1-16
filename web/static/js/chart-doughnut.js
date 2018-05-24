@@ -18,13 +18,13 @@
 					label: 'Dataset 1'
 				}],
 				labels: [
-					'Trojan-Ransom',
 					'Virus',
+					'Worm',
 					'Trojan',
-					'Backdoor',
-					'not-a-virus:Downloader',
-                    'Worm',
-                    'Rootkit'
+					'Downloader',
+					'Rootkit',
+                    'Ransomware',
+                    'Backdoor'
 				]
 			},
 			options: {
