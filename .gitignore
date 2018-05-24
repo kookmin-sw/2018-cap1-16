@@ -1,9 +1,18 @@
 ## Ignore File ##
-.idea/*
+.idea/
+__pycache__/
+
 web/web_sqlite3
 web/db.sqlite3
 web/media/*
 web/upload_app/migrations/
-__pycache__/
+
 normal_json/
 sample_report/
+
+fh_acs/
+
+tensorflow_model/static_bc_model.ckpt*
+tensorflow_model/static_mc_model.ckpt*
+tensorflow_model/dynamic_bc_model.ckpt*
+tensorflow_model/dynamic_mc_model.ckpt*
