@@ -1,14 +1,15 @@
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # acs 저장 경로
-ACS_PATH = os.path.normpath(os.path.abspath('./acs'))
+ACS_PATH = os.path.join(BASE_DIR,'./acs')
 # fh_acs 저장 경로
-FH_ACS_PATH = os.path.normpath(os.path.abspath('./fh_acs'))
+FH_ACS_PATH = os.path.join(BASE_DIR,'./fh_acs')
 
 # fops 저장 경로
-FOPS_PATH = os.path.normpath(os.path.abspath('./fops'))
+FOPS_PATH = os.path.join(BASE_DIR,'./fops')
 # fh_fops 저장 경로
-FH_FOPS_PATH = os.path.normpath(os.path.abspath('./fh_fops'))
+FH_FOPS_PATH = os.path.join(BASE_DIR,'./fh_fops')
 
 # ops 저장 경로
 OPS_PATH = os.path.normpath(os.path.abspath('./ops'))
