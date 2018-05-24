@@ -16,19 +16,15 @@ def create_file_list () :
     return ret_list
 def make_idb_fops( file_path ) :
     file_name = os.path.splitext(os.path.basename(file_path))[0]
-    sub_file_path = file_path.replace(MALWARE_PATH, '').replace(os.path.basename(file_path), '')
 
-    idb_save_path = IDB_PATH + sub_file_path
-    fops_save_path = FOPS_PATH + sub_file_path
+    if not os.path.exists(IDB_PATH):
+        os.makedirs(IDB_PATH)
 
-    if not os.path.exists(idb_save_path):
-        os.makedirs(idb_save_path)
+    if not os.path.exists(FOPS_PATH):
+        os.makedirs(FOPS_PATH)
 
-    if not os.path.exists(fops_save_path):
-        os.makedirs(fops_save_path)
-
-    dst_path = os.path.join(idb_save_path, file_name)
-    fops_dst_path = os.path.join(fops_save_path, file_name) + '.fops'
+    dst_path = IDB_PATH + os.sep + file_name
+    fops_dst_path = FOPS_PATH + os.sep + file_name + '.fops'
 
     if os.path.exists(dst_path + '.i64') or os.path.exists(dst_path + '.idb') or os.path.exists(fops_dst_path):
         return

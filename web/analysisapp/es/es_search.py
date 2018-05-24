@@ -20,6 +20,23 @@ def es_static_report_search(md5):
     else:
         return None
 
+def static_testing_result_search(md5):
+    print("test")
+    request_data = \
+        {
+            'query': {
+                "term": {
+                    "_id": md5
+                }
+            }
+        }
+    res = es.search(index=main_index, body=request_data)
+    print(res)
+    if res['hits']['total'] is not 0:
+        return res['hits']['hits'][0]['_source']
+    else:
+        return None
+
 def es_dynamic_report_search(md5):
 
     request_data = \

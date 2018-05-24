@@ -1,5 +1,6 @@
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IDA_DIR = os.path.join(os.path.dirname(BASE_DIR),'ida')
 
 # acs 저장 경로
 ACS_PATH = os.path.join(BASE_DIR,'./acs')
@@ -7,7 +8,7 @@ ACS_PATH = os.path.join(BASE_DIR,'./acs')
 FH_ACS_PATH = os.path.join(BASE_DIR,'./fh_acs')
 
 # fops 저장 경로
-FOPS_PATH = os.path.join(BASE_DIR,'./fops')
+FOPS_PATH = os.path.join(IDA_DIR,'./fops')
 # fh_fops 저장 경로
 FH_FOPS_PATH = os.path.join(BASE_DIR,'./fh_fops')
 

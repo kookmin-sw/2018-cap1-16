@@ -5,6 +5,7 @@ from .models import UploadFile
 from .forms import *
 from .md5 import get_hash_str
 from .es.es_search import *
+from .es.upload import *
 from .static_anlysis import *
 from .dynamic_anlysis import *
 from .create_form import *
@@ -59,8 +60,8 @@ def static_analysis(request,md5):
         if md5_search_data is not None:
             ctx['status'] = 200
         else:
-            static_analysis_data = run_static_analysis(upload_file_obj)
-            #upload_analysis_report(static_analysis_data)
+            result_bc, result_mc = run_static_analysis(upload_file_obj)
+            index_static_testing_result(md5,result_bc,result_mc)
             ctx['status'] = 200
 
         return HttpResponse(ctx)
@@ -98,7 +99,7 @@ def static_report_view(request, md5):
         ctx = {'report_form': None, 'similar_report_forms' : None}
 
         # Let's search from elasticsearch
-        md5_search_data = es_static_report_search(md5)
+        md5_search_data = static_testing_result_search(md5)
 
         # Create report form
         if md5_search_data is not None:
