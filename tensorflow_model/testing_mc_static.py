@@ -37,7 +37,7 @@ def mc_run( feature_vector ) :
         output = np.array(sess.run(y_test, feed_dict={x: [feature_vector]})).reshape([-1])
         group = []
         for i in range(OUTPUT_SIZE) :
-            group.append( int(output[i] * 100) )
+            group.append(output[i] * 100)
     return group
 
 def load_data( file_path ) :

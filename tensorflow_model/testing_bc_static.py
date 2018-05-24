@@ -36,7 +36,7 @@ def bc_run( feature_vector ) :
         sess.run(init)
         model_saver.restore(sess, STATIC_BC_CHECK_POINT)
         output = np.array(sess.run(y_test, feed_dict={x: [feature_vector]})).reshape([-1])
-        malware_score = int(output[-1] * 100)
+        malware_score = output[-1]
         detected=RESULT[int(output.argmax(-1))]
     return detected, malware_score
 
