@@ -28,11 +28,17 @@
                     <div class="text_name">
                         <p><strong>파일 MD5 </strong></p>
                         <p><strong>리포트 수집 날짜</strong></p>
+                        <p><strong>바이러스 감지 여부</strong></p>
                     </div>
 
                     <div class="text_data">
                         <p>{{ report_form.fields.md5.initial }}</p>
                         <p>{{ report_form.fields.collected_date.initial }}</p>
+                        {% if classification_data_form.fields.detected.initial == 1 %}
+                        <p>True</p>
+                        {% elif classification_data_form.fields.detected.initial == 0 %}
+                        <p>False</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

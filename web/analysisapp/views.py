@@ -9,7 +9,7 @@ from .es.upload import *
 from .static_anlysis import *
 from .dynamic_anlysis import *
 from .create_form import *
-import sys,os, json
+import sys,os, json,time
 
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
@@ -94,7 +94,7 @@ def dynamic_analysis(request,md5):
 
 def static_report_view(request, md5):
     if request.method == "GET":
-
+        time.sleep(0.05)
         ctx = {'report_form': None, 'classification_data_form':None, 'similar_report_forms' : None}
 
         # Let's search from elasticsearch
@@ -127,12 +127,12 @@ def dynamic_report_view(request, md5):
         ctx = {'report_form': None,'classification_data_form':None , 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
 
         # Let's search from elasticsearch
-        md5_search_data = es_dynamic_report_search(md5)
+        cuckoo_search_data = es_dynamic_report_search(md5)
         dynamic_testing_result_data = es_dynamic_testing_result_search(md5)
 
         # Create report form
-        if md5_search_data is not None:
-            dynamic_report_form, classification_data_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms= create_dynamic_report_form(md5_search_data, dynamic_testing_result_data)
+        if cuckoo_search_data is not None:
+            dynamic_report_form, classification_data_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms= create_dynamic_report_form(cuckoo_search_data, dynamic_testing_result_data)
 
             ctx['report_form'] = dynamic_report_form
             ctx['classification_data_form'] = classification_data_form
