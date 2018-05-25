@@ -11,7 +11,6 @@ from .dynamic_anlysis import *
 from .create_form import *
 import sys,os, json
 
-from .mongodb.search import mongo_testing_result_search
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
 
@@ -56,12 +55,12 @@ def static_analysis(request,md5):
 
         ctx = {'status': 500}
 
-        md5_search_data = es_static_report_search(file_md5)
+        md5_search_data = es_static_testing_result_search(file_md5)
         if md5_search_data is not None:
             ctx['status'] = 200
         else:
             result_bc, result_mc = run_static_analysis(upload_file_obj)
-            index_static_testing_result(md5,result_bc,result_mc)
+            es_upload_static_testing_result(md5,result_bc,result_mc)
             ctx['status'] = 200
 
         return HttpResponse(ctx)
@@ -88,23 +87,24 @@ def dynamic_analysis(request,md5):
             run_dynamic_analysis(upload_file_obj)
             ctx['status'] = 200
 
-        run_dynamic_clasification(dy_test_md5)
-        mongo_testing_result_search(dy_test_md5)
+        result_bc, result_mc = run_dynamic_clasification(dy_test_md5)
+        es_upload_dynamic_testing_result(dy_test_md5,result_bc,result_mc)
 
         return HttpResponse(ctx)
 
 def static_report_view(request, md5):
     if request.method == "GET":
 
-        ctx = {'report_form': None, 'similar_report_forms' : None}
+        ctx = {'report_form': None, 'classification_data_form':None, 'similar_report_forms' : None}
 
         # Let's search from elasticsearch
-        md5_search_data = static_testing_result_search(md5)
+        static_testing_result_data = es_static_testing_result_search(md5)
 
         # Create report form
-        if md5_search_data is not None:
-            md5_search_result_form = create_static_report_form(md5_search_data)
-            ctx['report_form'] = md5_search_result_form
+        if static_testing_result_data is not None:
+            static_report_form, classfication_data_form = create_static_report_form(static_testing_result_data)
+            ctx['report_form'] = static_report_form
+            ctx['classification_data_form'] = classfication_data_form
         else:
             return HttpResponse("Abnormal approach")
 
@@ -128,22 +128,19 @@ def dynamic_report_view(request, md5):
 
         # Let's search from elasticsearch
         md5_search_data = es_dynamic_report_search(md5)
+        dynamic_testing_result_data = es_dynamic_testing_result_search(md5)
 
         # Create report form
         if md5_search_data is not None:
-            dynamic_report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms = create_dynamic_report_form(md5_search_data)
+            dynamic_report_form, classification_data_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms= create_dynamic_report_form(md5_search_data, dynamic_testing_result_data)
 
             ctx['report_form'] = dynamic_report_form
+            ctx['classification_data_form'] = classification_data_form
             ctx['signature_forms'] = signature_forms
             ctx['DLL_forms'] = DLL_forms
             ctx['connects_host_forms'] = connects_host_forms
             ctx['connects_ip_forms'] = connects_ip_forms
         else:
             return HttpResponse("Abnormal approach")
-
-        detected, result_bc, result_mc = mongo_testing_result_search(md5)
-        classification_data_form = create_classfication_data_form(detected, result_bc,result_mc)
-        ctx['classification_data_form'] = classification_data_form
-
 
     return render(request, 'dynamic_report.html',ctx)

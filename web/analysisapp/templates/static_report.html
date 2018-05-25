@@ -27,23 +27,20 @@
 
                     <div class="text_name">
                         <p><strong>파일 MD5 </strong></p>
-                        <p><strong>바이러스 유무</strong></p>
-                        <p><strong>바이러스 분석 결과</strong></p>
                         <p><strong>리포트 수집 날짜</strong></p>
                     </div>
 
                     <div class="text_data">
                         <p>{{ report_form.fields.md5.initial }}</p>
-                        <p>{{ report_form.fields.detected.initial }}</p>
-                        <p>{{ report_form.fields.label.initial }}</p>
                         <p>{{ report_form.fields.collected_date.initial }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Tags-->
- <div class="row">
+
+    {% if classification_data_form.fields.detected.initial == 1 %}
+    <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -53,14 +50,13 @@
                     <div class="panel-body-half">
                         <label id="virus-percent">바이러스 확률</label>
                         <div class="progress progress-bar-vertical">
-                            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow={{ report_form.fields.score.initial }} aria-valuemin="0" aria-valuemax="100">
-                                {{ report_form.fields.score.initial }}%
-                                <!--{{ report_form.fields.score.initial }}%-->
+                            <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow={{ classification_data_form.fields.result_bc.initial }} aria-valuemin="0" aria-valuemax="100">
+                                {{ classification_data_form.fields.result_bc.initial }}%
                             </div>
                         </div>
                     </div>
                     <div class="panel-body-half">
-                        <div id="canvas-holder" mc-data-set="200,100,400,500,150,300,400">
+                        <div id="canvas-holder" mc-data-set={{ classification_data_form.fields.result_mc.initial }}>
                             <canvas id="chart-area"></canvas>
                         </div>
                         <script src="{% static  '/js/chart-doughnut.js' %}"></script>
@@ -69,6 +65,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 
     {% if ssdeep_forms != 0 %}
     <div class="row">

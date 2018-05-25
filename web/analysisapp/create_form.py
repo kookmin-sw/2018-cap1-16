@@ -4,12 +4,14 @@ def create_static_report_form(search_data):
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['collected_date'].initial = search_data['collected_date']
-    return report_form
+    classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
+    return report_form, classfication_data_form
 
-def create_dynamic_report_form(search_data):
+def create_dynamic_report_form(search_data,testing_search_data):
+    print(testing_search_data)
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['target']['file']['md5']
-
+    report_form.fields['collected_date'].initial = testing_search_data['collected_date']
     signature_forms = list()
     try:
         for idx in range(len(search_data['signatures'])):
@@ -19,6 +21,8 @@ def create_dynamic_report_form(search_data):
             signature_forms.append(signature_form)
     except:
         signature_forms = None
+
+    classification_data_form = create_classfication_data_form(testing_search_data['detected'],testing_search_data['result_bc'],testing_search_data['result_mc'])
 
     DLL_forms = list()
     try:
@@ -47,7 +51,7 @@ def create_dynamic_report_form(search_data):
     except:
         connects_ip_forms = None
 
-    return report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
+    return report_form, classification_data_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
 
 def create_classfication_data_form(detected, result_bc, result_mc):
     classificationData = ClassificationDataForm()

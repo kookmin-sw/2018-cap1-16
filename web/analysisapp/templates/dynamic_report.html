@@ -25,15 +25,11 @@
 
                     <div class="text_name">
                         <p><strong>파일 MD5 </strong></p>
-                        <p><strong>바이러스 유무</strong></p>
-                        <p><strong>바이러스 분석 결과</strong></p>
                         <p><strong>리포트 수집 날짜</strong></p>
                     </div>
 
                     <div class="text_data">
                         <p>{{ report_form.fields.md5.initial }}</p>
-                        <p>{{ report_form.fields.detected.initial }}</p>
-                        <p>{{ report_form.fields.label.initial }}</p>
                         <p>{{ report_form.fields.collected_date.initial }}</p>
                     </div>
                 </div>
@@ -42,7 +38,7 @@
     </div>
 
 
-    {% if classification_data_form.fields.detected.initial == True %}
+    {% if classification_data_form.fields.detected.initial == 1 %}
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">

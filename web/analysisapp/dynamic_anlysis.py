@@ -1,7 +1,6 @@
 import os,sys, shutil, pickle, subprocess
 from django.conf import settings
 from .mongodb.search import mongo_acs_search
-from .mongodb.upload import upload_dynamic_testing_result
 
 # import cuckoo script to system path
 CUCKOO_SCRIPT_ROOT = os.path.join(os.path.join(settings.PROJECT_DIR,'cuckoo'),'scripts')
@@ -50,7 +49,6 @@ def run_dynamic_clasification(md5):
     # make 'run bc&mc test' command
     result_bc = testing_bc_dynamic.run(fh_acs_file_path)
     result_mc = testing_mc_dynamic.run(fh_acs_file_path)
-    upload_dynamic_testing_result(md5,result_bc,result_mc)
 
 
     #cmd_tensor_bc = 'python ' + TENSOR_ROOT + os.sep + 'testing_bc_dynamic.py ' + fh_acs_file_path
@@ -60,4 +58,6 @@ def run_dynamic_clasification(md5):
 
     # remove the temp file
     shutil.rmtree(acs_folder_path)
+
+    return result_bc,result_mc
 

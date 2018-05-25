@@ -20,18 +20,16 @@ def es_static_report_search(md5):
     else:
         return None
 
-def static_testing_result_search(md5):
-    print("test")
+def es_static_testing_result_search(md5):
     request_data = \
         {
             'query': {
                 "term": {
-                    "_id": md5
+                    "md5": md5
                 }
             }
         }
-    res = es.search(index=main_index, body=request_data)
-    print(res)
+    res = es.search(index=main_index,doc_type=type_static_testing, body=request_data)
     if res['hits']['total'] is not 0:
         return res['hits']['hits'][0]['_source']
     else:
@@ -50,6 +48,21 @@ def es_dynamic_report_search(md5):
         }
     res = es.search(index=cuckoo_index, body=request_data)
     #print (res['hits']['hits'][0]['_source'])
+    if res['hits']['total'] is not 0:
+        return res['hits']['hits'][0]['_source']
+    else:
+        return None
+
+def es_dynamic_testing_result_search(md5):
+    request_data = \
+        {
+            'query': {
+                "term": {
+                    "md5": md5
+                }
+            }
+        }
+    res = es.search(index=main_index,doc_type=type_dynamic_testing, body=request_data)
     if res['hits']['total'] is not 0:
         return res['hits']['hits'][0]['_source']
     else:

@@ -11,6 +11,9 @@ normal_json/
 sample_report/
 
 fh_acs/
+fh_fops/
+fops/
+idb/
 
 tensorflow_model/static_bc_model.ckpt*
 tensorflow_model/static_mc_model.ckpt*

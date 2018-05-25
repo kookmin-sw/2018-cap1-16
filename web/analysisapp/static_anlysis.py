@@ -1,6 +1,5 @@
 import os,json,sys
 from django.conf import settings
-from .es.upload import index_static_testing_result
 
 # import tensorflow script to system path
 TENSOR_ROOT = os.path.join(settings.PROJECT_DIR, 'tensorflow_model')
