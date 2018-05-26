@@ -1,13 +1,11 @@
 import os,json,sys
 from django.conf import settings
 
-# import tensorflow script to system path
-TENSOR_ROOT = os.path.join(settings.PROJECT_DIR, 'tensorflow_model')
-sys.path.append(TENSOR_ROOT)
-import testing_bc_static
-import testing_mc_static
+from tensorflow_model import testing_bc_static
+from tensorflow_model import testing_mc_static
+#from pefile_viewer import peview
 
-def run_static_analysis(upload_file_obj):
+def run_static_testing(upload_file_obj):
 
     IDA_ROOT = os.path.join(settings.PROJECT_DIR,'ida')
     FEATURE_ROOT = os.path.join(settings.PROJECT_DIR,'make_feature')
@@ -29,3 +27,11 @@ def run_static_analysis(upload_file_obj):
     result_mc = testing_mc_static.run(fh_fops_file_path)
 
     return result_bc, result_mc
+
+
+def run_pefile_viewer(upload_file_obj):
+    upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
+
+    peviewer = peview.Peview(upload_file_path)
+
+    print(peviewer.get_hash())

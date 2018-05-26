@@ -59,9 +59,10 @@ def static_analysis(request,md5):
         if md5_search_data is not None:
             ctx['status'] = 200
         else:
-            result_bc, result_mc = run_static_analysis(upload_file_obj)
+            result_bc, result_mc = run_static_testing(upload_file_obj)
             es_upload_static_testing_result(md5,result_bc,result_mc)
-            time.sleep(0.2)
+            #run_pefile_viewer(upload_file_obj)
+            time.sleep(0.5)
             ctx['status'] = 200
 
         return HttpResponse(ctx)
@@ -90,7 +91,7 @@ def dynamic_analysis(request,md5):
 
         result_bc, result_mc = run_dynamic_clasification(dy_test_md5)
         es_upload_dynamic_testing_result(dy_test_md5,result_bc,result_mc)
-        time.sleep(0.2)
+        time.sleep(0.5)
 
         return HttpResponse(ctx)
 

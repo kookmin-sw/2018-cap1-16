@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import pickle
 
-from settings import *
+from tensorflow_model.settings import *
 
 # for using tensorflow as hyper parameter
 INPUT_SIZE = 12288
