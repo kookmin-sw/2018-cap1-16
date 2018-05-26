@@ -1,4 +1,4 @@
-import pefile, hashlib, peutils, os, datetime
+import pefile, hashlib, peutils, os, datetime, string
 
 class Peview :
     __BLOCK_SIZE = 8192
@@ -65,3 +65,39 @@ class Peview :
         except:
             tsdate = str(tstamp) + " [Invalid date]"
         return tsdate
+
+    def get_resources_info(self):
+        res_array = []
+        try:
+            for resource_type in self.__pe.DIRECTORY_ENTRY_RESOURCE.entries:
+                if resource_type.name is not None:
+                    name = "%s" % resource_type.name
+                else:
+                    name = "%s" % pefile.RESOURCE_TYPE.get(resource_type.struct.Id)
+
+                if name == None:
+                    name = "%d" % resource_type.struct.Id
+
+                if hasattr(resource_type, 'directory'):
+                    for resource_id in resource_type.directory.entries:
+                        if hasattr(resource_id, 'directory'):
+                            for resource_lang in resource_id.directory.entries:
+                                try:
+                                    data = self.__pe.get_data(resource_lang.data.struct.OffsetToData,
+                                                       resource_lang.data.struct.Size)
+                                except:
+                                    pass
+                                lang = pefile.LANG.get(resource_lang.data.lang, '*unknown*')
+                                sublang = pefile.get_sublang_name_for_lang(resource_lang.data.lang,
+                                                                           resource_lang.data.sublang)
+
+                                data = filter(lambda x: x in string.printable, data)
+
+                # print name, data, lang, sublang, hex(resource_lang.data.struct.OffsetToData), resource_lang.data.struct.Size
+                res_array.append({"name": name, "data": data, "offset": hex(resource_lang.data.struct.OffsetToData),
+                                  "size": resource_lang.data.struct.Size, "language": lang, "sublanguage": sublang})
+        except:
+            pass
+
+        return res_array
+
