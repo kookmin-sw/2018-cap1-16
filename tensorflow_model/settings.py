@@ -2,19 +2,19 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 정적 이진 Check Point 위치
-STATIC_BC_CHECK_POINT = os.path.join(BASE_DIR,'./static_bc_model.ckpt')
+STATIC_BC_CHECK_POINT = os.path.join(BASE_DIR,'static_bc_model.ckpt')
 
 # 정적 멀티 Check Point 위치
-STATIC_MC_CHECK_POINT = os.path.join(BASE_DIR,'./static_mc_model.ckpt')
+STATIC_MC_CHECK_POINT = os.path.join(BASE_DIR,'static_mc_model.ckpt')
 
 # 정적 분석 학습 파일 위치
 TRAIN_STATIC_DATA_PATH = os.path.normpath(os.path.abspath('./train_static_data'))
 
 # 동적 이진 Check Point 위치
-DYNAMIC_BC_CHECK_POINT = os.path.join(BASE_DIR,'./dynamic_bc_model.ckpt')
+DYNAMIC_BC_CHECK_POINT = os.path.join(BASE_DIR,'dynamic_model.ckpt')
 
 # 동적 멀티 Check Point 위치
-DYNAMIC_MC_CHECK_POINT = os.path.join(BASE_DIR,'./dynamic_mc_model.ckpt')
+DYNAMIC_MC_CHECK_POINT = os.path.join(BASE_DIR,'dynamic_mc_model.ckpt')
 
 # 동적 분석 학습 파일 위치
 TRAIN_DYNAMIC_DATA_PATH = os.path.normpath(os.path.abspath('./train_dynamic_data'))

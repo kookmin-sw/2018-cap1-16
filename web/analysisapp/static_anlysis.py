@@ -22,8 +22,8 @@ def run_static_analysis(upload_file_obj):
 
     fh_fops_folder_path = os.path.join(FEATURE_ROOT,'fh_fops')
     fh_fops_file_path = os.path.join(fh_fops_folder_path,file_name+'.fhfops')
-    cmd_run_ida_fh_fops = 'python ' + FEATURE_ROOT + os.sep + 'make_fh_fops.py ' + fops_file_path
-    os.system(cmd_run_ida_fh_fops)
+    cmd_fh_fops = 'python ' + FEATURE_ROOT + os.sep + 'make_fh_fops.py ' + fops_file_path
+    os.system(cmd_fh_fops)
 
     result_bc = testing_bc_static.run(fh_fops_file_path)
     result_mc = testing_mc_static.run(fh_fops_file_path)

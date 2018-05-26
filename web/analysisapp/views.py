@@ -61,6 +61,7 @@ def static_analysis(request,md5):
         else:
             result_bc, result_mc = run_static_analysis(upload_file_obj)
             es_upload_static_testing_result(md5,result_bc,result_mc)
+            time.sleep(0.2)
             ctx['status'] = 200
 
         return HttpResponse(ctx)
@@ -89,12 +90,12 @@ def dynamic_analysis(request,md5):
 
         result_bc, result_mc = run_dynamic_clasification(dy_test_md5)
         es_upload_dynamic_testing_result(dy_test_md5,result_bc,result_mc)
+        time.sleep(0.2)
 
         return HttpResponse(ctx)
 
 def static_report_view(request, md5):
     if request.method == "GET":
-        time.sleep(0.05)
         ctx = {'report_form': None, 'classification_data_form':None, 'similar_report_forms' : None}
 
         # Let's search from elasticsearch
