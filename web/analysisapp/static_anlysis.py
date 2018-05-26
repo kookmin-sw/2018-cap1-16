@@ -43,6 +43,15 @@ def run_pefile_viewer(upload_file_obj):
     hash_report['imp_hash'] = hashes[3]
     total_report['hash'] = hash_report
 
+    # packer_info
+    packer_report = dict()
+    packer_info = peviewer.get_packer_info()
+    if not len(packer_info) == 0:
+        for i, packer in enumerate(packer_info):
+            packer_report[str(i)] = packer
+        total_report['packer_info'] = packer_report
+    else:
+        total_report['packer_info'] = 'None'
 
 
     return total_report
