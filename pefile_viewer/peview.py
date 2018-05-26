@@ -101,5 +101,36 @@ class Peview :
                                   "size": resource_lang.data.struct.Size, "language": lang, "sublanguage": sublang})
         except:
             pass
-
         return res_array
+
+    def get_import_function(self):
+        array = []
+        library = []
+        libdict = {}
+        try:
+            for entry in self.__pe.DIRECTORY_ENTRY_IMPORT:
+                dll = entry.dll
+                for imp in entry.imports:
+                    address = hex(imp.address)
+                    function = imp.name
+
+                    if dll not in library:
+                        library.append(dll)
+                    array.append({"library": dll, "address": address, "function": function})
+
+            for key in library:
+                libdict[key] = []
+
+            for lib in library:
+                for item in array:
+                    if lib == item['library']:
+                        libdict[lib].append({"address": item['address'], "function": item['function']})
+        except:
+            pass
+
+        return libdict
+
+
+if __name__ == '__main__' :
+    peview = Peview("notepad.exe")
+    print(peview.get_import_function())
