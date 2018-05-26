@@ -34,6 +34,9 @@ class Peview :
                     array.append(item[0])
         return array
 
+    def get_section_number(self):
+        return self.__pe.FILE_HEADER.NumberOfSections
+
     def get_sections_info(self) :
         array = []
         for section in self.__pe.sections:
@@ -100,4 +103,3 @@ class Peview :
             pass
 
         return res_array
-
