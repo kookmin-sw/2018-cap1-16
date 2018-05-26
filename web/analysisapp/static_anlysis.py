@@ -90,5 +90,24 @@ def run_pefile_viewer(upload_file_obj):
     else:
         total_report['import_function'] = "None"
 
+    # mutex_info
+    mutex_report = dict()
+    mutex_info = peviewer.get_mutex_info()
+    if not len(mutex_info) == 0:
+        for i, mutex in enumerate(mutex_info):
+            mutex_report[str(i)]=mutex
+        total_report['mutex_info'] = mutex_report
+    else:
+        total_report['mutex_info'] = "None"
+
+    # api_alert_info
+    api_alert_report = dict()
+    api_alert_info = peviewer.get_api_alert_info()
+    if not len(api_alert_info) == 0:
+        for i, api_alert in enumerate(api_alert_info):
+            api_alert_report[str(i)] = api_alert
+        total_report['api_alert_info'] = api_alert_report
+    else:
+        total_report['api_alert_info'] = 'None'
 
     return total_report
