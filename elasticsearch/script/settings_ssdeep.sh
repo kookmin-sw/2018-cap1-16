@@ -4,7 +4,7 @@
 ip="203.246.112.137"
 port="9200"
 
-curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/ssdeep?pretty" -d '
+curl -XPUT -H "Content-Type: application/json" "$ip:$port/ssdeep?pretty" -d '
 {
 	"settings": {
 		"analysis" : {
@@ -35,7 +35,7 @@ curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/ssdeep?pretty" -d 
 				},
 				"chunk_size" :{
 					"type" : "integer"
-				}
+				},
 				"ssdeep_hash" :{
 					"type" : "text"
 				}
