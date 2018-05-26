@@ -97,10 +97,13 @@ class Peview :
                                 sublang = pefile.get_sublang_name_for_lang(resource_lang.data.lang,
                                                                            resource_lang.data.sublang)
 
-                                data = filter(lambda x: x in string.printable, data)
+                                result = ""
+                                for each in data :
+                                    if chr(each) in string.printable :
+                                        result += chr(each)
 
                 # print name, data, lang, sublang, hex(resource_lang.data.struct.OffsetToData), resource_lang.data.struct.Size
-                res_array.append({"name": name, "data": data, "offset": hex(resource_lang.data.struct.OffsetToData),
+                res_array.append({"name": name, "data": result, "offset": hex(resource_lang.data.struct.OffsetToData),
                                   "size": resource_lang.data.struct.Size, "language": lang, "sublanguage": sublang})
         except:
             pass
@@ -204,7 +207,3 @@ class Peview :
                     trk.append(trick)
 
         return trk
-
-pv = Peview("java.exe")
-
-print(pv.get_sections_info())
