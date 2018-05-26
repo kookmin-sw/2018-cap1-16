@@ -196,12 +196,11 @@ class Peview :
         with open(self.__file_path, "rb") as f:
             buf = f.read()
             for string in VM_Str:
-                match = re.findall(VM_Str[string], buf, re.IGNORECASE | re.MULTILINE)
-                if match:
+                if VM_Str[string].encode() in buf :
                     trk.append(string)
 
             for trick in VM_Sign:
-                if buf.find(VM_Sign[trick][::-1]) > -1:
+                if VM_Sign[trick][::-1].encode() in buf :
                     trk.append(trick)
 
         return trk
