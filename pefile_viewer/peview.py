@@ -74,6 +74,7 @@ class Peview :
 
     def get_resources_info(self):
         res_array = []
+        printable = string.printable
         try:
             for resource_type in self.__pe.DIRECTORY_ENTRY_RESOURCE.entries:
                 if resource_type.name is not None:
@@ -98,8 +99,9 @@ class Peview :
                                                                            resource_lang.data.sublang)
 
                                 result = ""
+
                                 for each in data :
-                                    if chr(each) in string.printable :
+                                    if chr(each) in printable :
                                         result += chr(each)
 
                 # print name, data, lang, sublang, hex(resource_lang.data.struct.OffsetToData), resource_lang.data.struct.Size
@@ -207,3 +209,7 @@ class Peview :
                     trk.append(trick)
 
         return trk
+
+pv = Peview("java.exe")
+
+print(pv.get_resources_info())
