@@ -53,5 +53,20 @@ def run_pefile_viewer(upload_file_obj):
     else:
         total_report['packer_info'] = 'None'
 
+    # section_number
+    section_num = peviewer.get_section_number()
+    total_report['section_num'] = section_num
+
+    # section_nfo
+    section_report = dict()
+    section_info = peviewer.get_sections_info()
+    if not len(section_info) == 0:
+        for i, section in enumerate(section_info):
+            section_report[str(i)] = section
+        total_report['section_info'] = section_report
+    else:
+        total_report['section_info'] = 'None'
+
+
 
     return total_report
