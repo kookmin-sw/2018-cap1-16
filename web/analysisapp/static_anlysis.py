@@ -110,4 +110,24 @@ def run_pefile_viewer(upload_file_obj):
     else:
         total_report['api_alert_info'] = 'None'
 
+    # anti_debug
+    anti_debug_report = dict()
+    anti_debug_info = peviewer.get_anti_debug()
+    if not len(anti_debug_info) == 0:
+        for i, anti_debug in enumerate(anti_debug_info):
+            anti_debug_report[str(i)] = anti_debug
+        total_report['anti_debug'] = anti_debug_report
+    else:
+        total_report['anti_debug'] = 'None'
+
+    # anti_vm
+    anti_vm_report = dict()
+    anti_vm_info = peviewer.get_anti_vm()
+    if not len(anti_vm_info) == 0:
+        for i, anti_vm in anti_vm_info:
+            anti_vm_report[str(i)] = anti_vm
+        total_report['anti_vm'] = anti_vm_report
+    else:
+        total_report['anti_vm'] = 'None'
+
     return total_report
