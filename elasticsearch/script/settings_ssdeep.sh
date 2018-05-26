@@ -25,6 +25,9 @@ curl -XPUT -H "Content-Type: application/json" "$ip:$port/ssdeep?pretty" -d '
 	"mappings" : {
 		"analyzed_report" :{
 			"properties":{
+			    "md5" : {
+			        "type" : "text",
+			    },
 				"chunk":{
 					"type" : "text",
 					"analyzer" : "ssdeep_analyzer"

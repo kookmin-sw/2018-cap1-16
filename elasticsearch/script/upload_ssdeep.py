@@ -6,10 +6,10 @@ import json,os
 
 es = Elasticsearch([{'host':IP,'port':PORT}])
 
-INDEX = 'seclab'
-DOC_TYPE = 'analyzed_report'
+INDEX = 'ssdeep'
+DOC_TYPE = 'ssdeep_report'
 
-DIRECTORY_PATH = '/home/seclab/sample_report/'
+DIRECTORY_PATH = '/home/seclab/ssdeep_report/'
 
 def index_report(path):
     files = os.listdir(path)
