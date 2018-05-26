@@ -209,7 +209,3 @@ class Peview :
                     trk.append(trick)
 
         return trk
-
-pv = Peview("java.exe")
-
-print(pv.get_resources_info())

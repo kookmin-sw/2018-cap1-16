@@ -7,6 +7,10 @@ def create_static_report_form(search_data):
     classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
     return report_form, classfication_data_form
 
+def create_peviewer_report_form(search_data):
+    peviewer_report_form = ReportForm()
+    return peviewer_report_form
+
 def create_dynamic_report_form(search_data,testing_search_data):
     print(testing_search_data)
     report_form = ReportForm()

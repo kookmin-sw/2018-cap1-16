@@ -68,6 +68,22 @@ def es_dynamic_testing_result_search(md5):
     else:
         return None
 
+def es_search_peviewer_result(md5):
+    request_data = \
+        {
+            'query': {
+                "term": {
+                    "_id": md5
+                }
+            }
+        }
+    res = es.search(index=main_index,doc_type=type_peviewer_result, body=request_data)
+    if res['hits']['total'] is not 0:
+        return res['hits']['hits'][0]['_source']
+    else:
+        return None
+
+
 def es_ssdeep_search(ssdeep):
 
     ssdeep_data = ssdeep.split(":")
