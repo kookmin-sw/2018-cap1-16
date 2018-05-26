@@ -58,7 +58,7 @@ class Peview :
             vs = hex(section.Misc_VirtualSize)
             srd = section.SizeOfRawData
 
-            array.append({"name": scn, "hash_md5": md5, "hash_sha1": sha1, "suspicious": spc, "virtual_address": va,
+            array.append({"name": scn.decode(), "hash_md5": md5, "hash_sha1": sha1, "suspicious": spc, "virtual_address": va,
                           "virtual_size": vs, "size_raw_data": srd})
 
         return array
@@ -204,3 +204,7 @@ class Peview :
                     trk.append(trick)
 
         return trk
+
+pv = Peview("java.exe")
+
+print(pv.get_sections_info())
