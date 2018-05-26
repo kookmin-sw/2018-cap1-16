@@ -3,6 +3,8 @@ import pefile, hashlib, peutils, os, datetime, string, json
 class Peview :
     __BLOCK_SIZE = 8192
     __USER_DB = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'signatures', 'userdb.txt')
+    with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'signatures', 'stringsmatch.json'), 'r') as f :
+        __STRING_MATCH = json.load(f)
 
     def __init__(self, file_path) :
         self.__file_path = file_path
@@ -131,11 +133,28 @@ class Peview :
 
         return libdict
 
-    def get_api_info(self):
-        api_found = []
+    def get_mutex_info(self):
+        mutexs = self.__STRING_MATCH['mutex']
+        array = []
         if hasattr(self.__pe, 'DIRECTORY_ENTRY_IMPORT'):
             for lib in self.__pe.DIRECTORY_ENTRY_IMPORT:
-                for imp in lib.imports:
-                    api_found.append(imp.name.decode())
+                for mutex in mutexs :
+                    if mutex :
+                        for imp in lib.imports:
+                            if imp.name.decode().startswith(mutex) :
+                                array.append(imp.name.decode())
 
-        return sorted(set(api_found))
+        return sorted(set(array))
+
+    def get_api_alert_info(self):
+        alerts = self.__STRING_MATCH['apialert']
+        array = []
+        if hasattr(self.__pe, 'DIRECTORY_ENTRY_IMPORT'):
+            for lib in self.__pe.DIRECTORY_ENTRY_IMPORT:
+                for alert in alerts:
+                    if alert:  # remove 'null'
+                        for imp in lib.imports:
+                            if imp.name.decode().startswith(alert):
+                                array.append(imp.name.decode())
+
+        return sorted(set(array))
