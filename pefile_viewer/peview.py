@@ -1,4 +1,4 @@
-import pefile, hashlib, peutils, os, datetime, string
+import pefile, hashlib, peutils, os, datetime, string, json
 
 class Peview :
     __BLOCK_SIZE = 8192
@@ -7,6 +7,7 @@ class Peview :
     def __init__(self, file_path) :
         self.__file_path = file_path
         self.__pe = pefile.PE(file_path)
+
     def get_hash(self):
         with open(self.__file_path, 'rb') as f :
             md5 = hashlib.md5()
@@ -130,7 +131,11 @@ class Peview :
 
         return libdict
 
+    def get_api_info(self):
+        api_found = []
+        if hasattr(self.__pe, 'DIRECTORY_ENTRY_IMPORT'):
+            for lib in self.__pe.DIRECTORY_ENTRY_IMPORT:
+                for imp in lib.imports:
+                    api_found.append(imp.name.decode())
 
-if __name__ == '__main__' :
-    peview = Peview("notepad.exe")
-    print(peview.get_import_function())
+        return sorted(set(api_found))
