@@ -1,4 +1,4 @@
-import pefile, hashlib, peutils, os
+import pefile, hashlib, peutils, os, datetime
 
 class Peview :
     __BLOCK_SIZE = 8192
@@ -57,3 +57,11 @@ class Peview :
 
         return array
 
+    def get_compile_time(self) :
+        # timestamp
+        tstamp = self.__pe.FILE_HEADER.TimeDateStamp
+        try:
+            tsdate = datetime.datetime.fromtimestamp(tstamp)
+        except:
+            tsdate = str(tstamp) + " [Invalid date]"
+        return tsdate
