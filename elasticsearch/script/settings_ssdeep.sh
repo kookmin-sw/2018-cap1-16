@@ -4,7 +4,7 @@
 ip="203.246.112.137"
 port="9200"
 
-curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/seclab?pretty" -d '
+curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/ssdeep?pretty" -d '
 {
 	"settings": {
 		"analysis" : {
@@ -25,16 +25,19 @@ curl -XPUT -H "Content-Type: application/json" "'$ip':'$port'/seclab?pretty" -d 
 	"mappings" : {
 		"analyzed_report" :{
 			"properties":{
-				"SSDeep_chunk":{
+				"chunk":{
 					"type" : "text",
 					"analyzer" : "ssdeep_analyzer"
 				},
-				"SSDeep_double_chunk":{
+				"double_chunk":{
 					"type" : "text",
 					"analyzer" : "ssdeep_analyzer"
 				},
-				"SSDeep_chunk_size" :{
+				"chunk_size" :{
 					"type" : "integer"
+				}
+				"ssdeep_hash" :{
+					"type" : "text"
 				}
 			}
 		}

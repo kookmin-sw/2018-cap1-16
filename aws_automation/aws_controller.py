@@ -85,6 +85,7 @@ def run() :
 
         ec2 = boto3.client('ec2', region_name='ap-northeast-2', aws_access_key_id='', aws_secret_access_key='')
         instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
+        instances += ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances']
         start_ec2(ec2, instances)
         stop_ec2(ec2, instances)
         unzip_report()
