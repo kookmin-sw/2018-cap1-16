@@ -58,7 +58,7 @@ class Peview :
             vs = hex(section.Misc_VirtualSize)
             srd = section.SizeOfRawData
 
-            array.append({"name": scn, "hash_md5": md5, "hash_sha1": sha1, "suspicious": spc, "virtual_address": va,
+            array.append({"name": scn.decode(), "hash_md5": md5, "hash_sha1": sha1, "suspicious": spc, "virtual_address": va,
                           "virtual_size": vs, "size_raw_data": srd})
 
         return array
@@ -74,6 +74,7 @@ class Peview :
 
     def get_resources_info(self):
         res_array = []
+        printable = string.printable
         try:
             for resource_type in self.__pe.DIRECTORY_ENTRY_RESOURCE.entries:
                 if resource_type.name is not None:
@@ -97,10 +98,14 @@ class Peview :
                                 sublang = pefile.get_sublang_name_for_lang(resource_lang.data.lang,
                                                                            resource_lang.data.sublang)
 
-                                data = filter(lambda x: x in string.printable, data)
+                                result = ""
+
+                                for each in data :
+                                    if chr(each) in printable :
+                                        result += chr(each)
 
                 # print name, data, lang, sublang, hex(resource_lang.data.struct.OffsetToData), resource_lang.data.struct.Size
-                res_array.append({"name": name, "data": data, "offset": hex(resource_lang.data.struct.OffsetToData),
+                res_array.append({"name": name, "data": result, "offset": hex(resource_lang.data.struct.OffsetToData),
                                   "size": resource_lang.data.struct.Size, "language": lang, "sublanguage": sublang})
         except:
             pass
@@ -204,3 +209,7 @@ class Peview :
                     trk.append(trick)
 
         return trk
+
+pv = Peview("java.exe")
+
+print(pv.get_resources_info())
