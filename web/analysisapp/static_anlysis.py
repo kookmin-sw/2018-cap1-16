@@ -3,7 +3,7 @@ from django.conf import settings
 
 from tensorflow_model import testing_bc_static
 from tensorflow_model import testing_mc_static
-#from pefile_viewer import peview
+from pefile_viewer import peview
 
 def run_static_testing(upload_file_obj):
 
@@ -31,7 +31,18 @@ def run_static_testing(upload_file_obj):
 
 def run_pefile_viewer(upload_file_obj):
     upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
-
     peviewer = peview.Peview(upload_file_path)
+    total_report = dict()
 
-    print(peviewer.get_hash())
+    # hash_info
+    hash_report = dict()
+    hashes = peviewer.get_hash()
+    hash_report['md5'] = hashes[0]
+    hash_report['sha1'] = hashes[1]
+    hash_report['sha256'] = hashes[2]
+    hash_report['imp_hash'] = hashes[3]
+    total_report['hash'] = hash_report
+
+
+
+    return total_report
