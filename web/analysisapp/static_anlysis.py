@@ -67,6 +67,28 @@ def run_pefile_viewer(upload_file_obj):
     else:
         total_report['section_info'] = 'None'
 
+    # compile_time
+    total_report['compile_time'] = peviewer.get_compile_time()
+
+    # resource_info
+    resource_report = dict()
+    resource_info = peviewer.get_resources_info()
+    if not len(resource_info) == 0:
+        for i, resource in enumerate(resource_info):
+            resource_report[str(i)] = resource
+        total_report['resource_info'] = resource_report
+    else:
+        total_report['resource_info'] = 'None'
+
+    # import_function
+    import_func_report = dict()
+    import_func_info = peviewer.get_import_function()
+    if not len(import_func_info) == 0:
+        for i, import_func in enumerate(import_func_info):
+            import_func_report[str(i)]=import_func.decode('ascii')
+        total_report['import_function'] = import_func_report
+    else:
+        total_report['import_function'] = "None"
 
 
     return total_report
