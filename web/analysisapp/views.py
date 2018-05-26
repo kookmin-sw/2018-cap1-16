@@ -61,7 +61,8 @@ def static_analysis(request,md5):
         else:
             result_bc, result_mc = run_static_testing(upload_file_obj)
             #es_upload_static_testing_result(md5,result_bc,result_mc)
-            run_pefile_viewer(upload_file_obj)
+            result_peviewer = run_pefile_viewer(upload_file_obj)
+            es_upload_peviewer_result(md5,result_peviewer)
             time.sleep(0.5)
             ctx['status'] = 200
 

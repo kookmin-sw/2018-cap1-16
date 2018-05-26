@@ -27,3 +27,8 @@ def es_upload_dynamic_testing_result(md5,result_bc,result_mc):
     doc['collected_date'] = datetime.datetime.now()
 
     res = es.index(index=main_index, doc_type=type_dynamic_testing,id = md5,body=doc)
+
+def es_upload_peviewer_result(md5,peviewer_result):
+    es = Elasticsearch([{'host': IP, 'port': Port}])
+
+    res = es.index(index=main_index, doc_type=peviewer_result, id = md5, body= peviewer_result)
