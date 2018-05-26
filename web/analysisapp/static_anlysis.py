@@ -62,6 +62,7 @@ def run_pefile_viewer(upload_file_obj):
     section_info = peviewer.get_sections_info()
     if not len(section_info) == 0:
         for i, section in enumerate(section_info):
+            print(section)
             section_report[str(i)] = section
         total_report['section_info'] = section_report
     else:
