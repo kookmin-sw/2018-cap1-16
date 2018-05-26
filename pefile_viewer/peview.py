@@ -158,3 +158,16 @@ class Peview :
                                 array.append(imp.name.decode())
 
         return sorted(set(array))
+
+    def get_anti_debug(self) :
+        antidbgs =  self.__STRING_MATCH['antidbg']
+        array = []
+        if hasattr(self.__pe, 'DIRECTORY_ENTRY_IMPORT'):
+            for lib in self.__pe.DIRECTORY_ENTRY_IMPORT:
+                for imp in lib.imports:
+                    for antidbg in antidbgs:
+                        if antidbg:
+                            if imp.name.decode().startswith(antidbg):
+                                array.append(imp.name.decode())
+        return sorted(set(array))
+
