@@ -133,6 +133,27 @@
 		"WSASocket",
 		"WSAStartup",
 		"ZwQueryInformation"
-	]
+	],"antidbg": [
+		"CheckRemoteDebugger",
+		"DebugActiveProcess",
+		"FindWindow",
+		"GetLastError",
+		"GetWindowThreadProcessId",
+		"IsDebugged",
+		"IsDebuggerPresent",
+		"IsProcessorFeaturePresent",
+		"NtCreateThreadEx",
+		"NtGlobalFlags",
+		"NtSetInformationThread",
+		"OutputDebugString",
+		"pbIsPresent",
+		"Process32First",
+		"Process32Next",
+		"RaiseException",
+		"TerminateProcess",
+		"ThreadHideFromDebugger",
+		"UnhandledExceptionFilter",
+		"ZwQueryInformation"
+	],
 }
 
