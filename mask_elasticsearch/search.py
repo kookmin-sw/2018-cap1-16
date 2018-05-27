@@ -83,25 +83,23 @@ def es_search_peviewer_result(md5):
     else:
         return None
 
-
-def es_ssdeep_search(ssdeep):
-
-    ssdeep_data = ssdeep.split(":")
-    ssdeep_size = int(ssdeep_data[0])
-    ssdeep_chunk = ssdeep_data[1]
-    ssdeep_double_chunk = ssdeep_data[2]
-
+def es_search_similar_file(ssdeep):
+    ssdeep = ssdeep.split(":")
+    ssdeep_size = int(ssdeep[0])
+    ssdeep_chunk = ssdeep[1]
+    ssdeep_double_chunk = ssdeep[2]
+    print(ssdeep_size,ssdeep_chunk)
     request_data = \
         {
             'query': {
                 'bool': {
                     'must': [{
-                        'term': {'SSDeep_chunk_size': ssdeep_size},
+                        'term': {'chunk_size': ssdeep_size},
                     }, {
                         'bool': {
                             'should': {
                                 'match': {
-                                    'SSDeep_chunk': {
+                                    'chunk': {
                                         'query': ssdeep_chunk
                                     }
                                 }
@@ -111,8 +109,8 @@ def es_ssdeep_search(ssdeep):
                 }
             }
         }
-    res = es.search(index=main_index, body=request_data)
-    # sys.stderr.write(str(res['hits']['hits']))
+    res = es.search(index=ssdeep_index,doc_type=type_ssdeep, body=request_data)
+    print(res['hits']['hits'])
     if res['hits']['total'] is not 0:
         return res['hits']['hits']
     else:

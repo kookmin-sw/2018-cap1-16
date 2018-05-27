@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .md5 import get_hash_str
-from elasticsearch.django.search import *
-from elasticsearch.django.upload import *
+from mask_elasticsearch.search import *
+from mask_elasticsearch.upload import *
 from .static_anlysis import *
 from .dynamic_anlysis import *
 from .create_form import *
-import json,time
+import json,time, ssdeep
 
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'
@@ -23,9 +23,11 @@ def upload(request):
             analysis_type = 1
 
         upload_file = request.FILES['upload_file']
-        upload_file_md5 = get_hash_str(upload_file)
+        upload_file_buf = upload_file.read()
+        upload_file_md5 = get_hash_str(upload_file_buf)
+        upload_file_ssdeep = ssdeep.hash(upload_file_buf)
 
-        UploadFile_obj = UploadFile(id=upload_file_md5,upload_file=upload_file)
+        UploadFile_obj = UploadFile(id=upload_file_md5,upload_file=upload_file,ssdeep=upload_file_ssdeep)
         UploadFile_obj.save()
 
         response = {'status':200,'pk':upload_file_md5,'analysis_type':analysis_type}
@@ -106,9 +108,12 @@ def static_report_view(request, md5):
                'peviewer_api_alert_info_forms' : None,
                'similar_report_forms' : None}
 
-        # Let's search from elasticsearch
+        upload_file_ssdeep = UploadFile.objects.get(pk=md5).ssdeep
+
+        # Let's search from mask_elasticsearch
         static_testing_result_data = es_static_testing_result_search(md5)
         peviewer_search_data = es_search_peviewer_result(md5)
+        es_search_similar_file(upload_file_ssdeep)
 
         # Create report form
         if static_testing_result_data is not None:
@@ -147,7 +152,7 @@ def dynamic_report_view(request, md5):
 
         ctx = {'report_form': None,'classification_data_form':None , 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
 
-        # Let's search from elasticsearch
+        # Let's search from mask_elasticsearch
         cuckoo_search_data = es_dynamic_report_search(md5)
         dynamic_testing_result_data = es_dynamic_testing_result_search(md5)
 
