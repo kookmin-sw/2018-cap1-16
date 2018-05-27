@@ -2,15 +2,10 @@ import os,sys, shutil, pickle, subprocess
 from django.conf import settings
 from .mongodb.search import mongo_acs_search
 
-# import cuckoo script to system path
-CUCKOO_SCRIPT_ROOT = os.path.join(os.path.join(settings.PROJECT_DIR,'cuckoo'),'scripts')
-sys.path.append(CUCKOO_SCRIPT_ROOT)
-# import tensorflow script to system path
-TENSOR_ROOT = os.path.join(settings.PROJECT_DIR, 'tensorflow_model')
-sys.path.append(TENSOR_ROOT)
-import upload_file
-import testing_bc_dynamic
-import testing_mc_dynamic
+
+from cuckoo.scripts import upload_file
+from tensorflow_model import testing_bc_dynamic
+from tensorflow_model import testing_mc_dynamic
 
 # run dynamic analysis
 def run_dynamic_analysis(upload_file_obj):

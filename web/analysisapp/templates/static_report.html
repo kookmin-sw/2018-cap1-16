@@ -73,6 +73,78 @@
     </div>
     {% endif %}
 
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>PE 파일 정보</span>
+                </div>
+                <div class="panel-body">
+
+                    {% if peviewer_basic_info_form != None %}
+                    <label class="peviewer-head-label">Basic Info</label>
+                    <div class="peviewer-li">MD5: {{ peviewer_basic_info_form.fields.md5.initial }}</div>
+                    <div class="peviewer-li">SHA-1: {{ peviewer_basic_info_form.fields.sha1.initial }}</div>
+                    <div class="peviewer-li">SHA-256: {{ peviewer_basic_info_form.fields.sha256.initial }}</div>
+                    <div class="peviewer-li">Imp-Hash: {{ peviewer_basic_info_form.fields.imp_hash.initial }}</div>
+                    {% endif %}
+
+                    {% if peviewer_packer_info_forms != None %}
+                    <label class="peviewer-head-label">Packer Info</label>
+                    {% for packer_info_form in peviewer_packer_info_forms %}
+                        <div class="peviewer-li"> &bull; {{ packer_info_form.fields.name.initial }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if peviewer_section_forms != None %}
+                    <label class="peviewer-head-label">Section Info</label>
+                    <div class="peviewer-section-table">
+                        <div class="peviewer-section-thead">
+                            <div class="peviewer-section-tr">
+                                <div class="peviewer-section-th"><strong>Name</strong></div>
+                                <div class="peviewer-section-th"><strong>Virtual Address</strong></div>
+                                <div class="peviewer-section-th"><strong>Virtual Size</strong></div>
+                                <div class="peviewer-section-th"><strong>Raw Data Size</strong></div>
+                                <div class="peviewer-section-th"><strong>Suspicious</strong></div>
+                                <div class="peviewer-section-th"><strong>MD5</strong></div>
+                            </div>
+                        </div>
+                        <div class="peviewer-section-tbody">
+                            {% for peviwer_section_form in peviewer_section_forms %}
+                            <div class="peviewer-section-tr">
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.name.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.virtual_address.initial }} </div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.virtual_size.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.size_raw_data.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.suspicious.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.hash_md5.initial }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if peviewer_import_function_forms != None %}
+                    <label class="peviewer-head-label">Import Functions</label>
+                    {% for import_function_form in peviewer_import_function_forms %}
+                        <div class="peviewer-li"> &bull; {{ import_function_form.fields.name.initial }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if peviewer_api_alert_info_forms != None %}
+                    <label class="peviewer-head-label">API Alert Info </label>
+                    {% for api_alert_info_form in peviewer_api_alert_info_forms %}
+                        <div class="peviewer-li"> &bull; {{ api_alert_info_form.fields.name.initial }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+
     {% if ssdeep_forms != 0 %}
     <div class="row">
         <div class="row_detail_2">

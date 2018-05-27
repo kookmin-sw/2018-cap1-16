@@ -34,3 +34,27 @@ class ClassificationDataForm(forms.Form):
     detected = forms.CharField(max_length=255)
     result_bc = forms.CharField(max_length=255)
     result_mc = forms.CharField(max_length=255)
+
+class PeviewerBasicInfoForm(forms.Form):
+    md5 = forms.CharField(max_length=255)
+    sha1 = forms.CharField(max_length=255)
+    sha256 = forms.CharField(max_length=255)
+    imp_hash = forms.CharField(max_length=255)
+
+class PeviewerSectionInfoForm(forms.Form):
+    name = forms.CharField(max_length=255)
+    hash_md5 = forms.CharField(max_length=255)
+    hash_sha1 = forms.CharField(max_length=255)
+    suspicious = forms.CharField(max_length=255)
+    virtual_address = forms.CharField(max_length=255)
+    virtual_size = forms.CharField(max_length=255)
+    size_raw_data = forms.CharField(max_length=255)
+
+class PeviewerImportFunctionForm(forms.Form):
+    name = forms.CharField(max_length=255)
+
+class PeviewerPackerInfoForm(forms.Form):
+    name = forms.CharField(max_length=255)
+
+class PeviewerApiAlertInfoForm(forms.Form):
+    name = forms.CharField(max_length=255)
