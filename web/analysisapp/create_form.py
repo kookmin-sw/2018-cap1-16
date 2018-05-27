@@ -18,15 +18,15 @@ def create_peviewer_section_forms(search_data):
 
     if not section_info == None:
         for section in section_info:
-            peviewer_report_form = PeviewerSectionForm()
-            peviewer_report_form.fields['name'].initial = section['name']
-            peviewer_report_form.fields['hash_md5'].initial = section['hash_md5']
-            peviewer_report_form.fields['hash_sha1'].initial = section['hash_sha1']
-            peviewer_report_form.fields['suspicious'].initial = section['suspicious']
-            peviewer_report_form.fields['virtual_address'].initial = section['virtual_address']
-            peviewer_report_form.fields['virtual_size'].initial = section['virtual_size']
-            peviewer_report_form.fields['size_raw_data'].initial = section['size_raw_data']
-            peviewer_report_forms.append(peviewer_report_form)
+            peviewer_section_form = PeviewerSectionInfoForm()
+            peviewer_section_form.fields['name'].initial = section['name']
+            peviewer_section_form.fields['hash_md5'].initial = section['hash_md5']
+            peviewer_section_form.fields['hash_sha1'].initial = section['hash_sha1']
+            peviewer_section_form.fields['suspicious'].initial = section['suspicious']
+            peviewer_section_form.fields['virtual_address'].initial = section['virtual_address']
+            peviewer_section_form.fields['virtual_size'].initial = section['virtual_size']
+            peviewer_section_form.fields['size_raw_data'].initial = section['size_raw_data']
+            peviewer_report_forms.append(peviewer_section_form)
     else:
         peviewer_report_forms = None
 
@@ -50,6 +50,25 @@ def create_peviewer_import_function_forms(search_data):
         peviewer_import_function_forms = None
 
     return peviewer_import_function_forms
+
+def create_peviewer_packer_info_forms(search_data):
+
+    peviewer_packer_info_forms = list()
+
+    try:
+        packer_infos = search_data['packer_info']
+    except:
+        packer_infos= None
+
+    if not packer_infos == None:
+        for packer_info in packer_infos:
+            peviewer_packer_info_form = PeviewerPackerInfoForm()
+            peviewer_packer_info_form.fields['name'].initial = packer_info
+            peviewer_packer_info_forms.append(peviewer_packer_info_form)
+    else:
+        peviewer_packer_info_forms = None
+
+    return peviewer_packer_info_forms
 
 def create_dynamic_report_form(search_data,testing_search_data):
     print(testing_search_data)

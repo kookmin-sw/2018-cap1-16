@@ -252,6 +252,7 @@ li {
 }
 .peviewer-section-table{
     border-collapse : collapse;
+    margin-bottom: 10px;
 }
 .peviewer-section-thead {
     display: table-header-group;
@@ -277,4 +278,9 @@ li {
 .peviewer-section-td{
     padding: 6px 10px;
     display: table-cell;
+}
+
+.peviewer-import-function-div{
+    margin-left: 10px;
+    margin-bottom : 5px;
 }

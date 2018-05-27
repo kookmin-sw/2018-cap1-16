@@ -100,20 +100,28 @@ def dynamic_analysis(request,md5):
 
 def static_report_view(request, md5):
     if request.method == "GET":
-        ctx = {'report_form': None, 'classification_data_form':None, 'peviewer_section_forms': None,'similar_report_forms' : None}
+        ctx = {'report_form': None,
+               'classification_data_form':None,
+               'peviewer_packer_info_forms':None,
+               'peviewer_section_forms': None,
+               'peviewer_import_function_forms': None,
+               'similar_report_forms' : None}
 
         # Let's search from elasticsearch
         static_testing_result_data = es_static_testing_result_search(md5)
         peviewer_search_data = es_search_peviewer_result(md5)
 
-
         # Create report form
         if static_testing_result_data is not None:
             static_report_form, classfication_data_form = create_static_report_form(static_testing_result_data)
+            peviewer_packer_info_forms = create_peviewer_packer_info_forms(peviewer_search_data)
             peviewer_section_forms = create_peviewer_section_forms(peviewer_search_data)
+            peviewer_import_function_forms = create_peviewer_import_function_forms(peviewer_search_data)
 
             ctx['report_form'] = static_report_form
+            ctx['peviewer_packer_info_forms'] = peviewer_packer_info_forms
             ctx['peviewer_section_forms'] = peviewer_section_forms
+            ctx['peviewer_import_function_forms'] = peviewer_import_function_forms
             ctx['classification_data_form'] = classfication_data_form
         else:
             return HttpResponse("Abnormal approach")
