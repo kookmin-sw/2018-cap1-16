@@ -1,4 +1,4 @@
-import os,json,sys
+import os,json,sys,shutil
 from django.conf import settings
 
 from tensorflow_model import testing_bc_static
@@ -13,6 +13,8 @@ def run_static_testing(upload_file_obj):
     upload_file_path = os.path.join(settings.MEDIA_ROOT, upload_file_obj.upload_file.name)
     file_name = os.path.splitext(upload_file_obj.upload_file.name)[0]
 
+    idb_folder_path = os.path.join(IDA_ROOT, 'idb')
+    idb_file_path = os.path.join(idb_folder_path,file_name+'.i64')
     fops_folder_path = os.path.join(IDA_ROOT,'fops')
     fops_file_path = os.path.join(fops_folder_path,file_name+'.fops')
     cmd_run_ida_fops = 'python ' + IDA_ROOT + os.sep + 'make_idb_fops.py ' + upload_file_path
@@ -25,6 +27,10 @@ def run_static_testing(upload_file_obj):
 
     result_bc = testing_bc_static.run(fh_fops_file_path)
     result_mc = testing_mc_static.run(fh_fops_file_path)
+
+    # remove temp file
+    os.remove(fops_file_path)
+    os.remove(idb_file_path)
 
     return result_bc, result_mc
 
