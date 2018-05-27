@@ -40,6 +40,9 @@ class PeviewerSectionForm(forms.Form):
     hash_md5 = forms.CharField(max_length=255)
     hash_sha1 = forms.CharField(max_length=255)
     suspicious = forms.CharField(max_length=255)
-    virutal_address = forms.CharField(max_length=255)
-    virutal_size = forms.CharField(max_length=255)
+    virtual_address = forms.CharField(max_length=255)
+    virtual_size = forms.CharField(max_length=255)
     size_raw_data = forms.CharField(max_length=255)
+
+class PeviewerImportFunctionForm(forms.Form):
+    name = forms.CharField(max_length=255)

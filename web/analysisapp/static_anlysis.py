@@ -44,91 +44,76 @@ def run_pefile_viewer(upload_file_obj):
     total_report['hash'] = hash_report
 
     # packer_info
-    packer_report = dict()
+    packer_report = list()
     packer_info = peviewer.get_packer_info()
     if not len(packer_info) == 0:
-        for i, packer in enumerate(packer_info):
-            packer_report[str(i)] = packer
+        for packer in packer_info:
+            packer_report.append(packer)
         total_report['packer_info'] = packer_report
-    else:
-        total_report['packer_info'] = 'None'
 
     # section_number
     section_num = peviewer.get_section_number()
     total_report['section_num'] = section_num
 
     # section_nfo
-    section_report = dict()
+    section_report = list()
     section_info = peviewer.get_sections_info()
     if not len(section_info) == 0:
-        for i, section in enumerate(section_info):
-            print(section)
-            section_report[str(i)] = section
+        for section in section_info:
+            section_report.append(section)
         total_report['section_info'] = section_report
-    else:
-        total_report['section_info'] = 'None'
 
     # compile_time
     total_report['compile_time'] = peviewer.get_compile_time()
 
     # resource_info
-    resource_report = dict()
+    resource_report = list()
     resource_info = peviewer.get_resources_info()
     if not len(resource_info) == 0:
-        for i, resource in enumerate(resource_info):
-            resource_report[str(i)] = resource
+        for resource in resource_info:
+            resource_report.append(resource)
         total_report['resource_info'] = resource_report
-    else:
-        total_report['resource_info'] = 'None'
 
     # import_function
-    import_func_report = dict()
+    import_func_report = list()
     import_func_info = peviewer.get_import_function()
     if not len(import_func_info) == 0:
-        for i, import_func in enumerate(import_func_info):
-            import_func_report[str(i)]=import_func.decode('ascii')
+        for import_func in import_func_info:
+            import_func_report.append(import_func.decode('ascii'))
         total_report['import_function'] = import_func_report
-    else:
-        total_report['import_function'] = "None"
 
     # mutex_info
-    mutex_report = dict()
+    mutex_report = list()
     mutex_info = peviewer.get_mutex_info()
     if not len(mutex_info) == 0:
-        for i, mutex in enumerate(mutex_info):
-            mutex_report[str(i)]=mutex
+        for mutex in mutex_info:
+            mutex_report.append(mutex)
         total_report['mutex_info'] = mutex_report
-    else:
-        total_report['mutex_info'] = "None"
 
     # api_alert_info
-    api_alert_report = dict()
+    api_alert_report = list()
     api_alert_info = peviewer.get_api_alert_info()
     if not len(api_alert_info) == 0:
-        for i, api_alert in enumerate(api_alert_info):
-            api_alert_report[str(i)] = api_alert
+        for api_alert in api_alert_info:
+            api_alert_report.append(api_alert)
         total_report['api_alert_info'] = api_alert_report
-    else:
-        total_report['api_alert_info'] = 'None'
 
     # anti_debug
-    anti_debug_report = dict()
+    anti_debug_report = list()
     anti_debug_info = peviewer.get_anti_debug()
     if not len(anti_debug_info) == 0:
-        for i, anti_debug in enumerate(anti_debug_info):
-            anti_debug_report[str(i)] = anti_debug
+        for anti_debug in anti_debug_info:
+            anti_debug_report.append(anti_debug)
         total_report['anti_debug'] = anti_debug_report
-    else:
-        total_report['anti_debug'] = 'None'
 
     # anti_vm
-    anti_vm_report = dict()
+    anti_vm_report = list()
     anti_vm_info = peviewer.get_anti_vm()
     if not len(anti_vm_info) == 0:
-        for i, anti_vm in anti_vm_info:
-            anti_vm_report[str(i)] = anti_vm
+        for anti_vm in anti_vm_info:
+            anti_vm_report.append(anti_vm)
         total_report['anti_vm'] = anti_vm_report
-    else:
-        total_report['anti_vm'] = 'None'
+
+    print(total_report)
 
     return total_report

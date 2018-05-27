@@ -7,11 +7,49 @@ def create_static_report_form(search_data):
     classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
     return report_form, classfication_data_form
 
-def create_peviewer_section_form(search_data):
-    section_info = search_data['section_info']
+def create_peviewer_section_forms(search_data):
 
-    peviewer_report_form = ReportForm()
-    return peviewer_report_form
+    peviewer_report_forms = list()
+
+    try:
+        section_info = search_data['section_info']
+    except:
+        section_info = None
+
+    if not section_info == None:
+        for section in section_info:
+            peviewer_report_form = PeviewerSectionForm()
+            peviewer_report_form.fields['name'].initial = section['name']
+            peviewer_report_form.fields['hash_md5'].initial = section['hash_md5']
+            peviewer_report_form.fields['hash_sha1'].initial = section['hash_sha1']
+            peviewer_report_form.fields['suspicious'].initial = section['suspicious']
+            peviewer_report_form.fields['virtual_address'].initial = section['virtual_address']
+            peviewer_report_form.fields['virtual_size'].initial = section['virtual_size']
+            peviewer_report_form.fields['size_raw_data'].initial = section['size_raw_data']
+            peviewer_report_forms.append(peviewer_report_form)
+    else:
+        peviewer_report_forms = None
+
+    return peviewer_report_forms
+
+def create_peviewer_import_function_forms(search_data):
+
+    peviewer_import_function_forms = list()
+
+    try:
+        import_functions = search_data['import_function']
+    except:
+        import_functions= None
+
+    if not import_functions == None:
+        for import_function in import_functions:
+            peviewer_import_function_form = PeviewerImportFunctionForm()
+            peviewer_import_function_form.fields['name'].initial = import_function
+            peviewer_import_function_forms.append(peviewer_import_function_form)
+    else:
+        peviewer_import_function_forms = None
+
+    return peviewer_import_function_forms
 
 def create_dynamic_report_form(search_data,testing_search_data):
     print(testing_search_data)

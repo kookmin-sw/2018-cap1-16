@@ -73,6 +73,46 @@
     </div>
     {% endif %}
 
+
+    <div class="row">
+        <div class="row_detail_2">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <span>Portable Executable Info</span>
+                </div>
+                <div class="panel-body">
+                    {% if peviewer_section_forms != None %}
+                    <label class="peviewer-head-label">Section Info</label>
+                    <div class="peviewer-section-table">
+                        <div class="peviewer-section-thead">
+                            <div class="peviewer-section-tr">
+                                <div class="peviewer-section-th"><strong>Name</strong></div>
+                                <div class="peviewer-section-th"><strong>Virtual Address</strong></div>
+                                <div class="peviewer-section-th"><strong>Virtual Size</strong></div>
+                                <div class="peviewer-section-th"><strong>Raw Data Size</strong></div>
+                                <div class="peviewer-section-th"><strong>Suspicious</strong></div>
+                                <div class="peviewer-section-th"><strong>MD5</strong></div>
+                            </div>
+                        </div>
+                        <div class="peviewer-section-tbody">
+                            {% for peviwer_section_form in peviewer_section_forms %}
+                            <div class="peviewer-section-tr">
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.name.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.virtual_address.initial }} </div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.virtual_size.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.size_raw_data.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.suspicious.initial }}</div>
+                                <div class="peviewer-section-td"> {{ peviwer_section_form.fields.hash_md5.initial }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
     {% if ssdeep_forms != 0 %}
     <div class="row">
         <div class="row_detail_2">

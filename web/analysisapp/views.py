@@ -61,8 +61,10 @@ def static_analysis(request,md5):
         else:
             result_bc, result_mc = run_static_testing(upload_file_obj)
             es_upload_static_testing_result(md5,result_bc,result_mc)
+
             result_peviewer = run_pefile_viewer(upload_file_obj)
             es_upload_peviewer_result(md5,result_peviewer)
+
             time.sleep(0.5)
             ctx['status'] = 200
 
@@ -98,19 +100,20 @@ def dynamic_analysis(request,md5):
 
 def static_report_view(request, md5):
     if request.method == "GET":
-        ctx = {'report_form': None, 'classification_data_form':None, 'peviewer_report_form': None,'similar_report_forms' : None}
+        ctx = {'report_form': None, 'classification_data_form':None, 'peviewer_section_forms': None,'similar_report_forms' : None}
 
         # Let's search from elasticsearch
         static_testing_result_data = es_static_testing_result_search(md5)
-        peviewer_result_data = es_search_peviewer_result(md5)
+        peviewer_search_data = es_search_peviewer_result(md5)
 
 
         # Create report form
         if static_testing_result_data is not None:
             static_report_form, classfication_data_form = create_static_report_form(static_testing_result_data)
-            peviewer_report_form = create_peviewer_report_form(peviewer_result_data)
+            peviewer_section_forms = create_peviewer_section_forms(peviewer_search_data)
+
             ctx['report_form'] = static_report_form
-            ctx['peviewer_report_form'] = peviewer_report_form
+            ctx['peviewer_section_forms'] = peviewer_section_forms
             ctx['classification_data_form'] = classfication_data_form
         else:
             return HttpResponse("Abnormal approach")
