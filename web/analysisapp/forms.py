@@ -4,7 +4,7 @@ from .models import UploadFile
 class UploadForm(forms.ModelForm):
 	class Meta:
 		model = UploadFile
-		fields = ('upload_file',)
+		fields = ('upload_file','ssdeep')
 
 class ReportForm(forms.Form): 
     md5 = forms.CharField(max_length=255)

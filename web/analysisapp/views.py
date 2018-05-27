@@ -1,15 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.http import HttpRequest
-from .models import UploadFile
-from .forms import *
 from .md5 import get_hash_str
-from .es.es_search import *
-from .es.upload import *
+from elasticsearch.django.search import *
+from elasticsearch.django.upload import *
 from .static_anlysis import *
 from .dynamic_anlysis import *
 from .create_form import *
-import sys,os, json,time
+import json,time
 
 
 test_md5 = 'fffde1818e6c06ee3a030065d3325e28'

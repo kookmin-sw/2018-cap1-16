@@ -20,6 +20,7 @@ class ReportFile(models.Model):
 class UploadFile(models.Model):
 	id = models.CharField(max_length=255,primary_key=True)
 	upload_file = models.FileField()
+	ssdeep = models.CharField(max_length=255)
 
 	#def get_absolute_url(self):
 		#url = reverse('report-detail',kwargs={'pk':self.pk})
