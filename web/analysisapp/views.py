@@ -102,6 +102,7 @@ def static_report_view(request, md5):
     if request.method == "GET":
         ctx = {'report_form': None,
                'classification_data_form':None,
+               'peviewer_basic_info_form': None,
                'peviewer_packer_info_forms':None,
                'peviewer_section_forms': None,
                'peviewer_import_function_forms': None,
@@ -115,12 +116,14 @@ def static_report_view(request, md5):
         # Create report form
         if static_testing_result_data is not None:
             static_report_form, classfication_data_form = create_static_report_form(static_testing_result_data)
+            peviewer_basic_info_form = create_peviewer_basic_info_form(peviewer_search_data)
             peviewer_packer_info_forms = create_peviewer_packer_info_forms(peviewer_search_data)
             peviewer_section_forms = create_peviewer_section_forms(peviewer_search_data)
             peviewer_import_function_forms = create_peviewer_import_function_forms(peviewer_search_data)
             peviewer_api_alert_info_forms = create_api_alert_info_forms(peviewer_search_data)
 
             ctx['report_form'] = static_report_form
+            ctx['peviewer_basic_info_form'] = peviewer_basic_info_form
             ctx['peviewer_packer_info_forms'] = peviewer_packer_info_forms
             ctx['peviewer_section_forms'] = peviewer_section_forms
             ctx['peviewer_import_function_forms'] = peviewer_import_function_forms

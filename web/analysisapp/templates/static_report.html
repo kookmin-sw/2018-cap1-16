@@ -83,6 +83,14 @@
                 </div>
                 <div class="panel-body">
 
+                    {% if peviewer_basic_info_form != None %}
+                    <label class="peviewer-head-label">Basic Info</label>
+                    <div class="peviewer-li">MD5: {{ peviewer_basic_info_form.fields.md5.initial }}</div>
+                    <div class="peviewer-li">SHA-1: {{ peviewer_basic_info_form.fields.sha1.initial }}</div>
+                    <div class="peviewer-li">SHA-256: {{ peviewer_basic_info_form.fields.sha256.initial }}</div>
+                    <div class="peviewer-li">Imp-Hash: {{ peviewer_basic_info_form.fields.imp_hash.initial }}</div>
+                    {% endif %}
+
                     {% if peviewer_packer_info_forms != None %}
                     <label class="peviewer-head-label">Packer Info</label>
                     {% for packer_info_form in peviewer_packer_info_forms %}

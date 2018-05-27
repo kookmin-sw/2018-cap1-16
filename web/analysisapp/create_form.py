@@ -7,6 +7,23 @@ def create_static_report_form(search_data):
     classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
     return report_form, classfication_data_form
 
+def create_peviewer_basic_info_form(search_data):
+    try:
+        basic_info = search_data['hash']
+    except:
+        basic_info = None
+
+    if not basic_info == None:
+        peviewer_basic_info_form = PeviewerBasicInfoForm()
+        peviewer_basic_info_form.fields['md5'].initial = basic_info['md5']
+        peviewer_basic_info_form.fields['sha1'].initial = basic_info['sha1']
+        peviewer_basic_info_form.fields['sha256'].initial = basic_info['sha256']
+        peviewer_basic_info_form.fields['imp_hash'].initial = basic_info['imp_hash']
+    else:
+        peviewer_basic_info_form = None
+
+    return peviewer_basic_info_form
+
 def create_peviewer_section_forms(search_data):
     peviewer_report_forms = list()
 

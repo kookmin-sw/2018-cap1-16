@@ -35,6 +35,11 @@ class ClassificationDataForm(forms.Form):
     result_bc = forms.CharField(max_length=255)
     result_mc = forms.CharField(max_length=255)
 
+class PeviewerBasicInfoForm(forms.Form):
+    md5 = forms.CharField(max_length=255)
+    sha1 = forms.CharField(max_length=255)
+    sha256 = forms.CharField(max_length=255)
+    imp_hash = forms.CharField(max_length=255)
 
 class PeviewerSectionInfoForm(forms.Form):
     name = forms.CharField(max_length=255)
