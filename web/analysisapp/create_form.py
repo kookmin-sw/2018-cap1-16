@@ -54,7 +54,6 @@ def create_peviewer_import_function_forms(search_data):
 def create_peviewer_packer_info_forms(search_data):
 
     peviewer_packer_info_forms = list()
-
     try:
         packer_infos = search_data['packer_info']
     except:

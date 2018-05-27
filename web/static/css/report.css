@@ -248,6 +248,7 @@ li {
     margin-left: 5%;
 }
 .peviewer-head-label{
+    margin: 10px 5px;
     font-size: 20px;
 }
 .peviewer-section-table{
@@ -280,7 +281,7 @@ li {
     display: table-cell;
 }
 
-.peviewer-import-function-div{
+.peviewer-li{
     margin-left: 10px;
     margin-bottom : 5px;
 }

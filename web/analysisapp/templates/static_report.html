@@ -82,6 +82,14 @@
                     <span>PE 파일 정보</span>
                 </div>
                 <div class="panel-body">
+
+                    {% if peviewer_packer_info_forms != None %}
+                    <label class="peviewer-head-label">Packer Info</label>
+                    {% for packer_info_form in peviewer_packer_info_forms %}
+                        <div class="peviewer-li"> &bull; {{ packer_info_form.fields.name.initial }}</div>
+                    {% endfor %}
+                    {% endif %}
+
                     {% if peviewer_section_forms != None %}
                     <label class="peviewer-head-label">Section Info</label>
                     <div class="peviewer-section-table">
@@ -113,7 +121,7 @@
                     {% if peviewer_import_function_forms != None %}
                     <label class="peviewer-head-label">Import Functions</label>
                     {% for import_function_form in peviewer_import_function_forms %}
-                        <div class="peviewer-import-function-div"> &bull; {{ import_function_form.fields.name.initial }}</div>
+                        <div class="peviewer-li"> &bull; {{ import_function_form.fields.name.initial }}</div>
                     {% endfor %}
                     {% endif %}
 
