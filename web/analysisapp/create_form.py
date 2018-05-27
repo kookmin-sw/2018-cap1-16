@@ -162,4 +162,16 @@ def create_classfication_data_form(detected, result_bc, result_mc):
     classificationData.fields['result_mc'].initial = result_mc
     return classificationData
 
+def create_similar_file_form(search_data):
+    similar_files = list()
+    if not search_data == None:
+        for file in search_data:
+            similar_file = SimilarFileForm()
+            similar_file.fields['md5'].initial = file['_source']['md5']
+            similar_file.fields['ssdeep'].initial = file['_source']['ssdeep']
+            similar_files.append(similar_file)
+    else:
+        similar_files = None
+    return similar_files
+
 

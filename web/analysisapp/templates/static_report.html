@@ -144,41 +144,20 @@
                 </div>
             </div>
         </div>
+    </div>
 
-    {% if ssdeep_forms != 0 %}
+    {% if similar_file_forms != None %}
     <div class="row">
         <div class="row_detail_2">
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <span>유사 파일</span>
+                    <span>유사한 파일</span>
                 </div>
                 <div class="panel-body">
-
-                    <table id='ssdeep_table'>
-                        <form action="" id="idxButtonForm">
-                        </form>
-                        <tbody>
-                            {% for ssdeep_form in ssdeep_forms %}
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;File MD5</strong></td>
-                                <td> {{ ssdeep_form.fields.md5.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;점수</strong></td>
-                                <td> {{ ssdeep_form.fields.score.initial }} </td>
-                            </tr>
-                            <tr>-
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 탐지 결과 </strong></td>
-                                <td> {{ ssdeep_form.fields.detected.initial }}</td>
-                            </tr>
-                            <tr>
-                                <td class="name_td"><strong>&emsp;&nbsp;바이러스 분석 결과</strong></td>
-                                <td> {{ ssdeep_form.fields.result.initial }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% for similar_file_form in similar_file_forms %}
+                    <div><a href="/static_report/{{ similar_file_form.fields.md5.initial }}" class="peviewer-li">File MD5 : {{ similar_file_form.fields.md5.initial }}</a></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -189,7 +168,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <span>유사 파일</span>
+                    <span>유사한 파일</span>
                 </div>
                 <div class="panel-body">
                     <h2> 검색된 유사한 파일이 존재하지 않습니다 </h2>

@@ -110,7 +110,6 @@ def es_search_similar_file(ssdeep):
             }
         }
     res = es.search(index=ssdeep_index,doc_type=type_ssdeep, body=request_data)
-    print(res['hits']['hits'])
     if res['hits']['total'] is not 0:
         return res['hits']['hits']
     else:

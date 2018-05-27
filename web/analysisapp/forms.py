@@ -58,3 +58,7 @@ class PeviewerPackerInfoForm(forms.Form):
 
 class PeviewerApiAlertInfoForm(forms.Form):
     name = forms.CharField(max_length=255)
+
+class SimilarFileForm(forms.Form):
+    md5 = forms.CharField(max_length=255)
+    ssdeep = forms.CharField(max_length=255)
