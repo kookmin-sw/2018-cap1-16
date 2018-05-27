@@ -125,6 +125,13 @@
                     {% endfor %}
                     {% endif %}
 
+                    {% if peviewer_api_alert_info_forms != None %}
+                    <label class="peviewer-head-label">API Alert Info </label>
+                    {% for api_alert_info_form in peviewer_api_alert_info_forms %}
+                        <div class="peviewer-li"> &bull; {{ api_alert_info_form.fields.name.initial }}</div>
+                    {% endfor %}
+                    {% endif %}
+
 
                 </div>
             </div>

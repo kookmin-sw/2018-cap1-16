@@ -8,7 +8,6 @@ def create_static_report_form(search_data):
     return report_form, classfication_data_form
 
 def create_peviewer_section_forms(search_data):
-
     peviewer_report_forms = list()
 
     try:
@@ -68,6 +67,24 @@ def create_peviewer_packer_info_forms(search_data):
         peviewer_packer_info_forms = None
 
     return peviewer_packer_info_forms
+
+def create_api_alert_info_forms(search_data):
+
+    peviewer_api_alert_info_forms = list()
+    try:
+        api_alert_infos = search_data['api_alert_info']
+    except:
+        api_alert_infos= None
+
+    if not api_alert_infos == None:
+        for api_alert_info in api_alert_infos:
+            peviewer_api_alert_info_form = PeviewerApiAlertInfoForm()
+            peviewer_api_alert_info_form.fields['name'].initial =api_alert_info
+            peviewer_api_alert_info_forms.append(peviewer_api_alert_info_form)
+    else:
+        peviewer_api_alert_info_forms = None
+
+    return peviewer_api_alert_info_forms
 
 def create_dynamic_report_form(search_data,testing_search_data):
     print(testing_search_data)

@@ -35,6 +35,7 @@ class ClassificationDataForm(forms.Form):
     result_bc = forms.CharField(max_length=255)
     result_mc = forms.CharField(max_length=255)
 
+
 class PeviewerSectionInfoForm(forms.Form):
     name = forms.CharField(max_length=255)
     hash_md5 = forms.CharField(max_length=255)
@@ -48,4 +49,7 @@ class PeviewerImportFunctionForm(forms.Form):
     name = forms.CharField(max_length=255)
 
 class PeviewerPackerInfoForm(forms.Form):
+    name = forms.CharField(max_length=255)
+
+class PeviewerApiAlertInfoForm(forms.Form):
     name = forms.CharField(max_length=255)
