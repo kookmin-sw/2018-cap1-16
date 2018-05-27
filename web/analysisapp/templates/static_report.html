@@ -156,7 +156,7 @@
                 </div>
                 <div class="panel-body">
                     {% for similar_file_form in similar_file_forms %}
-                    <div><a href="/static_report/{{ similar_file_form.fields.md5.initial }}" class="peviewer-li">File MD5 : {{ similar_file_form.fields.md5.initial }}</a></div>
+                    <div>&bull; File MD5 :<a href="/static_report/{{ similar_file_form.fields.md5.initial }}" class="peviewer-li"> {{ similar_file_form.fields.md5.initial }}</a></div>
                     {% endfor %}
                 </div>
             </div>
