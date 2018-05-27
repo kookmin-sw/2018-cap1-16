@@ -34,3 +34,12 @@ class ClassificationDataForm(forms.Form):
     detected = forms.CharField(max_length=255)
     result_bc = forms.CharField(max_length=255)
     result_mc = forms.CharField(max_length=255)
+
+class PeviewerSectionForm(forms.Form):
+    name = forms.CharField(max_length=255)
+    hash_md5 = forms.CharField(max_length=255)
+    hash_sha1 = forms.CharField(max_length=255)
+    suspicious = forms.CharField(max_length=255)
+    virutal_address = forms.CharField(max_length=255)
+    virutal_size = forms.CharField(max_length=255)
+    size_raw_data = forms.CharField(max_length=255)

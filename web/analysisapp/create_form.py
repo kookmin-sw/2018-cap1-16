@@ -7,7 +7,9 @@ def create_static_report_form(search_data):
     classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
     return report_form, classfication_data_form
 
-def create_peviewer_report_form(search_data):
+def create_peviewer_section_form(search_data):
+    section_info = search_data['section_info']
+
     peviewer_report_form = ReportForm()
     return peviewer_report_form
 
@@ -16,6 +18,8 @@ def create_dynamic_report_form(search_data,testing_search_data):
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['target']['file']['md5']
     report_form.fields['collected_date'].initial = testing_search_data['collected_date']
+
+    # signatures info
     signature_forms = list()
     try:
         for idx in range(len(search_data['signatures'])):
@@ -26,8 +30,10 @@ def create_dynamic_report_form(search_data,testing_search_data):
     except:
         signature_forms = None
 
+    # ai classification
     classification_data_form = create_classfication_data_form(testing_search_data['detected'],testing_search_data['result_bc'],testing_search_data['result_mc'])
 
+    # import dll
     DLL_forms = list()
     try:
         for idx in range(len(search_data['summary']['dll_loaded'])):
@@ -37,6 +43,7 @@ def create_dynamic_report_form(search_data,testing_search_data):
     except:
         DLL_forms = None
 
+    # connects host info
     connects_host_forms = list()
     try:
         for idx in range(len(search_data['summary']['connects_host'])):
@@ -46,6 +53,7 @@ def create_dynamic_report_form(search_data,testing_search_data):
     except:
         connects_host_forms = None
 
+    # connects ip info
     connects_ip_forms = list()
     try:
         for idx in range(len(search_data['summary']['connects_ip'])):
