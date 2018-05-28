@@ -1,10 +1,11 @@
 # Installation
 ### Prerequisition
-* python3
+* python 3.6.2
 * pip3
 * See [MongoDB installation](./installation/mongodb/installation.md)
 * See [Tensorflow insatllation](./installation/tensorflow/abc.md)
 * See [Cuckoo Sandbox installation](./installation/cuckoo/cuckoo.md)
+* see [ElasticSearch installation](./installation/elasticsearch.installation.md)
 
 ### Install package
 ```
@@ -12,24 +13,23 @@ $ pip install django
 $ pip install pymongo
 $ pip install elasticsearch
 $ pip install requests
+$ pip install peutils
+$ install ssdeep for windows -> https://github.com/MacDue/ssdeep-windows-32_64
 ```
 
 ### Build DB
 ```
 cd <Project_ROOT>/web
-$ python manage.py makemigrations upload_app
+$ python manage.py makemigrations anlaysisapp
 $ python manage.py migrate
 ```
 
 ### Configuration
-* Goto web/upload_app/mongodb
- - modify md5_search.py
- - client = SeclabMongoClient([your db server ip], 27017, [DB name])
-
-
-* Goto web/upload_app/es
- - modify es_view.py
- - es = Elasticsearch([{'host':[your elasticsearch ip],'port':9200}])
+* Goto web/analysisapp/mongodb
+ - modify settings.py
+ - Host = <your mongodb's ip which is connected cuckoo >
+ - Port = <your mongodb's ip which is connected cuckoo >
+ - CuckooDB = <your mongodb's cuckoo db name>
 
 ### How to run server
 ```
