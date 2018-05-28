@@ -17,7 +17,11 @@ CPU_COUNT = 4
 
 # Feature Hashing 관련 상수 정의
 # 최대 리스트 크기 ( 2 ^ k )
-MAX_LIST_SIZE = 12
+FEATURE_VECTOR_K = 12
+
+MAX_LIST_SIZE = 1 << FEATURE_VECTOR_K
+MOD_VALUE = ( 1 << (FEATURE_VECTOR_K  + 1) ) -  1
+
 
 # n-gram 시작
 N_GRAM_START = 3
