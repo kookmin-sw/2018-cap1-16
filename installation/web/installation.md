@@ -26,7 +26,7 @@ $ python manage.py migrate
 
 ### Configuration
 * setting cuckoo-mongodb 
- - modify web/analysisapp/mongodb/settings.py
+ 1. modify web/analysisapp/mongodb/settings.py
  ```
    Host = <your mongodb's ip which is connected cuckoo >
    Port = <your mongodb's ip which is connected cuckoo >
@@ -41,7 +41,7 @@ $ python manage.py migrate
    </div>
  ```
  
-### How to run server
+## How to run server
 ```
 cd <Project_ROOT>/web
 $ python manage.py runserver <ip>:<port>
