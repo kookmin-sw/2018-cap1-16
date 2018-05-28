@@ -1,11 +1,11 @@
 from .forms import *
+import datetime
 
 def create_static_report_form(search_data):
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['collected_date'].initial = search_data['collected_date']
-    classfication_data_form = create_classfication_data_form(search_data['detected'],search_data['result_bc'],search_data['result_mc'])
-    return report_form, classfication_data_form
+    return report_form
 
 def create_peviewer_basic_info_form(search_data):
     try:
@@ -103,12 +103,24 @@ def create_api_alert_info_forms(search_data):
 
     return peviewer_api_alert_info_forms
 
-def create_dynamic_report_form(search_data,testing_search_data):
-    print(testing_search_data)
+def create_similar_file_form(search_data):
+    similar_files = list()
+    if not search_data == None:
+        for file in search_data:
+            similar_file = SimilarFileForm()
+            similar_file.fields['md5'].initial = file['_source']['md5']
+            similar_file.fields['ssdeep'].initial = file['_source']['ssdeep']
+            similar_files.append(similar_file)
+    else:
+        similar_files = None
+    return similar_files
+
+def create_dynamic_report_form(search_data):
+    print(search_data)
     report_form = ReportForm()
     report_form.fields['md5'].initial = search_data['target']['file']['md5']
-    report_form.fields['collected_date'].initial = testing_search_data['collected_date']
-
+    report_form.fields['collected_date'].initial = datetime.datetime.fromtimestamp(int(search_data['report_time'])).strftime('%Y-%m-%d %H:%M:%S')
+    
     # signatures info
     signature_forms = list()
     try:
@@ -119,9 +131,6 @@ def create_dynamic_report_form(search_data,testing_search_data):
             signature_forms.append(signature_form)
     except:
         signature_forms = None
-
-    # ai classification
-    classification_data_form = create_classfication_data_form(testing_search_data['detected'],testing_search_data['result_bc'],testing_search_data['result_mc'])
 
     # import dll
     DLL_forms = list()
@@ -153,25 +162,15 @@ def create_dynamic_report_form(search_data,testing_search_data):
     except:
         connects_ip_forms = None
 
-    return report_form, classification_data_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
+    return report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms
 
-def create_classfication_data_form(detected, result_bc, result_mc):
+def create_classfication_data_form(search_data):
+
     classificationData = ClassificationDataForm()
-    classificationData.fields['detected'].initial = detected
-    classificationData.fields['result_bc'].initial = result_bc
-    classificationData.fields['result_mc'].initial = result_mc
+    classificationData.fields['detected'].initial = search_data['detected']
+    classificationData.fields['result_bc'].initial = search_data['result_bc']
+    classificationData.fields['result_mc'].initial = search_data['result_mc']
     return classificationData
 
-def create_similar_file_form(search_data):
-    similar_files = list()
-    if not search_data == None:
-        for file in search_data:
-            similar_file = SimilarFileForm()
-            similar_file.fields['md5'].initial = file['_source']['md5']
-            similar_file.fields['ssdeep'].initial = file['_source']['ssdeep']
-            similar_files.append(similar_file)
-    else:
-        similar_files = None
-    return similar_files
 
 

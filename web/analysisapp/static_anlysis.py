@@ -120,6 +120,4 @@ def run_pefile_viewer(upload_file_obj):
             anti_vm_report.append(anti_vm)
         total_report['anti_vm'] = anti_vm_report
 
-    print(total_report)
-
     return total_report

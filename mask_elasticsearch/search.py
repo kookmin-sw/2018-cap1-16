@@ -39,7 +39,7 @@ def es_dynamic_report_search(md5):
 
     request_data = \
         {
-            '_source': ["target.file","signatures","summary.dll_loaded","summary.connects_host","summary.connects_ip"],
+            '_source': ["target.file","signatures","summary.dll_loaded","summary.connects_host","summary.connects_ip","report_time"],
             'query': {
                 "term": {
                     "target.file.md5": md5
@@ -88,7 +88,6 @@ def es_search_similar_file(ssdeep):
     ssdeep_size = int(ssdeep[0])
     ssdeep_chunk = ssdeep[1]
     ssdeep_double_chunk = ssdeep[2]
-    print(ssdeep_size,ssdeep_chunk)
     request_data = \
         {
             'query': {
