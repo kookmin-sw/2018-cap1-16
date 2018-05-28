@@ -12,11 +12,6 @@ FOPS_PATH = os.path.join(IDA_DIR,'./fops')
 # fh_fops 저장 경로
 FH_FOPS_PATH = os.path.join(BASE_DIR,'./fh_fops')
 
-# ops 저장 경로
-OPS_PATH = os.path.normpath(os.path.abspath('./ops'))
-# fh_ops 저장 경로
-FH_OPS_PATH = os.path.normpath(os.path.abspath('./fh_ops'))
-
 # CPU COUNT
 CPU_COUNT = 4
 
