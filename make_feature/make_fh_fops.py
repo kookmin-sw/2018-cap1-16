@@ -17,7 +17,7 @@ def create_fops_list ( root ) :
 def make_fh( file_path ) :
     file_name = os.path.splitext(os.path.basename(file_path))[0]
 
-    save_path = FH_FOPS_PATH + os.sep + file_name + 'fhfops'
+    save_path = FH_FOPS_PATH + os.sep + file_name + '.fhfops'
 
     if os.path.exists(save_path) :
         print("{}는 이미 분석 결과가 있습니다.".format(file_name))
@@ -67,7 +67,7 @@ def print_help() :
     print("python make_idb_func_fops.py <file> : <file>에 대해 Feature Vector 생성해서 FH_FOPS_PATH 에 저장")
     
 if __name__ == '__main__' :
-    if os.path.exists(FH_FOPS_PATH) :
+    if not os.path.exists(FH_FOPS_PATH) :
         os.makedirs(FH_FOPS_PATH)
     argv_cnt = len(sys.argv)
     if argv_cnt == 1 :
