@@ -96,7 +96,7 @@ def dynamic_analysis(request,md5):
 
 def static_report_view(request, md5):
     if request.method == "GET":
-        ctx = {'report_form': None,
+        ctx = {'basic_report_form': None,
                'classification_data_form':None,
                'peviewer_basic_info_form': None,
                'peviewer_packer_info_forms':None,
@@ -114,7 +114,7 @@ def static_report_view(request, md5):
 
         # Create report form
         if static_testing_result_data is not None:
-            static_report_form = create_static_report_form(static_testing_result_data)
+            basic_report_form = create_static_report_form(static_testing_result_data)
             classfication_data_form = create_classfication_data_form(static_testing_result_data)
             peviewer_basic_info_form = create_peviewer_basic_info_form(peviewer_search_data)
             peviewer_packer_info_forms = create_peviewer_packer_info_forms(peviewer_search_data)
@@ -123,7 +123,7 @@ def static_report_view(request, md5):
             peviewer_api_alert_info_forms = create_api_alert_info_forms(peviewer_search_data)
             similar_file_forms = create_similar_file_form(similar_file_search_data)
 
-            ctx['report_form'] = static_report_form
+            ctx['basic_report_form'] = basic_report_form
             ctx['peviewer_basic_info_form'] = peviewer_basic_info_form
             ctx['peviewer_packer_info_forms'] = peviewer_packer_info_forms
             ctx['peviewer_section_forms'] = peviewer_section_forms
@@ -139,7 +139,7 @@ def static_report_view(request, md5):
 def dynamic_report_view(request, md5):
     if request.method == "GET":
 
-        ctx = {'report_form': None,'classification_data_form':None , 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
+        ctx = {'basic_report_form': None,'classification_data_form':None , 'signature_forms':None, 'DLL_forms': None, 'connects_host_forms': None, 'connects_ip_forms': None}
 
         # Let's search from mask_elasticsearch
         cuckoo_search_data = es_dynamic_report_search(md5)
@@ -147,10 +147,10 @@ def dynamic_report_view(request, md5):
 
         # Create report form
         if cuckoo_search_data is not None:
-            dynamic_report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms= create_dynamic_report_form(cuckoo_search_data)
+            basic_report_form, signature_forms, DLL_forms, connects_host_forms, connects_ip_forms= create_dynamic_report_form(cuckoo_search_data)
             classification_data_form = create_classfication_data_form(dynamic_testing_result_data)
 
-            ctx['report_form'] = dynamic_report_form
+            ctx['basic_report_form'] = basic_report_form
             ctx['classification_data_form'] = classification_data_form
             ctx['signature_forms'] = signature_forms
             ctx['DLL_forms'] = DLL_forms

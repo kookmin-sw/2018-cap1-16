@@ -16,7 +16,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading">
-                    <span>파일 정보</span>
+                    <span>기본 분석 정보</span>
                 </div>
                 <div class="panel-body">
 
@@ -30,8 +30,8 @@
                     </div>
 
                     <div class="text_data">
-                        <p>{{ report_form.fields.md5.initial }}</p>
-                        <p>{{ report_form.fields.collected_date.initial }}</p>
+                        <p>{{ basic_report_form.fields.md5.initial }}</p>
+                        <p>{{ basic_report_form.fields.collected_date.initial }}</p>
                         {% if classification_data_form.fields.detected.initial == 1 %}
                         <p>True</p>
                         {% elif classification_data_form.fields.detected.initial == 0 %}
