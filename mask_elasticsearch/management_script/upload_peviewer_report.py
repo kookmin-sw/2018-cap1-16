@@ -1,15 +1,12 @@
 from datetime import datetime
 from elasticsearch import Elasticsearch
-from .settings import *
+from ..settings import *
 import json,os
 
 
-es = Elasticsearch([{'host':IP,'port':PORT}])
+es = Elasticsearch([{'host':IP,'port':Port}])
 
-INDEX = 'seclab'
-DOC_TYPE = 'analyzed_report'
-
-DIRECTORY_PATH = '/home/seclab/sample_report/'
+DIRECTORY_PATH = '/home/seclab/peviewer_report/'
 
 def index_report(path):
     files = os.listdir(path)
@@ -19,7 +16,7 @@ def index_report(path):
         absolute_path = os.path.join(path,file)
         report_json = open(absolute_path).read()
         doc = json.loads(report_json)
-        res = es.index(index=INDEX, doc_type=DOC_TYPE,id = md5,body=doc)
+        res = es.index(index=main_index, doc_type=type_peviewer_result,id = md5,body=doc)
         print('Index suecceeded ('+str(remain_count)+'/'+str(file_count)+')')
         remain_count -=1
 

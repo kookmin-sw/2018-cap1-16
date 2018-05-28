@@ -1,6 +1,3 @@
-#curl -XPUT http://203.246.112.133:9200/seclab?pretty
-
-#curl -XPOST http://203.246.112.133:9200/seclab/_close?pretty
 ip="203.246.112.137"
 port="9200"
 
