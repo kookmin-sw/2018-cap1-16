@@ -25,7 +25,7 @@ class Peview :
             try:
                 return md5.hexdigest(), sha1.hexdigest(), sha256.hexdigest(), self.__pe.get_imphash()
             except:
-                return md5, sha1, sha256, ''
+                return md5, sha1, sha256, 'NO_IMP_HASH'
 
     def get_packer_info(self) :
         signatures = peutils.SignatureDatabase(self.__USER_DB)
@@ -146,8 +146,12 @@ class Peview :
                 for mutex in mutexs :
                     if mutex :
                         for imp in lib.imports:
-                            if imp.name.decode().startswith(mutex) :
-                                array.append(imp.name.decode())
+                            try :
+                                if imp.name.decode().startswith(mutex) :
+                                    array.append(imp.name.decode())
+                            except :
+                                pass
+
 
         return sorted(set(array))
 
@@ -159,8 +163,11 @@ class Peview :
                 for alert in alerts:
                     if alert:  # remove 'null'
                         for imp in lib.imports:
-                            if imp.name.decode().startswith(alert):
-                                array.append(imp.name.decode())
+                            try :
+                                if imp.name.decode().startswith(alert):
+                                    array.append(imp.name.decode())
+                            except :
+                                pass
 
         return sorted(set(array))
 
@@ -172,8 +179,11 @@ class Peview :
                 for imp in lib.imports:
                     for antidbg in antidbgs:
                         if antidbg:
-                            if imp.name.decode().startswith(antidbg):
-                                array.append(imp.name.decode())
+                            try :
+                                if imp.name.decode().startswith(antidbg):
+                                    array.append(imp.name.decode())
+                            except :
+                                pass
         return sorted(set(array))
 
     def get_anti_vm(self):
