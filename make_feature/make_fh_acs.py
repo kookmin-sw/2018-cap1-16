@@ -63,7 +63,7 @@ def print_help():
     print("python make_idb_func_acs.py <file> : <file>에 대해 Feature Vector 생성해서 FH_ACS_PATH 에 저장")
 
 if __name__ == '__main__':
-    if os.path.exists(FH_ACS_PATH):
+    if not os.path.exists(FH_ACS_PATH):
         os.makedirs(FH_ACS_PATH)
     argv_cnt = len(sys.argv)
 
