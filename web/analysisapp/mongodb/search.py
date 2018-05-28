@@ -1,9 +1,10 @@
 from .client import MyMongoClient
+from .settings import *
 import sys
 
 
 def mongo_acs_search(md5):
-    client = MyMongoClient('203.246.112.133', 27017, 'cuckoo')
+    client = MyMongoClient(Host, Port , CukcooDB)
     collection_analysis = client.db['analysis']
     collection_calls = client.db['calls']
     acs = list()
