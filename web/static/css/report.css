@@ -285,3 +285,11 @@ li {
     margin-left: 10px;
     margin-bottom : 5px;
 }
+
+.VT-a{
+    color: black;
+}
+
+.VT-a:hover{
+    text-decoration: none;
+}
