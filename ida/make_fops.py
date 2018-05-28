@@ -35,7 +35,7 @@ def print_help() :
     print("IDA Database 파일로 부터 함수 단위 Opcode Sequence를 추출하는 코드")
     print("python make_fops.py <file> : <file>에서 fops파일을 FOPS_PATH에 생성")
 if __name__ == '__main__' :
-    if os.path.exists(FOPS_PATH) :
+    if not os.path.exists(FOPS_PATH) :
         os.makedirs(FOPS_PATH)
     argv_cnt = len(sys.argv)
     if argv_cnt == 1 :
