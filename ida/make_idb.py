@@ -16,7 +16,7 @@ def create_file_list () :
 def make_idb( file_path ) :
     file_name = os.path.splitext(os.path.basename(file_path))[0]
 
-    dst_path = os.path.join(IDB_PATH, file_name)
+    dst_path = IDB_PATH + os.sep + file_name
 
     if os.path.exists(dst_path + '.i64') or os.path.exists(dst_path + '.idb') :
         print("{}는 이미 분석결과가 존재 합니다.".format(file_name))
