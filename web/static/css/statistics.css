@@ -21,6 +21,8 @@ body {
 
 .row-detail{
     padding: 0% 8% 2% 8%;
+    margin-left: -15%;
+    width: 1500px;
 }
 
 
@@ -38,4 +40,8 @@ body {
 .panel-body {
 	color: #2f2f33;
     font-weight: 500;
+}
+
+#kibana-dashboard{
+    border: None;
 }
