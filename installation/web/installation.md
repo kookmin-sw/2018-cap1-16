@@ -25,12 +25,22 @@ $ python manage.py migrate
 ```
 
 ### Configuration
-* Goto web/analysisapp/mongodb
- - modify settings.py
- - Host = <your mongodb's ip which is connected cuckoo >
- - Port = <your mongodb's ip which is connected cuckoo >
- - CuckooDB = <your mongodb's cuckoo db name>
-
+* setting cuckoo-mongodb 
+ - modify web/analysisapp/mongodb/settings.py
+ ```
+   Host = <your mongodb's ip which is connected cuckoo >
+   Port = <your mongodb's ip which is connected cuckoo >
+   CuckooDB = <your mongodb's cuckoo db name>
+```
+* how to set kibana dashboard
+ 1. get iframe source from your kibana dashboard's share button
+ 2. modify web/statisticsapp/templates/statistics.html
+ ```
+   <div class="panel-body">
+      insert your iframe source
+   </div>
+ ```
+ 
 ### How to run server
 ```
 cd <Project_ROOT>/web
