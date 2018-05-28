@@ -13,18 +13,10 @@ class ReportFile(models.Model):
 	result = models.CharField(max_length=255)
 	uploaded_date = models.DateTimeField(auto_now_add=True)
 
-#	def get_absolute_url(self):
-#		url = reverse('report-detail',kwargs={'pk':self.pk})
-#		return url
-
 class UploadFile(models.Model):
 	id = models.CharField(max_length=255,primary_key=True)
 	upload_file = models.FileField()
 	ssdeep = models.CharField(max_length=255)
-
-	#def get_absolute_url(self):
-		#url = reverse('report-detail',kwargs={'pk':self.pk})
-		#return url
 
 class UploadFileMeta(models.Model):
 	id = models.CharField(max_length=255,primary_key=True)

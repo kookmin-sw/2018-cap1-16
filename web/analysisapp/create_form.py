@@ -2,7 +2,7 @@ from .forms import *
 import datetime
 
 def create_static_report_form(search_data):
-    report_form = ReportForm()
+    report_form = BasicReportForm()
     report_form.fields['md5'].initial = search_data['md5']
     report_form.fields['collected_date'].initial = search_data['collected_date']
     return report_form
@@ -116,8 +116,7 @@ def create_similar_file_form(search_data):
     return similar_files
 
 def create_dynamic_report_form(search_data):
-    print(search_data)
-    report_form = ReportForm()
+    report_form = BasicReportForm()
     report_form.fields['md5'].initial = search_data['target']['file']['md5']
     report_form.fields['collected_date'].initial = datetime.datetime.fromtimestamp(int(search_data['report_time'])).strftime('%Y-%m-%d %H:%M:%S')
     
