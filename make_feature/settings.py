@@ -13,15 +13,14 @@ FOPS_PATH = os.path.join(IDA_DIR,'./fops')
 FH_FOPS_PATH = os.path.join(BASE_DIR,'./fh_fops')
 
 # CPU COUNT
-CPU_COUNT = 4
+CPU_COUNT = 1
 
 # Feature Hashing 관련 상수 정의
 # 최대 리스트 크기 ( 2 ^ k )
 FEATURE_VECTOR_K = 12
 
 MAX_LIST_SIZE = 1 << FEATURE_VECTOR_K
-MOD_VALUE = ( 1 << (FEATURE_VECTOR_K  + 1) ) -  1
-
+MOD_VALUE = MAX_LIST_SIZE -  1
 
 # n-gram 시작
 N_GRAM_START = 3
