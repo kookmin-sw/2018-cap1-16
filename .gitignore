@@ -17,6 +17,7 @@ idb/
 
 tensorflow_model/static_bc_model.ckpt*
 tensorflow_model/static_mc_model.ckpt*
+tensorflow_model/static_model.ckpt*
 tensorflow_model/dynamic_model.ckpt*
 tensorflow_model/dynamic_bc_model.ckpt*
 tensorflow_model/dynamic_mc_model.ckpt*
