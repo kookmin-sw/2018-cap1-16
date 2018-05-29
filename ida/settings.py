@@ -1,29 +1,20 @@
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # IDA 경로
-IDA_PATH = os.path.normpath('C:/Program Files/IDA 7.0/idat64.exe')
+IDA_PATH = "IDA PRO 위치 ( idat 로 하는 것을 추천 )"
 
 # malware 경로
-MALWARE_PATH = os.path.normpath(os.path.abspath('./malware'))
-
-# ZIP FILE PATH
-ZIP_FILE_PATH = os.path.normpath(os.path.abspath('./zipfile'))
+MALWARE_PATH = "분석할 파일이 저장되어 있는 경로"
 
 # idb(i64) 저장 경로
-IDB_PATH = os.path.join(BASE_DIR,'idb')
-
-# ops 저장 경로
-OPS_PATH = os.path.normpath(os.path.abspath('./ops'))
+IDB_PATH = "IDA Database 저장되어 있는 경로"
 
 # fops 저장 경로
-FOPS_PATH = os.path.join(BASE_DIR,'fops')
+FOPS_PATH = "FOPS 파일이 저장될 경로"
 
 # ida python management_script 저장 경로
-IDA_PYTHON_SCRIPT_PATH = os.path.join(BASE_DIR,'ida_script')
+IDA_PYTHON_SCRIPT_PATH = "IDA 스크립트가 저장되어 있는 경로"
 
-# CPU COUNT
-CPU_COUNT = 4
+# CPU COUNT ( os.cpu_count() 미만으로 설정 )
+CPU_COUNT = "사용할 CPU 코어 갯수"
 
-# TIME OUT
-TIME_OUT = 60
+# TIME OUT ( 정수형으로 쓸 것 )
+TIME_OUT = "IDA PRO 시간 제한"
