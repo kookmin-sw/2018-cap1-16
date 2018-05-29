@@ -111,8 +111,12 @@ def run() :
         print("Wait Time :", WAIT_TIME)
         move_malware_to_ftp(malware_path_list)
 
-        ec2 = boto3.client('ec2', region_name='us-west-2', aws_access_key_id='', aws_secret_access_key='')
-        instances = ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][0]['Instances'] + ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'][1]['Instances']
+        ec2 = boto3.client('ec2', region_name='YOUR_AWS_REGION_NAME', aws_access_key_id='YOUR_AWS_ACCESS_KEY_ID', aws_secret_access_key='YOUR_AWS_SECRET_ACCESS_KEY')
+        instances = []
+
+        for each_instance in ec2.describe_instances(Filters=[{'Name': 'tag:Name', 'Values': ['*']}])['Reservations'] :
+            instances += each_instance['Instances']
+
         start_ec2(ec2, instances)
         time.sleep(WAIT_TIME)
         stop_ec2(ec2, instances)
