@@ -15,14 +15,9 @@ def create_file_list () :
 
 def make_idb( file_path ) :
     file_name = os.path.splitext(os.path.basename(file_path))[0]
-    sub_file_path = file_path.replace(MALWARE_PATH,'').replace(os.path.basename(file_path), '')
 
-    idb_save_path = IDB_PATH + sub_file_path
+    dst_path = IDB_PATH + os.sep + file_name
 
-    if not os.path.exists(idb_save_path):
-        os.makedirs(idb_save_path)
-
-    dst_path = os.path.join(idb_save_path, file_name)
     if os.path.exists(dst_path + '.i64') or os.path.exists(dst_path + '.idb') :
         print("{}는 이미 분석결과가 존재 합니다.".format(file_name))
         return

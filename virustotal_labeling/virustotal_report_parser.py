@@ -1,10 +1,10 @@
-import simplejson, os
+import json, os
 
 class Parser :
     def __init__(self, path) :
         self.path = path
         with open(path, 'r') as f :
-            self.json_obj = simplejson.loads(f.read())
+            self.json_obj = json.loads(f.read())
     def md5(self) :
         try :
             return self.json_obj['md5']

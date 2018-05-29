@@ -20,8 +20,14 @@ def upload_files(ftp,local_dir_path,remote_dir_path):
     ftp.cwd(remote_dir_path)
     file_list = os.listdir(local_dir_path)
     for f in file_list:
-        time.sleep(INTERVAL_TIME)
-        ftp.storbinary("STOR " + f ,open(os.path.join(local_dir_path,f),'rb'))
+        for i in range(3) :
+            try :
+                time.sleep(INTERVAL_TIME)
+                ftp.storbinary("STOR " + f ,open(os.path.join(local_dir_path,f),'rb'))
+                break
+            except :
+                pass
+
 
 def make_zip():
     if not os.path.exists(LOCAL_ZIP_PATH) :
@@ -44,7 +50,7 @@ def run():
         if not os.path.exists(LOCAL_REPORT_PATH):
             os.makedirs(LOCAL_REPORT_PATH)
 
-        with multiprocessing.Pool(1) as pool:
+        with multiprocessing.Pool(os.cpu_count()) as pool:
             pool.starmap(vt.retrieving_file_scan_report, zip(md5_list, report_path_list, key_list))
 
         json_list = os.listdir(LOCAL_REPORT_PATH)
@@ -53,9 +59,9 @@ def run():
 
     make_zip()
     ftp = connect()
-    upload_files(ftp,LOCAL_ZIP_DIR,REMOTE_REPORT_PATH)
+    upload_files(ftp,LOCAL_ZIP_PATH,REMOTE_REPORT_PATH)
     shutil.rmtree( LOCAL_REPORT_PATH )
-    shutil.rmtree(LOCAL_ZIP_DIR)
+    shutil.rmtree(LOCAL_ZIP_PATH)
     print(time.time()-start_time)
 if __name__ == '__main__':
     run()
