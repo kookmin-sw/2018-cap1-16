@@ -128,7 +128,15 @@
                                     }
 
 
-                                } else alert('Error. Please, contact the webmaster!');
+                                }
+                                else if (parseInt(data.status) == 406 ){
+                                    alert(data.message);
+                                    window.location.reload()
+                                }
+                                else {
+                                    alert('Error. Please, contact the webmaster!');
+                                    window.location.reload()
+                                }
                             }
 
                             ajax.onerror = function() {

@@ -21,6 +21,12 @@ def upload(request):
 
         upload_file = request.FILES['upload_file']
         upload_file_buf = upload_file.read()
+
+        pe_signal = str(upload_file_buf[:2].decode())
+        if not pe_signal == 'MZ':
+            response = {'status': 406, 'message': 'Does not support Not PE File'}
+            return HttpResponse(json.dumps(response), content_type='application/json')
+
         upload_file_md5 = get_hash_str(upload_file_buf)
         upload_file_ssdeep = ssdeep.hash(upload_file_buf)
 
