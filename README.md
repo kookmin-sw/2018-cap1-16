@@ -18,7 +18,7 @@ tensorflow 이용하여 탐지 모델을 학습하고 분석 결과를 보여줍
 
 ### 프로젝트 소개영상
 
-[![MASK](https://img.youtube.com/vi/ofUCoVY2yBI/0.jpg)](https://www.youtube.com/watch?v=ofUCoVY2yBI)
+[![MASK](https://img.youtube.com/vi/dztAI8KKLW8/0.jpg)](https://www.youtube.com/watch?v=dztAI8KKLW8)
 
 
 ### Abstract
