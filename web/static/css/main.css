@@ -18,6 +18,9 @@ body {
     margin: 0px 0px 0px 0px;
 }
 
+.container{
+    margin-top: 50px;
+}
 .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header{
     margin-left: 0px;
     margin-right: 10px;
@@ -151,10 +154,10 @@ input.radio:checked ~ label {
 
 
 .box__logo {
-    max-height: 200px;
+    /* max-height: 200px; */
     height: 100%;
     width: 100%;
-    max-width: 800px;
+    /* max-width: 800px; */
     /* 800 */
     margin: auto;
     position: relative;
