@@ -3,7 +3,6 @@ import json
 import sys, os
 import pickle
 
-DIRECTORY = "/home/seclab/.cuckoo/storage/analyses/"
 
 def api_extract(dir, file_cnt,DIRECTORY):
     total_cnt = 0
