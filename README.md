@@ -111,4 +111,4 @@ member_5 = {
 
 ### License
 
- [![LICENSE](https://img.shields.io/badge/license-Apache2.0-red.svg)](https://github.com/kookmin-sw/2018-cap1-16/blob/master/LICENSE.md)
+ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
